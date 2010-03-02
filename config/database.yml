@@ -1,0 +1,24 @@
+development:
+ adapter: mysql
+ encoding: utf8
+ database: roomstore_development
+ username: root
+ password: PAC7#m_at
+ host: localhost
+
+test:
+ adapter: mysql
+ encoding: utf8
+ database: roomstore_development
+ username: root
+ password: PAC7#m_at
+ host: localhost
+
+production:
+ adapter: mysql
+ encoding: utf8
+ database: roomstore_development
+ username: root
+ password: PAC7#m_at
+ host: localhost
+

@@ -1,0 +1,384 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+  <script type="text/javascript">
+//<![CDATA[
+var matches,url,path,domain;url=document.location.toString();try{domain=url.match(/https?:\/\/[^\/]+/);if(matches=url.match(/(.+?)#(.+)/)){url=matches[1];path=matches[2];if(path){var arr=path.split(/\?/);path=arr[0];var params=arr[1];path=path.replace(/^\//,"");var redirect_url=[domain,path].join("/");if(params){redirect_url=[redirect_url,params].join("?")}document.location=redirect_url}}}catch(err){};
+//]]>
+</script>
+  <script type="text/javascript">
+//<![CDATA[
+var page={};var onCondition=function(D,C,A,B){D=D;A=A?Math.min(A,5):5;B=B||100;if(D()){C()}else{if(A>1){setTimeout(function(){onCondition(D,C,A-1,B)},B)}}};
+//]]>
+</script>
+  
+
+
+
+
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta content="en-us" http-equiv="Content-Language" />
+<meta content="Twitter is without a doubt the best way to share and discover what is happening right now." name="description" />
+<meta content="no" http-equiv="imagetoolbar" />
+<meta content="width = 780" name="viewport" />
+
+<meta content="4FTTxY4uvo0RZTMQqIyhh18HsepyJOctQ+XTOu1zsfE=" name="verify-v1" />
+<meta content="1" name="page" />
+<meta content="NOODP" name="robots" />
+<meta content="n" name="session-loggedin" />
+  <title>Twitter</title>
+  <link href="http://a1.twimg.com/a/1267135446/images/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+<link href="http://a1.twimg.com/a/1267135446/images/twitter_57.png" rel="apple-touch-icon" />
+  
+  <link href="http://a3.twimg.com/a/1267135446/stylesheets/front.css?1267424868" media="screen, projection" rel="stylesheet" type="text/css" />
+</head>
+
+<body class="timeline firefox front" id="front">
+  <script type="text/javascript">
+//<![CDATA[
+if (window.top !== window.self) {document.write = "";window.top.location = window.self.location; setTimeout(function(){document.body.innerHTML='';},1);window.self.onload=function(evt){document.body.innerHTML='';};}
+//]]>
+
+</script>
+  <ul id="accessibility" class="offscreen">
+  <li><a href="#content" accesskey="0">Skip past navigation</a></li>
+  <li>On a mobile phone? Check out <a href="http://m.twitter.com/">m.twitter.com</a>!</li>
+  <li><a href="#footer" accesskey="2">Skip to navigation</a></li>
+    <li><a href="#signin">Skip to sign in form</a></li>
+
+</ul>
+
+
+  <div id="container">
+
+    <div id="topnav">
+      <div id="small_signup">
+        <span>New to Twitter?</span>
+        <a href="http://twitter.com/signup" class="signup-button">Sign up now</a>
+      </div>
+
+      Have an account? <a href="http://twitter.com/login" class="signin" tabindex="3"><span>Sign in</span></a>
+    </div>
+
+    <fieldset id="signin_menu" class="common-form standard-form">
+    
+      <form method="post" id="signin" action="https://twitter.com/sessions">
+    
+      <input id="authenticity_token" name="authenticity_token" type="hidden" value="46fcf0b35dbcba618d53e56ab58a3719aa376cd3" />        <p>
+          <label for="username">Username or email</label>
+
+          <input type="text" id="username" name="session[username_or_email]" value="" title="username"  tabindex="4"/>
+        </p>
+        <p>
+          <label for="password">Password</label>
+          <input type="password" id="password" name="session[password]" value="" title="password" tabindex="5" />
+        </p>
+        <p class="remember">
+            <input type="submit" id="signin_submit" value="Sign in" tabindex="7"/>
+
+            <input type="checkbox" id="remember" name="remember_me" value="1" tabindex="6"/>
+            <label for="remember">Remember me</label>
+        </p>
+        <p class="forgot">
+          <a href="/account/resend_password" id="resend_password_link">Forgot your password?</a>
+        </p>
+        <p class="forgot-username">
+          <a href="" id="forgot_username_link" title="If you remember your password, try logging in with your email">Forgot your username?</a>
+
+        </p>
+        <p class="complete">
+          <a href="/account/complete" id="account_complete_link">Already using Twitter on your phone?</a>
+        </p>
+        <input type="hidden" name="q" id="signin_q" value=""/>
+      </form>
+    </fieldset>
+
+    <div id="header">
+
+      <div id="header2">
+        <h1 id="tagline">Share and discover what&rsquo;s happening right now, anywhere in the world.</h1>
+        <a href="http://twitter.com/" class="logo"><img alt="Twitter" border="0" height="55" id="logo" src="http://a1.twimg.com/a/1267135446/images/logo.png" width="224" /></a>
+
+        <img alt="Tweet, tweet!" height="55" id="bird" src="http://a2.twimg.com/a/1267135446/images/frontpage-bird.png" width="80" />
+        <form action="/search" class="search" id="home_search" method="post"><div style="margin:0;padding:0"><input name="authenticity_token" type="hidden" value="46fcf0b35dbcba618d53e56ab58a3719aa376cd3" /></div>
+          <div>
+            <div id="big_signup">
+
+              <label>Join the conversation</label>
+              <a href="http://twitter.com/signup" class="signup-button" id="signup_submit" tabindex="8">Sign up now</a>
+            </div>
+            
+              <label for="home_search_q">See what people are saying about&#8230;</label>
+              <input id="home_search_q" type="text" size="40" name="q" accesskey="/" tabindex="1"/>
+              <a href="#" id="home_search_submit" class="submit" tabindex="2">Search</a>
+            
+          </div>
+
+        </form>
+      </div>
+    </div>
+
+    <div id="trend_info">
+      <span>POPULAR TOPICS BY THE MINUTE, DAY, AND WEEK</span> <img alt="Trend info" height="16" src="http://a1.twimg.com/a/1267135446/images/icon-what.png" title="Twitter looks at every incoming tweet, then ranks the popularity of certain words or phrases in real time. Click any of the popular topics below to see what people are saying about them right now." width="16" />
+    </div>
+
+    <div id="trend_description">
+
+      <span></span><img alt="Trend Info" height="16" src="http://a1.twimg.com/a/1267135446/images/icon-what.png" title="Twitter looks at every incoming tweet, then ranks the popularity of certain words or phrases in real time. Click any of the popular topics below to see what people are saying about them right now. Some topic descriptions are sourced from WhatTheTrend.com." width="16" /><p></p>
+    </div>
+
+    <div id="trends">
+      
+        
+  <div class="current" title="Popular topics right now">
+    <ul>
+                
+            <li><a href="/search?q=%22Justin+Bieber%22" class="search_link" name="&quot;Justin Bieber&quot;" rel="nofollow" title="&quot;Justin Bieber&quot;">Justin Bieber</a><em>The young Canadian R&amp;B/pop singer has a lot of fans who like to tweet about him! </em></li>
+          
+            <li><a href="/search?q=%22How+We+Get+News%22" class="search_link" name="&quot;How We Get News&quot;" rel="nofollow" title="&quot;How We Get News&quot;">How We Get News</a></li>
+
+          
+            <li><a href="/search?q=PS3" class="search_link" name="PS3" rel="nofollow" title="PS3">PS3</a></li>
+          
+            <li><a href="/search?q=%22It%27s+March%22" class="search_link" name="&quot;It's March&quot;" rel="nofollow" title="&quot;It's March&quot;">It's March</a></li>
+          
+            <li><a href="/search?q=%22Major+Part%22" class="search_link" name="&quot;Major Part&quot;" rel="nofollow" title="&quot;Major Part&quot;">Major Part</a></li>
+          
+            <li><a href="/search?q=%23nowplaying" class="search_link" name="#nowplaying" rel="nofollow" title="#nowplaying">#nowplaying</a><em>People are tweeting their media choice of the moment.</em></li>
+          
+            <li><a href="/search?q=%23happybirthdayjustin" class="search_link" name="#happybirthdayjustin" rel="nofollow" title="#happybirthdayjustin">#happybirthdayjustin</a></li>
+          
+            <li><a href="/search?q=%23amitheonlyone" class="search_link" name="#amitheonlyone" rel="nofollow" title="#amitheonlyone">#amitheonlyone</a></li>
+
+          
+            <li><a href="/search?q=%23ibelieve" class="search_link" name="#ibelieve" rel="nofollow" title="#ibelieve">#ibelieve</a></li>
+          
+            <li><a href="/search?q=%23OMGIKnowRight" class="search_link" name="#OMGIKnowRight" rel="nofollow" title="#OMGIKnowRight">#OMGIKnowRight</a></li>
+          
+      
+    </ul>
+  </div>
+
+        
+        
+  <div class="daily" title="Popular topics today">
+    <ul>
+                
+            <li><a href="/search?q=Chile+OR+%23Chile" class="search_link" name="Chile OR #Chile" rel="nofollow" title="Chile OR #Chile">Chile</a><em>There was a 8.8 magnitude earthquake (Feb. 27) with an epicenter 70 miles from Concepcion, the country's second largest city.</em></li>
+
+          
+            <li><a href="/search?q=%22Justin+Bieber%22" class="search_link" name="&quot;Justin Bieber&quot;" rel="nofollow" title="&quot;Justin Bieber&quot;">Justin Bieber</a><em>The young Canadian R&amp;B/pop singer has a lot of fans who like to tweet about him! </em></li>
+          
+            <li><a href="/search?q=Canada+OR+%23Canada" class="search_link" name="Canada OR #Canada" rel="nofollow" title="Canada OR #Canada">Canada</a><em>They play Team USA today in the men's hockey gold medal game at the Winter Olympics (Feb. 28).</em></li>
+          
+            <li><a href="/search?q=Hawaii" class="search_link" name="Hawaii" rel="nofollow" title="Hawaii">Hawaii</a><em>People are tweeting about the tsunami headed in that direction, as well as sharing links to live news feeds (Feb. 27).</em></li>
+          
+            <li><a href="/search?q=Haiti" class="search_link" name="Haiti" rel="nofollow" title="Haiti">Haiti</a><em>The area was hit by a 7.0 magnitude earthquake Jan. 12. People are tweeting to organize relief efforts or relay news.</em></li>
+
+          
+            <li><a href="/search?q=%22Ryan+Miller%22+OR+Miller" class="search_link" name="&quot;Ryan Miller&quot; OR Miller" rel="nofollow" title="&quot;Ryan Miller&quot; OR Miller">Ryan Miller</a></li>
+          
+            <li><a href="/search?q=%22Team+USA%22+OR+%23USA" class="search_link" name="&quot;Team USA&quot; OR #USA" rel="nofollow" title="&quot;Team USA&quot; OR #USA">Team USA</a><em>The Olympic men's hockey team is facing off against Finland (Feb. 26).</em></li>
+          
+            <li><a href="/search?q=%22It%27s+Java%27s+Event%22" class="search_link" name="&quot;It's Java's Event&quot;" rel="nofollow" title="&quot;It's Java's Event&quot;">It's Java's Event</a></li>
+          
+            <li><a href="/search?q=%22Go+Canada+Go%22" class="search_link" name="&quot;Go Canada Go&quot;" rel="nofollow" title="&quot;Go Canada Go&quot;">Go Canada Go</a></li>
+          
+            <li><a href="/search?q=USA" class="search_link" name="USA" rel="nofollow" title="USA">USA</a><em>People are tweeting about team USA at the Winter Olympics in a variety of events. </em></li>
+
+          
+            <li><a href="/search?q=%22Sidney+Crosby%22+OR+%22Sydney+Crosby%22" class="search_link" name="&quot;Sidney Crosby&quot; OR &quot;Sydney Crosby&quot;" rel="nofollow" title="&quot;Sidney Crosby&quot; OR &quot;Sydney Crosby&quot;">Sidney Crosby</a></li>
+          
+            <li><a href="/search?q=SNL+OR+%23SNL" class="search_link" name="SNL OR #SNL" rel="nofollow" title="SNL OR #SNL">SNL</a></li>
+          
+      
+    </ul>
+  </div>
+
+        
+  <div class="weekly" title="Popular topics this week">
+    <ul>
+                
+            <li><a href="/search?q=%22Justin+Bieber%22" class="search_link" name="&quot;Justin Bieber&quot;" rel="nofollow" title="&quot;Justin Bieber&quot;">Justin Bieber</a><em>The young Canadian R&amp;B/pop singer has a lot of fans who like to tweet about him! </em></li>
+
+          
+            <li><a href="/search?q=Chile+OR+%23Chile" class="search_link" name="Chile OR #Chile" rel="nofollow" title="Chile OR #Chile">Chile</a><em>There was a 8.8 magnitude earthquake (Feb. 27) with an epicenter 70 miles from Concepcion, the country's second largest city.</em></li>
+          
+            <li><a href="/search?q=Hawaii" class="search_link" name="Hawaii" rel="nofollow" title="Hawaii">Hawaii</a><em>People are tweeting about the tsunami headed in that direction, as well as sharing links to live news feeds (Feb. 27).</em></li>
+          
+            <li><a href="/search?q=%22Retweet+This+If+You%22" class="search_link" name="&quot;Retweet This If You&quot;" rel="nofollow" title="&quot;Retweet This If You&quot;">Retweet This If You</a></li>
+          
+            <li><a href="/search?q=Haiti" class="search_link" name="Haiti" rel="nofollow" title="Haiti">Haiti</a><em>The area was hit by a 7.0 magnitude earthquake Jan. 12. People are tweeting to organize relief efforts or relay news.</em></li>
+          
+            <li><a href="/search?q=%22Shutter+Island%22" class="search_link" name="&quot;Shutter Island&quot;" rel="nofollow" title="&quot;Shutter Island&quot;">Shutter Island</a><em>Martin Scorsese's new thriller starring Leonardo DiCaprio release to theaters today in the US (Feb. 19).</em></li>
+
+          
+            <li><a href="/search?q=IHOP" class="search_link" name="IHOP" rel="nofollow" title="IHOP">IHOP</a><em>The restaurant chain is serving free short stacks today (Feb. 23) from 7 AM to 10 PM, asking that you donate to a local children's hospital or other charity.</em></li>
+          
+            <li><a href="/search?q=%23nowplaying" class="search_link" name="#nowplaying" rel="nofollow" title="#nowplaying">#nowplaying</a><em>People are tweeting their media choice of the moment.</em></li>
+          
+            <li><a href="/search?q=%23ItsFunnyHow" class="search_link" name="#ItsFunnyHow" rel="nofollow" title="#ItsFunnyHow">#ItsFunnyHow</a></li>
+          
+            <li><a href="/search?q=%23FF" class="search_link" name="#FF" rel="nofollow" title="#FF">#FF</a><em>Follow Friday. People tweet suggested users to follow on Fridays.</em></li>
+          
+            <li><a href="/search?q=%23wegotogetherlike" class="search_link" name="#wegotogetherlike" rel="nofollow" title="#wegotogetherlike">#wegotogetherlike</a></li>
+
+          
+            <li><a href="/search?q=%23thingswewantback" class="search_link" name="#thingswewantback" rel="nofollow" title="#thingswewantback">#thingswewantback</a><em>People are tweeting things they miss.</em></li>
+          
+      
+    </ul>
+  </div>
+
+        <span class="fade"> </span>
+      
+    </div>
+    <div class="wrapper">
+      <div id="sidebar">
+
+        
+          
+            <h2><strong>Trending</strong> topics</h2>
+            <div id="trends_list">
+              <ul>
+                
+                  
+                    <li><a href="/search?q=%23nowplaying" name="#nowplaying" title="People are tweeting their media choice of the moment." rel="nofollow">#nowplaying</a></li>
+                  
+                    <li><a href="/search?q=%23happybirthdayjustin" name="#happybirthdayjustin" title="" rel="nofollow">#happybirthdayjustin</a></li>
+                  
+                    <li><a href="/search?q=%23amitheonlyone" name="#amitheonlyone" title="" rel="nofollow">#amitheonlyone</a></li>
+
+                  
+                    <li><a href="/search?q=%23MusicMonday" name="#MusicMonday" title="People are tweeting the tunes they're using to kick off their week." rel="nofollow">#MusicMonday</a></li>
+                  
+                    <li><a href="/search?q=%22Justin+Bieber%22" name="&quot;Justin Bieber&quot;" title="The young Canadian R&amp;B/pop singer has a lot of fans who like to tweet about him! " rel="nofollow">Justin Bieber</a></li>
+                  
+                    <li><a href="/search?q=Chile+OR+%23Chile" name="Chile OR #Chile" title="There was a 8.8 magnitude earthquake (Feb. 27) with an epicenter 70 miles from Concepcion, the country's second largest city." rel="nofollow">Chile</a></li>
+                  
+                    <li><a href="/search?q=%23ibelieve" name="#ibelieve" title="" rel="nofollow">#ibelieve</a></li>
+                  
+                    <li><a href="/search?q=%22How+We+Get+News%22" name="&quot;How We Get News&quot;" title="" rel="nofollow">How We Get News</a></li>
+                  
+                    <li><a href="/search?q=%23OMGIKnowRight" name="#OMGIKnowRight" title="" rel="nofollow">#OMGIKnowRight</a></li>
+
+                  
+                    <li><a href="/search?q=PS3" name="PS3" title="" rel="nofollow">PS3</a></li>
+                  
+                
+              </ul>
+            </div>
+          
+        
+        <div class="search-tip">
+          <h3>Search tip</h3>
+          <div>Use <em>near:</em> immediately before a location (or a zip code) to find tweets near that location. Example: <a href="/search?q=%22happy+hour%22+near%3A%22san+francisco%22">"happy hour" near:"san francisco"</a> will find tweets containing the exact phrase "happy hour" and sent near "san francisco".</div>
+
+        </div>
+        <div class="signup-tip">
+          <h2><strong>Join</strong> the conversation</h2>
+          <a href="/signup">Sign up now</a> to contribute what's going on in your world and to filter your view of Twitter down to the people and topics that interest you most.
+        </div>
+      </div>
+      <div id="content" class="homepage">
+
+        <h2 id="timeline_heading"></h2>
+                  <div data="{&quot;timeline&quot;:{&quot;max_refresh_size&quot;:40,&quot;delay&quot;:30,&quot;decay&quot;:1.5,&quot;max_delay&quot;:300},&quot;search&quot;:{&quot;delay&quot;:20,&quot;decay&quot;:1.25,&quot;max_delay&quot;:180}}" id="new_results_notification"><a accesskey="n" class="minor-notification" id="results_update" style="display:none;"></a></div>
+        
+        <ol id="timeline" class="statuses"></ol>
+        <div id="pagination"></div>
+      </div>
+      <div class="clear"></div>
+    </div>
+    
+
+    
+
+    
+    
+  <div id="footer" class="round wide">
+      <h3 class="offscreen">Footer</h3>
+
+      
+      
+      <form action="/sessions/change_locale" id="lf" method="post" style="display:none;"><div style="margin:0;padding:0"><input name="authenticity_token" type="hidden" value="46fcf0b35dbcba618d53e56ab58a3719aa376cd3" /></div>
+  <input type="hidden" name="lang"  id="lang" value="en"/>
+</form>
+<ul class="language-select"><li>Language:</li><li><span>English</span>&nbsp;<small>&#9660;</small></li></ul>
+<ol class="language-menu round">
+  <li id="it">Italian - Italiano</li>
+  <li id="es">Spanish - Español</li>
+  <li id="en">English</li>
+
+  <li id="fr">French - français</li>
+  <li id="de">German - Deutsch</li>
+  <li id="ja">Japanese - 日本語</li>
+</ol>
+    
+      <ul>
+          <li class="first">&copy; 2010 Twitter</li>
+          <li><a href="/about">About Us</a></li>
+
+          <li><a href="/about/contact">Contact</a></li>
+          <li><a href="http://blog.twitter.com">Blog</a></li>
+          <li><a href="http://status.twitter.com">Status</a></li>
+                      <li><a href="/goodies">Goodies</a></li>
+                    <li><a href="http://apiwiki.twitter.com/">API</a></li>
+                      <li><a href="http://business.twitter.com/twitter101">Business</a></li>
+
+                    <li><a href="/help/start">Help</a></li>
+          <li><a href="/jobs">Jobs</a></li>
+          <li><a href="/tos">Terms</a></li>
+          <li><a href="/privacy">Privacy</a></li>
+      </ul>
+  </div>
+
+  </div>
+
+  
+  <script type="text/javascript">
+      page.summizeSearchUrl = 'http://integratedsearch.twitter.com/search.html';
+  page.query = '';
+  page.locale = 'en';
+  
+    window.twttr = window.twttr || {};
+    twttr.form_authenticity_token = '46fcf0b35dbcba618d53e56ab58a3719aa376cd3';
+  
+  </script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.0/jquery.min.js" type="text/javascript"></script>
+<script src="http://a0.twimg.com/a/1267135446/javascripts/front.js?1267424868" type="text/javascript"></script>
+  
+
+  
+  <div id="notifications"></div>
+
+      <!-- BEGIN google analytics -->
+
+  <script type="text/javascript">
+    var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+    document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+  </script>
+
+  <script type="text/javascript">
+
+    try {
+      var pageTracker = _gat._getTracker("UA-30775-6");
+      pageTracker._setDomainName("twitter.com");
+            pageTracker._setVar('Not Logged In');
+            pageTracker._setVar('lang: en');
+            pageTracker._initData();
+                              pageTracker._trackPageview('/');
+                  } catch(err) { }
+
+  </script>
+
+  <!-- END google analytics -->
+
+
+
+
+</body>
+</html>
+
