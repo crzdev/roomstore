@@ -1,0 +1,2 @@
+class GroupAdministrator < User
+end
