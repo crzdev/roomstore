@@ -120,7 +120,7 @@ class UsersController < ApplicationController
   def logout
     session[:user_id] = nil
     flash[:notice] = "Logged out"
-    redirect_to(:action => "login" )
+    redirect_to(:controller => :site )
   end
 
   #searche users with specifyed group
