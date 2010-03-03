@@ -1,0 +1,23 @@
+<p>
+  <b>Name:</b>
+  <%=h @group.name %>
+</p>
+
+<p>
+  <b>Address:</b>
+  <%=h @group.address %>
+</p>
+
+<p>
+  <b>Phone:</b>
+  <%=h @group.phone %>
+</p>
+
+<p>
+  <b>User:</b>
+  <%=h @group.user_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_group_path(@group) %> |
+<%= link_to 'Back', groups_path %>

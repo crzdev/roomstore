@@ -1,11 +1,11 @@
 /* xajax Javascript library :: version 0.2.4 */
 Array.prototype.containsValue=function(valueToCheck){for(var i=0;i<this.length;i++){if(this[i]==valueToCheck)return true;}
-return false;}
-function Xajax(){this.DebugMessage=function(text){if(text.length > 1000)text=text.substr(0,1000)+"...\n[long response]\n...";try{if(this.debugWindow==undefined||this.debugWindow.closed==true){this.debugWindow=window.open('about:blank','xajax-debug','width=800,height=600,scrollbars=1,resizable,status');this.debugWindow.document.write('<html><head><title>Xajax debug output</title></head><body><h2>Xajax debug output</h2><div id="debugTag"></div></body></html>');}
-text=text.replace(/&/g,"&amp;")
-text=text.replace(/</g,"&lt;")
-text=text.replace(/>/g,"&gt;")
-debugTag=this.debugWindow.document.getElementById('debugTag');debugTag.innerHTML=('<b>'+(new Date()).toString()+'</b>: '+text+'<hr/>')+debugTag.innerHTML;}catch(e){alert("Xajax Debug:\n "+text);}
+																										 return false;}
+		function Xajax(){this.DebugMessage=function(text){if(text.length > 1000)text=text.substr(0,1000)+"...\n[long response]\n...";try{if(this.debugWindow==undefined||this.debugWindow.closed==true){this.debugWindow=window.open('about:blank','xajax-debug','width=800,height=600,scrollbars=1,resizable,status');this.debugWindow.document.write('<html><head><title>Xajax debug output</title></head><body><h2>Xajax debug output</h2><div id="debugTag"></div></body></html>');}
+								text=text.replace(/&/g,"&amp;")
+										text=text.replace(/</g,"&lt;")
+										text=text.replace(/>/g,"&gt;")
+										debugTag=this.debugWindow.document.getElementById('debugTag');debugTag.innerHTML=('<b>'+(new Date()).toString()+'</b>: '+text+'<hr/>')+debugTag.innerHTML;}catch(e){alert("Xajax Debug:\n "+text);}
 };this.workId='xajaxWork'+new Date().getTime();this.depth=0;this.responseErrorsForAlert=["400","401","402","403","404","500","501","502","503"];this.getRequestObject=function(){if(xajaxDebug)this.DebugMessage("Initializing Request Object..");var req=null;if(typeof XMLHttpRequest!="undefined")
 req=new XMLHttpRequest();if(!req&&typeof ActiveXObject!="undefined"){try{req=new ActiveXObject("Msxml2.XMLHTTP");}
 catch(e){try{req=new ActiveXObject("Microsoft.XMLHTTP");}

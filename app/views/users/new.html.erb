@@ -20,6 +20,11 @@
     <%= f.password_field :password_confirmation, :size => 40 %>
   </p>
   <p>
+    <label for="group_id">Group ID:</label>
+    <%= f.text_field :group_id, :size => 40 %>
+  </p>
+
+  <p>
     <%= f.submit "Add User" , :class => "submit" %>
   </p>
 <% end %>

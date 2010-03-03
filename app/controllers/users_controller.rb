@@ -86,6 +86,10 @@ class UsersController < ApplicationController
 
   def authorize
   end
+
+  def session_test
+    @id = session[:user_id]
+  end
   
   def login
     session[:user_id] = nil
@@ -101,6 +105,10 @@ class UsersController < ApplicationController
           redirect_to(:action => "index" )
         end
 
+        if user.class == GroupAdministrator
+          redirect_to(:controller => "group_administrating", :action => "index" )
+        end
+
       else
         flash.now[:notice] = "Invalid user/password combination"
       end
@@ -111,6 +119,11 @@ class UsersController < ApplicationController
     session[:user_id] = nil
     flash[:notice] = "Logged out"
     redirect_to(:action => "login" )
+  end
+
+  #searche users with specifyed group
+  def find_for_group
+    User.find();
   end
 
 
