@@ -83,7 +83,9 @@ class UsersController < ApplicationController
       format.xml  { head :ok }
     end
   end
-
+	
+	#remove authorization block
+	#todo: remove it in production
   def authorize
   end
 
