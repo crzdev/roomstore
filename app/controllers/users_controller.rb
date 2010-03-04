@@ -100,7 +100,7 @@ class UsersController < ApplicationController
       if user
         session[:user_id] = user.id
         if user.class == SimpleUser
-          redirect_to(:controller => "oldsite", :action => "main_page" )
+          redirect_to(:controller => "oldsite", :action => "home_page" )
         end
 
         if user.class == Root
