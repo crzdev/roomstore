@@ -1,0 +1,20 @@
+class SiteController < ApplicationController
+	#start page
+  #œô¨âœô¨ãœô¨ßœô¨Þ œô¨àœô¨Õœô¨Ôœô¨Øœô¨àœô¨Õœô¨Úœô¨â œô¨Ýœô¨Ð œô¨Ûœô¨Þœô¨Óœô¨Øœô¨Ý. œô¨±œô¨Õœô¨× œô¨Ðœô¨Òœô¨âœô¨Þœô¨àœô¨Øœô¨×œô¨Ðœô¨æœô¨Øœô¨Ø œô¨Ýœô¨Õœô¨Ûœô¨ìœô¨×œô¨ï œô¨ßœô¨Þœô¨Ûœô¨ìœô¨×œô¨Þœô¨Òœô¨Ðœô¨âœô¨ìœô¨áœô¨ï œô¨áœô¨Øœô¨áœô¨âœô¨Õœô¨Üœô¨Þœô¨Ù.
+  def index
+    if User.find_by_id(session[:user_id])
+      flash[:notice] = "œô¨²œô¨ë œô¨ãœô¨Öœô¨Õ œô¨Ò œô¨áœô¨Øœô¨áœô¨âœô¨Õœô¨Üœô¨Õ"
+    else
+      flash[:notice] = "œô¨½œô¨ãœô¨Öœô¨Ýœô¨Þ œô¨Ðœô¨Òœô¨âœô¨Þœô¨àœô¨Øœô¨×œô¨Þœô¨Òœô¨Ðœô¨âœô¨ìœô¨áœô¨ï. œô¨¿œô¨Þœô¨ßœô¨àœô¨Þœô¨Ñœô¨ãœô¨Ùœô¨âœô¨Õ Login: user œô¨Ø Password: user"
+    end					 
+    redirect_to :controller => :users, :action => :login				
+  end
+
+  #bloack of general authorize from ApplicationController 
+  def authorize
+  end
+
+  def search
+  end
+
+end
