@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
   protected
   def authorize
     unless User.find_by_id(session[:user_id])
-      flash[:notice] = "Please log in"
+      flash[:notice] = "Необходима авторизация"
       redirect_to :controller => :users, :action => :login
     end
   end
