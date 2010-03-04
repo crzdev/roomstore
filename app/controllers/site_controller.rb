@@ -1,5 +1,6 @@
 class SiteController < ApplicationController
 	#start page
+  #тупо редирект на логин. Без авторизации нельзя пользоваться системой.
   def index
     if User.find_by_id(session[:user_id])
       flash[:notice] = "Вы уже в системе"
@@ -9,8 +10,10 @@ class SiteController < ApplicationController
     redirect_to :controller => :users, :action => :login				
   end
 
+  #bloack of general authorize from ApplicationController 
   def authorize
   end
+
   def search
   end
 
