@@ -1,0 +1,2 @@
+class RentEntry < Entry
+end

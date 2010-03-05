@@ -36,9 +36,9 @@
     <td><%=h entry.contacts %></td>
     <td><%=h entry.comment %></td>
     <td><%=h entry.user_id %></td>
-    <td><%= link_to 'Show', entry %></td>
+    <td><%= link_to 'Show', entry_path(entry) %></td>
     <td><%= link_to 'Edit', edit_entry_path(entry) %></td>
-    <td><%= link_to 'Destroy', entry, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= link_to 'Destroy', entry_path(entry), :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>

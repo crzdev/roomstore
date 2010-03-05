@@ -4,9 +4,21 @@
 <fieldset>Enter User Details
 	<% form_for(@user) do |f| %>
   <p>
+    <label for="user_login">Login:</label>
+    <%= f.text_field :login, :size => 40 %>
+  </p>
+
+
+  <p>
     <label for="user_name">Name:</label>
     <%= f.text_field :name, :size => 40 %>
   </p>
+
+  <p>
+    <label for="user_surname">Surname:</label>
+    <%= f.text_field :surname, :size => 40 %>
+  </p>
+
   <p>
     <label for="user_type">Type:</label>
     <%=	f.collection_select(:type,User.avalible_subtypes, :to_s, :to_s ) %> 
@@ -27,7 +39,7 @@
   <p>
     <%= f.submit "Add User" , :class => "submit" %>
   </p>
-<% end %>
+	<% end %>
 </fieldset>
 </div>
 
