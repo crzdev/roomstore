@@ -1,0 +1,9 @@
+class AddTestDataToEntries < ActiveRecord::Migration
+  def self.up
+    Entries.delete_all
+    SimpleUser.create(:name => )
+  end
+
+  def self.down
+  end
+end

@@ -1,0 +1,35 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  type: MyString
+  rooms_count: 1
+  rent_price: 9.99
+  city: MyString
+  street: MyString
+  house_number: MyString
+  flat_number: 1
+  floor_number: 1
+  disctrict: MyString
+  area_total: 1
+  area_kitchen: 1
+  rent_time: 1
+  contacts: MyText
+  comment: MyText
+  user_id: 1
+
+two:
+  type: MyString
+  rooms_count: 1
+  rent_price: 9.99
+  city: MyString
+  street: MyString
+  house_number: MyString
+  flat_number: 1
+  floor_number: 1
+  disctrict: MyString
+  area_total: 1
+  area_kitchen: 1
+  rent_time: 1
+  contacts: MyText
+  comment: MyText
+  user_id: 1

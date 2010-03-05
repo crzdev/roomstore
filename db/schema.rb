@@ -9,7 +9,27 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100303131550) do
+ActiveRecord::Schema.define(:version => 20100305090048) do
+
+  create_table "entries", :force => true do |t|
+    t.string   "type"
+    t.integer  "rooms_count"
+    t.integer  "rent_price",   :limit => 10, :precision => 10, :scale => 0
+    t.string   "city"
+    t.string   "street"
+    t.string   "house_number"
+    t.integer  "flat_number"
+    t.integer  "floor_number"
+    t.string   "disctrict"
+    t.integer  "area_total"
+    t.integer  "area_kitchen"
+    t.integer  "rent_time"
+    t.text     "contacts"
+    t.text     "comment"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "groups", :force => true do |t|
     t.string   "name"

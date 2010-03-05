@@ -1,4 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :entries
+
   map.connect "group_administrating", :controller => "group_administrating", :action => "index"
 
   map.resources :groups
