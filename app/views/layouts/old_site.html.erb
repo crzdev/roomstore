@@ -1,0 +1,31 @@
+# -*- coding: utf-8 -*-
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd" >
+  <html>
+  <head>
+  <title>Pragprog Books Online Store</title>
+<%= stylesheet_link_tag "old_site" , :media => "all" %>
+<%= javascript_include_tag :defaults %>
+</head>
+<body id="old_site">
+<div id="top_user_panel">
+  <% if session[:user_id] %>
+<td><%= link_to 'Домашняя', :controller => "oldsite", :action => "home_page" %></td>
+<td><%= link_to 'Поиск', :controller => 'search', :action => "new" %></td>
+<td><%= link_to 'Добавить объявление', :controller => 'entries', :action => "new" %></td>
+<td><%= link_to 'Личный кабинет', :controller => 'oldsite', :action => "personal_page" %></td>
+<% if GroupAdministrator.find_by_id(session[:user_id]) %>
+<td><%= link_to 'Управление пользователями', :controller => 'group_administrating', :action => "index" %></td>
+<% end %>
+<td><%= link_to 'Выход', :controller => 'users', :action => "logout" %></td>
+<% end %>
+</div>
+<div id="main">
+<% if flash[:notice] -%>
+<div id="notice"><%= flash[:notice] %></div>
+<% end -%>
+<%= yield :layout %>
+</div>
+</div>
+</body>
+</html>

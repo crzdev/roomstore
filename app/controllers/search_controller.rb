@@ -3,6 +3,9 @@ class SearchController < ApplicationController
     @search_condition = SearchCondition.new()
   end
 
+  def old
+  end
+
   def find
   end
 

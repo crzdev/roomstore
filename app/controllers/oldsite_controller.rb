@@ -1,26 +1,23 @@
+# -*- coding: utf-8 -*-
+
 class OldsiteController < ApplicationController
+
   def search
+    redirect_to :controller => "search", :action => "old"
   end
 
   def home_page
   end
 
+  def personal_page
+  end
+
   def new_entry
   end
 
-	#start page
-  #тупо редирект на логин. Без авторизации нельзя пользоваться системой.
+	#entry point
   def index
-    if User.find_by_id(session[:user_id])
-      flash[:notice] = "Вы уже в системе"
-    else
-      flash[:notice] = "Нужно авторизоваться. Попробуйте Login: user и Password: user"
-    end					 
-    redirect_to :controller => :users, :action => :login				
+    redirect_to :action => :home_page				
   end
-  #bloack of general authorize from ApplicationController 
-  def authorize
-  end
-
 
 end
