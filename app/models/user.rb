@@ -1,6 +1,7 @@
 require 'digest/sha1'
 class User < ActiveRecord::Base
   belongs_to :group
+  has_many :entries
 
   validates_presence_of     :login  
   validates_presence_of     :surname

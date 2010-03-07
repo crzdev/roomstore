@@ -12,8 +12,8 @@
   <% if session[:user_id] %>
 <td><%= link_to 'Домашняя', :controller => "oldsite", :action => "home_page" %></td>
 <td><%= link_to 'Поиск', :controller => 'search', :action => "new" %></td>
-<td><%= link_to 'Добавить объявление', :controller => 'entries', :action => "new" %></td>
-<td><%= link_to 'Личный кабинет', :controller => 'oldsite', :action => "personal_page" %></td>
+<td><%= link_to 'Добавить объявление', :controller => 'personal_area', :action => "new_rent_entry" %></td>
+<td><%= link_to 'Личный кабинет', :controller => 'personal_area', :action => "index" %></td>
 <% if GroupAdministrator.find_by_id(session[:user_id]) %>
 <td><%= link_to 'Управление пользователями', :controller => 'group_administrating', :action => "index" %></td>
 <% end %>

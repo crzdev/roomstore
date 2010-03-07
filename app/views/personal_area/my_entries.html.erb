@@ -1,0 +1,48 @@
+<h1>Listing entries</h1>
+
+<table>
+  <tr>
+    <th>Type</th>
+    <th>Rooms count</th>
+    <th>Rent price</th>
+    <th>City</th>
+    <th>Street</th>
+    <th>House number</th>
+    <th>Flat number</th>
+    <th>Floor number</th>
+    <th>Disctrict</th>
+    <th>Area total</th>
+    <th>Area kitchen</th>
+    <th>Rent time</th>
+    <th>Contacts</th>
+    <th>Comment</th>
+    <th>User</th>
+  </tr>
+
+<% @entries.each do |entry| %>
+  <tr>
+    <td><%=h entry.type %></td>
+    <td><%=h entry.rooms_count %></td>
+    <td><%=h entry.rent_price %></td>
+    <td><%=h entry.city %></td>
+    <td><%=h entry.street %></td>
+    <td><%=h entry.house_number %></td>
+    <td><%=h entry.flat_number %></td>
+    <td><%=h entry.floor_number %></td>
+    <td><%=h entry.disctrict %></td>
+    <td><%=h entry.area_total %></td>
+    <td><%=h entry.area_kitchen %></td>
+    <td><%=h entry.rent_time %></td>
+    <td><%=h entry.contacts %></td>
+    <td><%=h entry.comment %></td>
+    <td><%=h entry.user_id %></td>
+    <td><%= link_to 'Show', entry_path(entry) %></td>
+    <td><%= link_to 'Edit', edit_entry_path(entry) %></td>
+    <td><%= link_to 'Destroy', entry_path(entry), :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New entry', new_entry_path %>

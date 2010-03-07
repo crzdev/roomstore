@@ -1,6 +1,11 @@
 ActionController::Routing::Routes.draw do |map|
   map.resources :entries
 
+  map.connect "user_entries/new_rent", :controller => "user_entries", :action => "new_rent"
+  map.connect "user_entries/:id/update_rent", :controller => "user_entries", :action => "update_rent"
+  map.connect "user_entries/:id/edit_rent", :controller => "user_entries", :action => "edit_rent"
+  map.resources :user_entries
+
   map.connect "group_administrating", :controller => "group_administrating", :action => "index"
 
   map.resources :groups

@@ -1,0 +1,72 @@
+<h1>Editing entry</h1>
+
+<% form_for(@entry ,:url => {:action => "update"}) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :type %><br />
+    <%= f.text_field :type %>
+  </p>
+  <p>
+    <%= f.label :rooms_count %><br />
+    <%= f.text_field :rooms_count %>
+  </p>
+  <p>
+    <%= f.label :rent_price %><br />
+    <%= f.text_field :rent_price %>
+  </p>
+  <p>
+    <%= f.label :city %><br />
+    <%= f.text_field :city %>
+  </p>
+  <p>
+    <%= f.label :street %><br />
+    <%= f.text_field :street %>
+  </p>
+  <p>
+    <%= f.label :house_number %><br />
+    <%= f.text_field :house_number %>
+  </p>
+  <p>
+    <%= f.label :flat_number %><br />
+    <%= f.text_field :flat_number %>
+  </p>
+  <p>
+    <%= f.label :floor_number %><br />
+    <%= f.text_field :floor_number %>
+  </p>
+  <p>
+    <%= f.label :disctrict %><br />
+    <%= f.text_field :disctrict %>
+  </p>
+  <p>
+    <%= f.label :area_total %><br />
+    <%= f.text_field :area_total %>
+  </p>
+  <p>
+    <%= f.label :area_kitchen %><br />
+    <%= f.text_field :area_kitchen %>
+  </p>
+  <p>
+    <%= f.label :rent_time %><br />
+    <%= f.text_field :rent_time %>
+  </p>
+  <p>
+    <%= f.label :contacts %><br />
+    <%= f.text_area :contacts %>
+  </p>
+  <p>
+    <%= f.label :comment %><br />
+    <%= f.text_area :comment %>
+  </p>
+  <p>
+    <%= f.label :user_id %><br />
+    <%= f.text_field :user_id %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', user_entry_path(@entry) %> |
+<%= link_to 'Back', user_entries_path %>
