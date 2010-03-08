@@ -38,8 +38,7 @@
     <td><%=h entry.user_id %></td>
     <td><%= link_to 'Show', user_entry_path(entry) %></td>
     <td><%= link_to 'Edit Rent',:controller => :user_entries, :action => "edit_rent", :id => entry.id  %></td>
-    <td><%= link_to 'Edit',:controller => :user_entries, :action => "edit", :id => entry.id  %></td>
-    <td><%= link_to 'Destroy', user_entry_path(entry), :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= link_to 'Destroy', :controller => :user_entries, :action => :destroy, :id => entry.id, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>

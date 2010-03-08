@@ -1,9 +1,15 @@
 ActionController::Routing::Routes.draw do |map|
+  map.connect "group_administrating/:id/show_user", :controller => "group_administrating", :action => "show_user"
+  map.connect "group_administrating/:id/edit_user", :controller => "group_administrating", :action => "edit_user"
+  map.connect "group_administrating/:id/update_user", :controller => "group_administrating", :action => "update_user"
+  map.connect "group_administrating/:id/destroy_user", :controller => "group_administrating", :action => "destroy_user"
   map.resources :entries
+
 
   map.connect "user_entries/new_rent", :controller => "user_entries", :action => "new_rent"
   map.connect "user_entries/:id/update_rent", :controller => "user_entries", :action => "update_rent"
   map.connect "user_entries/:id/edit_rent", :controller => "user_entries", :action => "edit_rent"
+  map.connect "user_entries/:id/destroy", :controller => "user_entries", :action => "destroy"
   map.resources :user_entries
 
   map.connect "group_administrating", :controller => "group_administrating", :action => "index"

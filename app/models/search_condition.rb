@@ -1,5 +1,5 @@
+#attrs names must be same as colomun names in entries table
 class SearchCondition
-  #todo add accessors for all columns
   attr_accessor :city
   attr_accessor :district
   attr_accessor :street
@@ -83,8 +83,19 @@ class SearchCondition
       result.update ({"has_photo" => has_photo})
     end
 
-     result
+    result
   end
 
+  #more sofiscated method to get hash
+  #returns hash with attribute => value pairs  
+  def get_hash2
+    result = {}
+    instance_variables.each { |var|
+      if instance_variable_get(var) != "" && instance_variable_get(var) != nil
+        result.update({var.slice(1..var.length) => instance_variable_get(var)})
+      end
+    }
+    result
+  end
 
 end

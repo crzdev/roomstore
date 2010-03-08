@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd" >
   <html>
@@ -12,7 +11,7 @@
   <% if session[:user_id] %>
 <td><%= link_to 'Домашняя', :controller => "oldsite", :action => "home_page" %></td>
 <td><%= link_to 'Поиск', :controller => 'search', :action => "new" %></td>
-<td><%= link_to 'Добавить объявление', :controller => 'personal_area', :action => "new_rent_entry" %></td>
+<td><%= link_to 'Добавить объявление', :controller => 'user_entries', :action => "new_rent" %></td>
 <td><%= link_to 'Личный кабинет', :controller => 'personal_area', :action => "index" %></td>
 <% if GroupAdministrator.find_by_id(session[:user_id]) %>
 <td><%= link_to 'Управление пользователями', :controller => 'group_administrating', :action => "index" %></td>

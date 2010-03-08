@@ -35,16 +35,16 @@
     <th>Type</th>
     <th>Group</th>
   </tr>
-<% @users.each do |user| %>
+<% @simple_users.each do |user| %>
   <tr>
     <td><%=h user.name %></td>
     <td><%=h user.hashed_password %></td>
     <td><%=h user.salt %></td>
     <td><%=h user.type %></td>
     <td><%=h user.group_id %></td>
-    <td><%= link_to "Show", :action => "show", :id => user.id %></td>
-    <td><%= link_to "Edit", edit_user_path(user) %></td>
-    <td><%= link_to "Destroy", user_path(user), :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= link_to "Show", :action => "show_user", :id => user.id %></td>
+    <td><%= link_to "Edit", :action => "edit_user", :id => user.id %></td>
+    <td><%= link_to "Destroy", :action => "destroy_user",:id => user.id, :confirm => 'Are yaou sure?', :method => :delete %></td>
     <td><%= link_to "Объявления размещенные пользователем", :action => "index" %> </td>
   </tr>
 <% end %>
@@ -52,5 +52,5 @@
 
 <br />
 
-<%= link_to 'New user', new_user_path %>
+<%= link_to 'New user', :action => "new_user" %>
 

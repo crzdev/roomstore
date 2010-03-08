@@ -1,2 +1,31 @@
-<h1>GroupAdministrating#edit_user</h1>
-<p>Find me in app/views/group_administrating/edit_user.html.erb</p>
+<h1>Editing user</h1>
+ 
+<% form_for( @simple_user, :url => {:controller => 'group_administrating', :action => :update_user}) do |f| %>
+  <%= f.error_messages %>
+  <p>
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :hashed_password %><br />
+    <%= f.text_field :hashed_password %>
+  </p>
+  <p>
+    <%= f.label :salt %><br />
+    <%= f.text_field :salt %>
+  </p>
+  <p>
+    <%= f.label :type %><br />
+    <%= f.text_field :type %>
+  </p>
+  <p>
+    <%= f.label :group_id %><br />
+    <%= f.text_field :group_id %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', :action => "show_user", :id => @simple_user.id %>  |
+<%= link_to 'Back', :action => "index" %>

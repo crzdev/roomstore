@@ -15,7 +15,7 @@ class UserEntriesController < ApplicationController
   def show
     #todo: add entry  check that entry belongs to current user
     @entry = Entry.find(params[:id])
-    if @entry.user.id != session[:user_id]
+    if @entry.user_id != session[:user_id]
       flash[:notice] = "You can't edit this entry"
       redirect_to :action => "index"
     else
@@ -51,7 +51,7 @@ class UserEntriesController < ApplicationController
   def edit
     #todo: add entry  check that entry belongs to current user
     @entry = Entry.find(params[:id])
-    if @entry.user.id != session[:user_id]
+    if @entry.user_id != session[:user_id]
       flash[:notice] = "You can't edit this entry"
       redirect_to :action => "index"
     end
@@ -60,7 +60,7 @@ class UserEntriesController < ApplicationController
   def edit_rent
     #todo: add entry  check that entry belongs to current user
     @rent_entry = RentEntry.find(params[:id])
-    if @rent_entry.user.id != session[:user_id]
+    if @rent_entry.user_id != session[:user_id]
       flash[:notice] = "You can't edit this entry"
       redirect_to :action => "index"
     end
@@ -70,13 +70,9 @@ class UserEntriesController < ApplicationController
   # POST /entries
   # POST /entries.xml
   def create_rent
-    #todo: add entry  check that entry belongs to current user
     @rent_entry = RentEntry.new(params[:rent_entry])
-    if @rent_entry.user.id != session[:user_id]
-      flash[:notice] = "You can't edit this entry"
-      redirect_to :action => "index"
-    end
-
+    #entry is created for curent user
+    @rent_entry.user_id = session[:user_id]
     respond_to do |format|
         if @rent_entry.save
           flash[:notice] = 'Entry was successfully created.'
@@ -87,7 +83,6 @@ class UserEntriesController < ApplicationController
           format.xml  { render :xml => @rent_entry.errors, :status => :unprocessable_entity }
         end
       end
-
   end
 
   # PUT /entries/1
@@ -95,7 +90,7 @@ class UserEntriesController < ApplicationController
   def update_rent
     #todo: add entry  check that entry belongs to current user
     @rent_entry = RentEntry.find(params[:id])
-    if @rent_entry.user.id != session[:user_id]
+    if @rent_entry.user_id != session[:user_id]
       flash[:notice] = "You can't edit this entry"
       redirect_to :action => "index"
     end
@@ -107,7 +102,7 @@ class UserEntriesController < ApplicationController
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
-        format.xml  { render :xml => @rent_entry.eerrors, :status => :unprocessable_entity }
+        format.xml  { render :xml => @rent_entry.errors, :status => :unprocessable_entity }
       end
 
       end
@@ -118,8 +113,7 @@ class UserEntriesController < ApplicationController
   def destroy
     #todo: add entry  check that entry belongs to current user
     @entry = Entry.find(params[:id])
-
-    if @rent_entry.user.id != session[:user_id]
+    if @entry.user_id != session[:user_id]
       flash[:notice] = "You can't edit this entry"
       redirect_to :action => "index"
     end

@@ -3,7 +3,7 @@
   <tr>
   <td>  <%= "Вы вошли как #{@user.name} + #{@user.surname}" %>  </td>
   <td>
-  <%= link_to "Новое объявление об аренде",:action => "new_rent_entry"%>
+  <%= link_to "Новое объявление об аренде",:controller => "user_entries",:action => "new_rent"%>
   <%= link_to "Мои объявления",:action => "my_entries"%>
   <%= link_to "Редактировать персональную информацию",:action => "personal_info"%>
   </td>
