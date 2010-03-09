@@ -21,7 +21,7 @@
 
   <p>
     <label for="user_type">Type:</label>
-    <%=	f.collection_select(:type,User.avalible_subtypes, :to_s, :to_s ) %> 
+    <%=	f.collection_select(:type, User.avalible_subtypes, :to_s, :to_s ) %> 
   </p>
   <p>
     <label for="user_password">Password:</label>

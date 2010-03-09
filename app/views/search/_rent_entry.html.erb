@@ -1,0 +1,21 @@
+<tr>
+	<div id="rent_entry_result_entry">
+    <td><%=h rent_entry.rooms_count %></td>
+    <td><%=h rent_entry.rent_price %></td>
+    <td><%=h rent_entry.city %></td>
+    <td><%=h rent_entry.street %></td>
+    <td><%=h rent_entry.house_number %></td>
+    <td><%=h rent_entry.flat_number %></td>
+    <td><%=h rent_entry.floor_number %></td>
+    <td><%=h rent_entry.disctrict %></td>
+    <td><%=h rent_entry.area_total %></td>
+    <td><%=h rent_entry.area_kitchen %></td>
+    <td><%=h rent_entry.rent_time %></td>
+    <td><%=h rent_entry.contacts %></td>
+    <td><%=h rent_entry.comment %></td>
+    <td><%=h rent_entry.user_id %></td>
+    <td><%= link_to 'Show', entry_path(rent_entry) %></td>
+    <td><%= link_to 'Edit', edit_entry_path(rent_entry) %></td>
+    <td><%= link_to 'Destroy', entry_path(rent_entry), :confirm => 'Are you sure?', :method => :delete %></td>
+	</div>
+</tr>

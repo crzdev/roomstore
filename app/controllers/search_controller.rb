@@ -3,6 +3,10 @@ class SearchController < ApplicationController
     @search_condition = SearchCondition.new()
   end
 
+  def flat
+    @search_condition = SearchCondition.new()
+  end
+
   def old
   end
 

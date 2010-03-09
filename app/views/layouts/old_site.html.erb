@@ -2,13 +2,15 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd" >
   <html>
   <head>
-  <title>Pragprog Books Online Store</title>
+  <title>ROOMSTORE</title>
 <%= stylesheet_link_tag "old_site" , :media => "all" %>
 <%= javascript_include_tag :defaults %>
+<%= javascript_include_tag "metro" %>
 </head>
 <body id="old_site">
 <div id="top_user_panel">
   <% if session[:user_id] %>
+<td>Вы вошли как:  <%= link_to User.find_by_id(session[:user_id]).login , :controller => "personal_area", :action => "index" %>  </td>
 <td><%= link_to 'Домашняя', :controller => "oldsite", :action => "home_page" %></td>
 <td><%= link_to 'Поиск', :controller => 'search', :action => "new" %></td>
 <td><%= link_to 'Добавить объявление', :controller => 'user_entries', :action => "new_rent" %></td>

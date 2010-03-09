@@ -10,6 +10,19 @@ class UserEntriesController < ApplicationController
     end
   end
 
+  def list_entries
+
+    @entries_pages = Paginator.new self, Entries.count, 2, params[:page]
+    @entries = Entries.find :all, :conditions => ["user_id = ?",session[:user_id]],
+    :order => "created_at", :limit => @entries_pages.items_per_page, 
+    :offset => @person_pages.curent.offset
+    
+    respond_to do |format|
+      format.html # index.html.erb
+      format.xml  { render :xml => @entries }
+    end
+  end
+
   # GET /entries/1
   # GET /entries/1.xml
   def show
