@@ -26,6 +26,7 @@ class SearchController < ApplicationController
       @qs.slice!(@qs.length-5..@qs.length)
     end
 
+    @qs = @search_condition.get_sql_condition
     @entries = Entry.find(:all,:conditions => @qs) #todo: SQLINJECTIONABLE
 
     #    @entries = Entry.find(:all,:conditions => ["city = ? AND street = ? AND rooms_count = ?",

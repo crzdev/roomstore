@@ -98,4 +98,29 @@ class SearchCondition
     result
   end
 
+  def get_sql_condition
+    qs = "" #query_string 
+    get_hash2.each_pair {|key,value|
+      if key !="min_price" && key != "max_price" #those parametrs processed in another way
+        qs += "#{key} = '#{value}' AND "
+      end
+    }
+
+    if min_price != "" && min_price != nil
+      qs += "rent_price > '#{min_price}' AND "
+    end
+
+    if max_price != "" && max_price != nil
+     qs += "rent_price < '#{max_price}' AND "
+    end
+
+    #slice last " AND "
+    if qs != ""
+      qs.slice!(qs.length-5..qs.length)
+    end
+    
+    qs
+
+  end
+
 end

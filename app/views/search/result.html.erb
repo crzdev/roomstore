@@ -3,20 +3,19 @@
 Строка условия поиска: <%= @qs %>
 <table>
   <tr>
-    <th>Rooms count</th>
-    <th>Rent price</th>
-    <th>City</th>
-    <th>Street</th>
-    <th>House number</th>
-    <th>Flat number</th>
-    <th>Floor number</th>
-    <th>Disctrict</th>
-    <th>Area total</th>
-    <th>Area kitchen</th>
-    <th>Rent time</th>
-    <th>Contacts</th>
-    <th>Comment</th>
-    <th>User</th>
+    <th>Количество комнат</th>
+    <th>Цена аренты руб. в мес.</th>
+    <th>Город</th>
+    <th>Улица</th>
+    <th>Дом</th>
+    <th>Номер квартиры</th>
+    <th>Номер этажа</th>
+    <th>Район</th>
+    <th>Площадь суммарная</th>
+    <th>Площадь кухни</th>
+    <th>Время аренды</th>
+    <th>Контакты</th>
+    <th>Комментарий</th>
   </tr>
   <tr>
 		<%= render(:partial => "rent_entry" , :collection => @entries) %>
