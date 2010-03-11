@@ -59,6 +59,18 @@ class UserEntriesController < ApplicationController
     end
   end
 
+  def new_rent_subway
+    @rent_entry = RentEntry.new
+    @rent_entry.user_id = session[:user_id]
+    @subway_stations = SubwayStation.find(:all)
+    @ess = EntriesSubwayStations.new
+    respond_to do |format|
+      format.html # new.html.erb
+      format.xml  { render :xml => @entry }
+    end
+  end
+
+
 
   # GET /entries/1/edit
   def edit
@@ -86,8 +98,36 @@ class UserEntriesController < ApplicationController
     @rent_entry = RentEntry.new(params[:rent_entry])
     #entry is created for curent user
     @rent_entry.user_id = session[:user_id]
+    @subway_station = SubwayStation.find_by_id(params[:subway_station][:id])
     respond_to do |format|
-        if @rent_entry.save
+      if @rent_entry.save
+        if @subway_station != nil
+          @ess = @rent_entry.entries_subway_stations.create(:subway_station_id => @subway_station.id,:time_to => params[:subway_station][:time_to])
+          @ess.save
+        end
+
+          flash[:notice] = 'Entry was successfully created.'
+          format.html { redirect_to :action => :show, :id => @rent_entry.id}
+          format.xml  { render :xml => @rent_entry, :status => :created, :location => @entry }
+        else
+          format.html { render :action => "new_rent" }
+          format.xml  { render :xml => @rent_entry.errors, :status => :unprocessable_entity }
+        end
+      end
+  end
+
+  #for testing rent creating with subway select list
+  def create_rent_subway
+    @rent_entry = RentEntry.new(params[:rent_entry])
+    #entry is created for curent user
+    @rent_entry.user_id = session[:user_id]
+    @subway_station = SubwayStation.find_by_id(params[:subway_station][:id])
+    respond_to do |format|
+      if @rent_entry.save
+        if @subway_station != nil
+          @ess = @rent_entry.entries_subway_stations.create(:subway_station_id => @subway_station.id,:time_to => params[:subway_station][:time_to])
+          @ess.save
+        end
           flash[:notice] = 'Entry was successfully created.'
           format.html { redirect_to :action => :show, :id => @rent_entry.id}
           format.xml  { render :xml => @rent_entry, :status => :created, :location => @entry }

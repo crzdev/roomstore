@@ -5,6 +5,7 @@ ActionController::Routing::Routes.draw do |map|
   map.connect "group_administrating/:id/destroy_user", :controller => "group_administrating", :action => "destroy_user"
   map.resources :entries
 
+  map.connect "user_entries/new_rent_subway", :controller => "user_entries", :action => "new_rent_subway"
   map.connect "user_entries/list_entries", :controller => "user_entries", :action => "list_entries"
   map.connect "user_entries/new_rent", :controller => "user_entries", :action => "new_rent"
   map.connect "user_entries/:id/update_rent", :controller => "user_entries", :action => "update_rent"

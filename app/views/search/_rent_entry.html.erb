@@ -13,8 +13,6 @@
     <td><%=h rent_entry.rent_time %></td>
     <td><%=h rent_entry.contacts %></td>
     <td><%=h rent_entry.comment %></td>
-    <td><%= link_to 'Show', entry_path(rent_entry) %></td>
-    <td><%= link_to 'Edit', edit_entry_path(rent_entry) %></td>
-    <td><%= link_to 'Destroy', entry_path(rent_entry), :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= link_to 'Подробнее', entry_path(rent_entry) %></td>
 	</div>
 </tr>

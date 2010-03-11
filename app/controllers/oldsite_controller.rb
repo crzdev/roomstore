@@ -1,7 +1,6 @@
 class OldsiteController < ApplicationController
 
-  def search
-    redirect_to :controller => "search", :action => "old"
+  def new_entry_start
   end
 
   def home_page

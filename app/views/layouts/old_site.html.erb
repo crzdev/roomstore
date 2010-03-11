@@ -15,7 +15,7 @@
       <div id="controls">
 				<ul>
 					<li><%= link_to 'Поиск', :controller => "oldsite", :action => "home_page" %></li>
-					<li><%= link_to 'Добавить объявление', :controller => 'user_entries', :action => "new_rent" %></li>
+					<li><%= link_to 'Добавить объявление', :controller => 'oldsite', :action => "new_entry_start" %></li>
 					<li><%= link_to 'Личный кабинет', :controller => 'personal_area', :action => "index" %></li>
 					<% if GroupAdministrator.find_by_id(session[:user_id]) -%>
 					<li><%= link_to 'Управление пользователями', :controller => 'group_administrating', :action => "index" %></li>
