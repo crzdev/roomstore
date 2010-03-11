@@ -1,7 +1,7 @@
 <% form_for(@search_condition, :url => {:action => "result"}) do |f| %>
 <div id="search">
   <div id="search_conditions" class="column">
-    <h1>Поиск по комнатам и квартирам в Москве</h1>
+    <h1>Поиск по нежелым помещениям в Москве</h1>
     <p>
       <label for="City">Город:</label>
       <%= f.text_field :city, :size => 40 %>
@@ -65,7 +65,7 @@
       </select>
 			<input id="add_button" type=button name=add value="->" onclick="add_m();">
       <input id="remove_button" type=button name=del value="<-" onclick="del_m();">
-      <select id="search_condition_nearest_subway_stations" name="search_condition[nearest_subway_stations][]" size=10 multiple style="width:150px;" ondblclick="del_m();">
+      <select id="search_condition_nearest_subway_stations" name="search_condition[nearest_subway_stations]" size=10 multiple style="width:150px;" ondblclick="del_m();">
       </select>
       <input id="clear_button" type="button" value="  Очистить ст.метро!  " onclick="freset();">
     </div>

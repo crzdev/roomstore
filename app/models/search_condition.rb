@@ -37,50 +37,50 @@ class SearchCondition
     result = {}
 
     if city != ""
-      result.update ({"city" => city})
+      result.update({"city" => city})
     end
 
     if street != ""
-      result.update ({"street" => street})
+      result.update({"street" => street})
     end
 
     if district != ""
-      result.update ({"district" => district})
+      result.update({"district" => district})
     end
       
     if rooms_count != ""
-      result.update ({"rooms_count" => rooms_count})
+      result.update({"rooms_count" => rooms_count})
     end
 
     if rooms_count != ""
-      result.update ({"rooms_count" => rooms_count})
+      result.update({"rooms_count" => rooms_count})
     end
     if min_price != ""
-      result.update ({"min_price" => min_price})
+      result.update({"min_price" => min_price})
     end
     if max_price != ""
-      result.update ({"max_price" => max_price})
+      result.update({"max_price" => max_price})
     end
     if total_area != ""
-      result.update ({"total_area" => total_area})
+      result.update({"total_area" => total_area})
     end
     if kitchen_area != ""
-      result.update ({"kitchen_area" => kitchen_area})
+      result.update({"kitchen_area" => kitchen_area})
     end
     if live_area != ""
-      result.update ({"live_area" => live_area})
+      result.update({"live_area" => live_area})
     end
     if rent_time != ""
-      result.update ({"rent_time" => rent_time})
+      result.update({"rent_time" => rent_time})
     end
     if nearest_subway_stations != ""
-      result.update ({"nearest_subway_stations" => nearest_subway_stations})
+      result.update({"nearest_subway_stations" => nearest_subway_stations})
     end
     if time_to_nearest_subway_station != ""
-      result.update ({"time_to_nearest_subway_station" => time_to_nearest_subway_station})
+      result.update({"time_to_nearest_subway_station" => time_to_nearest_subway_station})
     end
     if has_photo != ""
-      result.update ({"has_photo" => has_photo})
+      result.update({"has_photo" => has_photo})
     end
 
     result
@@ -100,18 +100,37 @@ class SearchCondition
 
   def get_sql_condition
     qs = "" #query_string 
+
+    #building base query string
     get_hash2.each_pair {|key,value|
-      if key !="min_price" && key != "max_price" #those parametrs processed in another way
+      if key !="min_price" && key != "max_price" && key != "has_photo" && key != "nearest_subway_stations"#those parametrs processed in another way
         qs += "#{key} = '#{value}' AND "
       end
     }
 
+    #adding price restrictions
     if min_price != "" && min_price != nil
       qs += "rent_price > '#{min_price}' AND "
     end
 
     if max_price != "" && max_price != nil
      qs += "rent_price < '#{max_price}' AND "
+    end
+
+    #adding photo restriction
+    #todo: add code here
+
+    #adding multiple subway stations
+    if nearest_subway_stations != nil
+      qs += "("
+      nearest_subway_stations.each do |id|
+        qs +="nearest_subway_station ='#{Metro.get_stations[id]}' OR "
+      end
+      #slice last " OR "
+      if qs != ""
+        qs.slice!(qs.length-5..qs.length)
+      end
+      qs +=") AND "
     end
 
     #slice last " AND "

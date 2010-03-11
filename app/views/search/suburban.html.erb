@@ -1,7 +1,7 @@
 <% form_for(@search_condition, :url => {:action => "result"}) do |f| %>
 <div id="search">
   <div id="search_conditions" class="column">
-    <h1>Поиск по комнатам и квартирам в Москве</h1>
+    <h1>Поиск по Квартирам, Дачам, Котеджам</h1>
     <p>
       <label for="City">Город:</label>
       <%= f.text_field :city, :size => 40 %>
@@ -52,23 +52,6 @@
     <p>
       <%= f.submit "Найти!" , :class => "submit" %>
     </p>
-  </div>
-  <div id="map" class="column">
-    <div id="cool_map_selector">
-      <img usemap="#map" src="/images/metromap_2009b.gif" >
-    </div>
-    <div id="options_map_selection">
-      <select name=metro_s size=10 ondblclick="add_m();">
-				<% Metro.get_stations.each_pair do |key, value| %>
-				<%= "<option value=\"#{key}\">#{value}</option>" %>
-				<% end %>
-      </select>
-			<input id="add_button" type=button name=add value="->" onclick="add_m();">
-      <input id="remove_button" type=button name=del value="<-" onclick="del_m();">
-      <select id="search_condition_nearest_subway_stations" name="search_condition[nearest_subway_stations][]" size=10 multiple style="width:150px;" ondblclick="del_m();">
-      </select>
-      <input id="clear_button" type="button" value="  Очистить ст.метро!  " onclick="freset();">
-    </div>
   </div>
 </div>
 <% end %>

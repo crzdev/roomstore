@@ -1,5 +1,5 @@
 class Metro
-  @stations = {
+  @@stations = {
     85 => "Авиамоторная",
     13 => "Автозаводская",
     97 => ">Академическая",
@@ -38,14 +38,7 @@ class Metro
   }
   
   def self.get_stations
-    @stations.values
+    @@stations
   end
-
-  def self.hello
-    puts "Hello"
-  end
-
-
-
 
 end
