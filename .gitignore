@@ -2,3 +2,5 @@
 *~
 # Emacs file locks
 .#*
+# Log files
+*.log

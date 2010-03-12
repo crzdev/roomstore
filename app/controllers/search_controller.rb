@@ -64,4 +64,34 @@ class SearchController < ApplicationController
     #                      );
   end
 
+  def result_flat
+    @qs = "" #query_string todo: remove in production
+    @search_condition = SearchCondition.new(params[:search_condition])
+    @qs = @search_condition.get_sql_condition
+    @entries = Entry.find(:all,:conditions => @qs) #todo: SQLINJECTIONABLE
+  end
+
+  def result_flat_mo
+    @qs = "" #query_string todo: remove in production
+    @search_condition = SearchCondition.new(params[:search_condition])
+    @qs = @search_condition.get_sql_condition
+    @entries = Entry.find(:all,:conditions => @qs) #todo: SQLINJECTIONABLE
+  end
+
+  def result_office
+    @qs = "" #query_string todo: remove in production
+    @search_condition = SearchCondition.new(params[:search_condition])
+    @qs = @search_condition.get_sql_condition
+    @entries = Entry.find(:all,:conditions => @qs) #todo: SQLINJECTIONABLE
+  end
+
+  def result_office_mo
+    @qs = "" #query_string todo: remove in production
+    @search_condition = SearchCondition.new(params[:search_condition])
+    @qs = @search_condition.get_sql_condition
+    @entries = Entry.find(:all,:conditions => @qs) #todo: SQLINJECTIONABLE
+  end
+
+
+
 end

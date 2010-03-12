@@ -1,0 +1,16 @@
+<div id="moscow_search_result_flat" class="search_result">
+<h1>Результаты поиска нежелых помещений в Московской Областе:</h1>
+Строка условия поиска: <%= @qs %>
+<table id="moscow_search_result_office_table" class="search_result_table">
+  <tr>
+    <th id="address_header">Адрес</th>
+    <th id="type_header">Тип помещения</th>
+    <th id="rooms_count_header">Кол-во комнат</th>
+    <th id="price_header">Цена руб/мес</th>
+    <th id="total_area_header"> Площадь суммарная</th>
+    <th id="contacts_header">Контакты</th>
+    <th id="comment_header">Комментарий</th>
+  </tr>
+	<%= render(:partial => "office_rent_entry" , :collection => @entries) %>
+</table>
+</div>

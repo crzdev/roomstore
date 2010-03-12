@@ -1,0 +1,16 @@
+<div id="moscow_search_result_flat" class="search_result">
+<h1>Результаты поиска квартир и комнат в Московской Областе:</h1>
+Строка условия поиска: <%= @qs %>
+<table id="moscow_search_result_flat_table" class="search_result_table">
+  <tr>
+    <th id="address_header">Адрес</th>
+    <th id="type_header">Квартира/Комната</th>
+    <th id="price_header">Цена руб/мес</th>
+    <th id="total_area_header"> Площадь суммарная</th>
+    <th id="kitchen_area_header">Площадь кухни</th>
+    <th id="contacts_header">Контакты</th>
+    <th id="comment_header">Комментарий</th>
+  </tr>
+	<%= render(:partial => "flat_rent_entry" , :collection => @entries) %>
+</table>
+</div>

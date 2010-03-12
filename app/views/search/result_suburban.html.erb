@@ -1,0 +1,18 @@
+<div id="moscow_search_result_flat" class="search_result">
+<h1>Результаты поиска Загородных помещений:</h1>
+Строка условия поиска: <%= @qs %>
+<table id="moscow_search_result_office_table" class="search_result_table">
+  <tr>
+    <th id="distance_to_mkad_header">до МКАД</th>
+    <th id="highway_header">Шоссе</th>
+    <th id="type_header">Тип недвижимости</th>
+    <th id="total_area_header"> Площадь участка</th>
+    <th id="house_area_header">Площадь дома</th>
+    <th id="price_header">Цена руб/мес</th>
+    <th id="commission_header">Коммисия %</th>
+    <th id="contacts_header">Контакты</th>
+    <th id="comment_header">Комментарий</th>
+  </tr>
+	<%= render(:partial => "suburban_rent_entry" , :collection => @entries) %>
+</table>
+</div>
