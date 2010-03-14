@@ -9,12 +9,12 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100311150859) do
+ActiveRecord::Schema.define(:version => 20100314134716) do
 
   create_table "entries", :force => true do |t|
     t.string   "type"
     t.integer  "rooms_count"
-    t.integer  "rent_price",   :limit => 10, :precision => 10, :scale => 0
+    t.integer  "rent_price",        :limit => 10, :precision => 10, :scale => 0
     t.string   "city"
     t.string   "street"
     t.string   "house_number"
@@ -29,6 +29,24 @@ ActiveRecord::Schema.define(:version => 20100311150859) do
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "realty_type"
+    t.string   "currency"
+    t.integer  "highway_id"
+    t.integer  "plot_area"
+    t.integer  "commission_client", :limit => 10, :precision => 10, :scale => 0
+    t.integer  "commission_agent",  :limit => 10, :precision => 10, :scale => 0
+    t.boolean  "phone"
+    t.boolean  "refridgerator"
+    t.boolean  "tv"
+    t.boolean  "washing_machine"
+  end
+
+  create_table "entries_highways", :force => true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "entry_id"
+    t.integer  "highway_id"
+    t.integer  "time_to"
   end
 
   create_table "entries_subway_stations", :force => true do |t|
@@ -44,6 +62,12 @@ ActiveRecord::Schema.define(:version => 20100311150859) do
     t.text     "address"
     t.string   "phone"
     t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "highways", :force => true do |t|
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
