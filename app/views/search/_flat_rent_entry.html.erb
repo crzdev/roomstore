@@ -3,11 +3,7 @@
 			<div id= "flat_rent_entry_address" class="rent_entry_table_field">
 				<% flat_rent_entry.subway_stations.each do |station| %>
 				<%= station.name %>
-				<% end %>
-
-				<% flat_rent_entry.district |station| %>
-				<%= station.name %>
-				<% end %>
+        <% end %>
 
 				<%=h flat_rent_entry.street %>
 				<%=h flat_rent_entry.house_number %>

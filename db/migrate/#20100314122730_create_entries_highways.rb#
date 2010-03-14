@@ -1,0 +1,11 @@
+class CreateEntriesHighways < ActiveRecord::Migration
+  def self.up
+    create_table :entries_highways do |t|
+      t.timestamps
+    end
+  end
+
+  def self.down
+    drop_table :entries_highways
+  end
+end

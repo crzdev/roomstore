@@ -6,6 +6,11 @@ class SearchCondition
   attr_accessor :rooms_count
   attr_accessor :min_price
   attr_accessor :max_price
+  attr_accessor :tv
+  attr_accessor :refridgerator
+  attr_accessor :washing_machine
+  attr_accessor :phone
+  attr_accessor :furniture
   attr_accessor :total_area
   attr_accessor :kitchen_area
   attr_accessor :live_area
@@ -30,65 +35,16 @@ class SearchCondition
     @nearest_subway_stations = args[:nearest_subway_stations]
     @time_to_nearest_subway_station = args[:time_to_nearest_subway_station]
     @has_photo = args[:has_photo]
-  end
-
-  #returns hash with attribute => value pairs
-  def get_hash
-    result = {}
-
-    if city != ""
-      result.update({"city" => city})
-    end
-
-    if street != ""
-      result.update({"street" => street})
-    end
-
-    if district != ""
-      result.update({"district" => district})
-    end
-      
-    if rooms_count != ""
-      result.update({"rooms_count" => rooms_count})
-    end
-
-    if rooms_count != ""
-      result.update({"rooms_count" => rooms_count})
-    end
-    if min_price != ""
-      result.update({"min_price" => min_price})
-    end
-    if max_price != ""
-      result.update({"max_price" => max_price})
-    end
-    if total_area != ""
-      result.update({"total_area" => total_area})
-    end
-    if kitchen_area != ""
-      result.update({"kitchen_area" => kitchen_area})
-    end
-    if live_area != ""
-      result.update({"live_area" => live_area})
-    end
-    if rent_time != ""
-      result.update({"rent_time" => rent_time})
-    end
-    if nearest_subway_stations != ""
-      result.update({"nearest_subway_stations" => nearest_subway_stations})
-    end
-    if time_to_nearest_subway_station != ""
-      result.update({"time_to_nearest_subway_station" => time_to_nearest_subway_station})
-    end
-    if has_photo != ""
-      result.update({"has_photo" => has_photo})
-    end
-
-    result
+    @tv = args[:tv]
+    @furniture = args[:furniture]
+    @refridgerator = args[:refridgerator]
+    @phone = args[:phone]
+    @washing_machine = args[:washing_machine]
   end
 
   #more sofiscated method to get hash
   #returns hash with attribute => value pairs  
-  def get_hash2
+  def get_hash
     result = {}
     instance_variables.each { |var|
       if instance_variable_get(var) != "" && instance_variable_get(var) != nil
@@ -102,8 +58,9 @@ class SearchCondition
     qs = "" #query_string 
 
     #building base query string
-    get_hash2.each_pair {|key,value|
-      if key !="min_price" && key != "max_price" && key != "has_photo" && key != "nearest_subway_stations"#those parametrs processed in another way
+    get_hash.each_pair {|key,value|
+      #those parametrs processed in another way
+      if key !="min_price" && key != "max_price" && key != "has_photo" && key != "nearest_subway_stations" && key != "tv" && key != "furniture" && key != "washing_machine" && key != "phone"  && key != "refridgerator" 
         qs += "#{key} = '#{value}' AND "
       end
     }
@@ -132,6 +89,20 @@ class SearchCondition
       end
       qs +=") AND "
     end
+
+    #adding attributes that represented with radio group with vlues "yes" "no" "no_mater" in view
+    ("refridgerator,furniture,tv,phone,washing_machine".split(",")).each do |var| 
+      value = instance_variable_get("@"+var)
+      case value
+            when "yes"
+              qs += "#{var} = true AND "
+            when "no"
+              qs += "#{var} = false AND "
+            when "no_mater"
+              #donothing
+            end
+    end
+
 
     #slice last " AND "
     if qs != ""

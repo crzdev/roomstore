@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100314134716) do
+ActiveRecord::Schema.define(:version => 20100314162741) do
 
   create_table "entries", :force => true do |t|
     t.string   "type"
@@ -39,6 +39,7 @@ ActiveRecord::Schema.define(:version => 20100314134716) do
     t.boolean  "refridgerator"
     t.boolean  "tv"
     t.boolean  "washing_machine"
+    t.boolean  "furniture"
   end
 
   create_table "entries_highways", :force => true do |t|

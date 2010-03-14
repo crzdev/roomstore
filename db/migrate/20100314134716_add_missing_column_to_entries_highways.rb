@@ -6,5 +6,10 @@ class AddMissingColumnToEntriesHighways < ActiveRecord::Migration
   end
 
   def self.down
+
+    remove_column :entries_highways, :entry_id
+    remove_column :entries_highways, :highway_id
+    remove_column :entries_highways, :time_to
+
   end
 end
