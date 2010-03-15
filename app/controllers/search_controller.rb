@@ -33,6 +33,10 @@ class SearchController < ApplicationController
   #search for suburban
   def suburban
     @search_condition = SearchCondition.new()
+    @realty_types = RealtyType.get_suburban_types
+    @rent_time_types = RentTimeType.get_rent_time_types
+    #todo: add sorting by name
+    @higways = Highway.find(:all)
   end
 
 
@@ -73,6 +77,14 @@ class SearchController < ApplicationController
     @qs = @search_condition.get_sql_condition
     @entries = Entry.find(:all,:conditions => @qs) #todo: SQLINJECTIONABLE
   end
+
+  def result_suburban
+    @qs = "" #query_string todo: remove in production
+    @search_condition = SearchCondition.new(params[:search_condition])
+    @qs = @search_condition.get_sql_condition
+    @entries = Entry.find(:all,:conditions => @qs) #todo: SQLINJECTIONABLE
+  end
+
 
   def result_flat_mo
     @qs = "" #query_string todo: remove in production

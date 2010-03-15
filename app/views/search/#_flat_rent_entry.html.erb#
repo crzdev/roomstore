@@ -1,0 +1,42 @@
+<tr>
+  <td>
+			<div id= "flat_rent_entry_address" class="rent_entry_table_field">
+				<% flat_rent_entry.subway_stations.each do |station| %>
+				<%= station.name %>
+        <% end %>
+				<%=h flat_rent_entry.street %>
+				<%=h flat_rent_entry.house_number %>
+			</div>
+		</td>
+		<td>
+			<div id= "flat_rent_entry_rooms_count" class="rent_entry_table_field">
+				<%=h flat_rent_entry.rooms_count %>
+			</div>
+		</td>
+		<td>
+			<div id= "flat_rent_entry_rent_price" class="rent_entry_table_field">
+				<%=h flat_rent_entry.rent_price %>
+			</div>
+		</td>
+		<td>
+			<div id= "flat_rent_entry_area_total" class="rent_entry_table_field">
+				<%=h flat_rent_entry.area_total %>
+			</div>
+		</td>
+		<td>
+			<div id= "flat_rent_entry_area_kitchen" class="rent_entry_table_field">
+				<%=h flat_rent_entry.area_kitchen %>
+			</div>
+		</td>
+		<td>
+			<div id= "flat_rent_entry_contacts" class="rent_entry_table_field">
+				<%=h flat_rent_entry.contacts %>
+			</div>
+		</td>
+		<td>
+			<div id= "flat_rent_entry_comment" class="rent_entry_table_field">
+				<%=h flat_rent_entry.comment %>
+			</div>
+		</td>
+</tr>
+

@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100315132150) do
+ActiveRecord::Schema.define(:version => 20100315160236) do
 
   create_table "entries", :force => true do |t|
     t.string   "type"
@@ -42,6 +42,9 @@ ActiveRecord::Schema.define(:version => 20100315132150) do
     t.boolean  "furniture"
     t.integer  "mo_district_id"
     t.string   "rent_time_type"
+    t.integer  "distance_to_mkad"
+    t.integer  "area_house"
+    t.integer  "area_plot"
   end
 
   create_table "entries_highways", :force => true do |t|
