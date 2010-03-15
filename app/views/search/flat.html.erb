@@ -1,3 +1,4 @@
+<%= javascript_include_tag "metro" %>
 <% form_for(@search_condition, :url => {:action => "result_flat"}) do |f| %>
 <div id="search">
   <div id="search_conditions" class="column">
@@ -89,7 +90,7 @@
     </p>
     <p>
       <label for="Rent_Time">Срок аренды:</label>
-			<%=	f.select( :rent_time, RentTimeTypes.get_rent_time_types ) %>
+			<%=	f.select( :rent_time_type, RentTimeTypes.get_rent_time_types ) %>
     </p>
     <p>
       <%= f.submit "Найти!" , :class => "submit" %>
