@@ -1,7 +1,7 @@
 #attrs names must be same as colomun names in entries table
 class SearchCondition
   attr_accessor :city
-  attr_accessor :district
+  attr_accessor :mo_districts
   attr_accessor :street
   attr_accessor :rooms_count
   attr_accessor :min_price
@@ -23,7 +23,7 @@ class SearchCondition
 
   def initialize (args = {})
     @city = args[:city]
-    @district = args[:district]
+    @mo_districts = args[:mo_districts]
     @street = args[:street]
     @rooms_count = args[:rooms_count]
     @min_price = args[:min_price]
@@ -59,8 +59,8 @@ class SearchCondition
 
     #building base query string
     get_hash.each_pair {|key,value|
-      #those parametrs processed in another way
-      if key !="min_price" && key != "max_price" && key != "has_photo" && key != "nearest_subway_stations" && key != "tv" && key != "furniture" && key != "washing_machine" && key != "phone"  && key != "refridgerator" 
+      #parametrs below processed in another way
+      if key !="min_price" && key != "max_price" && key != "has_photo" && key != "nearest_subway_stations" && key != "tv" && key != "furniture" && key != "washing_machine" && key != "phone"  && key != "refridgerator" && key != "total_area" && key != "kitchen_area" && key != "live_area" && key != "mo_districts"
         qs += "#{key} = '#{value}' AND "
       end
     }
@@ -74,6 +74,18 @@ class SearchCondition
      qs += "rent_price < '#{max_price}' AND "
     end
 
+    #adding area restriction
+    #todo: add live_area restriction
+    if total_area != "" && total_area != nil
+      qs += "total_area > '#{total_area}' AND "
+    end
+
+    if kitchen_area != "" && kitchen_area != nil
+      qs += "kitchen_area > '#{kitchen_area}' AND "
+    end
+
+
+
     #adding photo restriction
     #todo: add code here
 
@@ -85,10 +97,24 @@ class SearchCondition
       end
       #slice last " OR "
       if qs != ""
-        qs.slice!(qs.length-5..qs.length)
+        qs.slice!(qs.length-4..qs.length)
       end
       qs +=") AND "
     end
+
+    #adding multiple mo_districts
+    if mo_districts != nil
+      qs += "("
+      mo_districts.each do |id|
+        qs +="mo_district_id =#{id} OR "
+      end
+      #slice last " OR "
+      if qs != ""
+        qs.slice!(qs.length-4..qs.length)
+      end
+      qs +=") AND "
+    end
+
 
     #adding attributes that represented with radio group with vlues "yes" "no" "no_mater" in view
     ("refridgerator,furniture,tv,phone,washing_machine".split(",")).each do |var| 

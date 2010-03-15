@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100314162741) do
+ActiveRecord::Schema.define(:version => 20100315132150) do
 
   create_table "entries", :force => true do |t|
     t.string   "type"
@@ -40,6 +40,8 @@ ActiveRecord::Schema.define(:version => 20100314162741) do
     t.boolean  "tv"
     t.boolean  "washing_machine"
     t.boolean  "furniture"
+    t.integer  "mo_district_id"
+    t.string   "rent_time_type"
   end
 
   create_table "entries_highways", :force => true do |t|
@@ -68,6 +70,12 @@ ActiveRecord::Schema.define(:version => 20100314162741) do
   end
 
   create_table "highways", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "mo_districts", :force => true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"

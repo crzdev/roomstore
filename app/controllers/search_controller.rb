@@ -7,12 +7,15 @@ class SearchController < ApplicationController
   def flat
     @search_condition = SearchCondition.new()
     @search_condition.city = "Москва"
+    @subway_stations = SubwayStation.find(:all)
   end
 
   #search for flats in MO
   def flat_mo
     @search_condition = SearchCondition.new()
     @search_condition.city = "МО"
+    @districts = MoDistrict.find(:all)
+
   end
 
   #search for office in Moscow

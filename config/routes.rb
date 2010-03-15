@@ -1,4 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :mo_districts
+
   map.connect "group_administrating/:id/show_user", :controller => "group_administrating", :action => "show_user"
   map.connect "group_administrating/:id/edit_user", :controller => "group_administrating", :action => "edit_user"
   map.connect "group_administrating/:id/update_user", :controller => "group_administrating", :action => "update_user"

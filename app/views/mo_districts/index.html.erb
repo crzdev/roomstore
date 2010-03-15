@@ -1,0 +1,20 @@
+<h1>Listing mo_districts</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+  </tr>
+
+<% @mo_districts.each do |mo_district| %>
+  <tr>
+    <td><%=h mo_district.name %></td>
+    <td><%= link_to 'Show', mo_district %></td>
+    <td><%= link_to 'Edit', edit_mo_district_path(mo_district) %></td>
+    <td><%= link_to 'Destroy', mo_district, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New mo_district', new_mo_district_path %>

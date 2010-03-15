@@ -8,7 +8,7 @@
     </p>
     <p>
       <label for="Rooms count">Количество комнат:</label>
-      <%= f.text_field :rooms_count, :size => 40 %>
+      <%= f.text_field :rooms_count, :size => 3 %>
     </p>
     <p>
       <label for="price">Цена</label>
@@ -25,7 +25,7 @@
       <label for="furniture">Мемель:</label>
 			<%=  f.radio_button( "furniture","yes") %>
       <label for="furniture">есть,</label>
-			<%=  f.radio_button( "furniture", "no_matter",:checked => :true) %>
+			<%=  f.radio_button( "furniture", "no_matter",:checked => true) %>
       <label for="furniture">неважно,</label>
 			<%=  f.radio_button( "furniture", "no") %>
       <label for="furniture">нет</label>
@@ -35,7 +35,7 @@
       <label for="tv">Телевизор:</label>
 			<%=  f.radio_button( "tv","yes") %>
       <label for="tv">есть,</label>
-			<%=  f.radio_button( "tv", "no_matter",:checked => :true) %>
+			<%=  f.radio_button( "tv", "no_matter",:checked => true) %>
       <label for="tv">неважно,</label>
 			<%=  f.radio_button( "tv", "no") %>
       <label for="tv">нет</label>
@@ -44,7 +44,7 @@
       <label for="refridgerator">Холодильник:</label>
 			<%=  f.radio_button( "refridgerator","yes") %>
       <label for="refridgerator">есть,</label>
-			<%=  f.radio_button( "refridgerator", "no_matter",:checked => :true) %>
+			<%=  f.radio_button( "refridgerator", "no_matter",:checked => true) %>
       <label for="refridgerator">неважно,</label>
 			<%=  f.radio_button( "refridgerator", "no") %>
       <label for="refridgerator">нет</label>
@@ -53,7 +53,7 @@
       <label for="washing_machine">Стиральная машина:</label>
 			<%=  f.radio_button( "washing_machine","yes") %>
       <label for="washing_machine">есть,</label>
-			<%=  f.radio_button( "washing_machine", "no_matter",:checked => :true) %>
+			<%=  f.radio_button( "washing_machine", "no_matter",:checked => true) %>
       <label for="washing_machine">неважно,</label>
 			<%=  f.radio_button( "washing_machine", "no") %>
       <label for="washing_machine">нет</label>
@@ -62,22 +62,26 @@
       <label for="phone">Телефон:</label>
 			<%=  f.radio_button( "phone","yes") %>
       <label for="phone">есть,</label>
-			<%=  f.radio_button( "phone", "no_matter",:checked => :true) %>
+			<%=  f.radio_button( "phone", "no_matter",:checked => true) %>
       <label for="phone">неважно,</label>
 			<%=  f.radio_button( "phone", "no") %>
       <label for="phone">нет</label>
     </p>
     <p>
+      <label for="has_photo">Только с фотографиями</label>
+      <%= f.check_box :has_photo, :size => 40 %>
+    </p>
+    <p>
       <label for="total_area">Общая площадь от:</label>
-      <%= f.text_field :total_area, :size => 5 %>
+      <%= f.text_field :total_area, :size => 3 %>м2
     </p>
     <p>
       <label for="Kitchen_Area">Кухня площадь от:</label>
-      <%= f.text_field :kitchen_area, :size => 5 %>
+      <%= f.text_field :kitchen_area, :size => 3 %>м2
     </p>
     <p>
       <label for="Live_Area">Жилая площадь от:</label>
-      <%= f.text_field :live_area, :size => 5 %>
+      <%= f.text_field :live_area, :size => 3 %>м2
     </p>
     <p>
       <label for="Time_To_Nearest_Subway_Station">Время до ближайшей станции метро:</label>
@@ -85,11 +89,7 @@
     </p>
     <p>
       <label for="Rent_Time">Срок аренды:</label>
-      <%= f.text_field :rent_time, :size => 40 %>
-    </p>
-    <p>
-      <label for="has_photo">Только с фотографиями</label>
-      <%= f.check_box :has_photo, :size => 40 %>
+			<%=	f.select( :rent_time, RentTimeTypes.get_rent_time_types ) %>
     </p>
     <p>
       <%= f.submit "Найти!" , :class => "submit" %>
@@ -100,11 +100,7 @@
       <img usemap="#map" src="/images/metromap_2009b.gif" >
     </div>
     <div id="options_map_selection">
-      <select name=metro_s size=10 ondblclick="add_m();">
-				<% Metro.get_stations.each_pair do |key, value| %>
-				<%= "<option value=\"#{key}\">#{value}</option>" %>
-				<% end %>
-      </select>
+			<%= select "subway","station", @subway_stations.collect { |el| [el.name, el.id]},{},{:size =>10,:ondblclick=>"add_m();"}  %>
 			<input id="add_button" type=button name=add value="->" onclick="add_m();">
       <input id="remove_button" type=button name=del value="<-" onclick="del_m();">
       <select id="search_condition_nearest_subway_stations" name="search_condition[nearest_subway_stations][]" size=10 multiple style="width:150px;" ondblclick="del_m();">
