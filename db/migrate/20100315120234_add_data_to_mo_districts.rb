@@ -7,6 +7,5 @@ class AddDataToMoDistricts < ActiveRecord::Migration
   end
 
   def self.down
-    MoDistrict.clear
   end
 end
