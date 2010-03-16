@@ -1,6 +1,6 @@
 # Emacs backup files
 *~
 # Emacs file locks
-.#*
+*.*#
 # Log files
 *.log

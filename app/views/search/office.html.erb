@@ -1,3 +1,4 @@
+<%= javascript_include_tag "metro" %>
 <% form_for(@search_condition, :url => {:action => "result_office"}) do |f| %>
 <div id="search">
   <div id="search_conditions" class="column">
@@ -7,12 +8,15 @@
       <%= f.text_field :city, :size => 40 %>
     </p>
     <p>
-      <label for="District">Район:</label>
-      <%= f.text_field :district, :size => 40 %>
+      <label for="realty_type">Тип недвижимости:</label>
+			<% for  type in @realty_types -%>
+      <%= check_box_tag "search_condition[realty_types][]", "#{type[1]}" -%>
+      <%= "#{type[0]}" -%>
+      <% end -%>
     </p>
     <p>
-      <label for="Street">Улица:</label>
-      <%= f.text_field :street, :size => 40 %>
+      <label for="total_area">Общая площадь от:</label>
+      <%= f.text_field :total_area, :size => 40 %>
     </p>
     <p>
       <label for="Rooms count">Количество комнат:</label>
@@ -26,28 +30,17 @@
       <%= f.text_field :max_price, :size => 10 %> руб.
     </p>
     <p>
-      <label for="total_area">Общая площадь от:</label>
-      <%= f.text_field :total_area, :size => 40 %>
-    </p>
-    <p>
-      <label for="Kitchen_Area">Кухня площадь от:</label>
-      <%= f.text_field :kitchen_area, :size => 40 %>
-    </p>
-    <p>
-      <label for="Live_Area">Жилая площадь от:</label>
-      <%= f.text_field :live_area, :size => 40 %>
-    </p>
-    <p>
-      <label for="Rent_Time">Срок аренды:</label>
-      <%= f.text_field :rent_time, :size => 40 %>
+      <label for="furniture">Мемель:</label>
+			<%=  f.radio_button( "furniture","yes") %>
+      <label for="furniture">есть,</label>
+			<%=  f.radio_button( "furniture", "no_matter",:checked => true) %>
+      <label for="furniture">неважно,</label>
+			<%=  f.radio_button( "furniture", "no") %>
+      <label for="furniture">нет</label>
     </p>
     <p>
       <label for="Time_To_Nearest_Subway_Station">Время до ближайшей станции метро:</label>
       <%= f.text_field :time_to_nearest_subway_station, :size => 10 %> мин.
-    </p>
-    <p>
-      <label for="has_photo">Только с фотографиями</label>
-      <%= f.check_box :has_photo, :size => 40 %>
     </p>
     <p>
       <%= f.submit "Найти!" , :class => "submit" %>
@@ -58,14 +51,10 @@
       <img usemap="#map" src="/images/metromap_2009b.gif" >
     </div>
     <div id="options_map_selection">
-      <select name=metro_s size=10 ondblclick="add_m();">
-				<% Metro.get_stations.each_pair do |key, value| %>
-				<%= "<option value=\"#{key}\">#{value}</option>" %>
-				<% end %>
-      </select>
+			<%= select "subway","station", @subway_stations.collect { |el| [el.name, el.id]},{},{:size =>10,:ondblclick=>"add_m();"}  %>
 			<input id="add_button" type=button name=add value="->" onclick="add_m();">
       <input id="remove_button" type=button name=del value="<-" onclick="del_m();">
-      <select id="search_condition_nearest_subway_stations" name="search_condition[nearest_subway_stations]" size=10 multiple style="width:150px;" ondblclick="del_m();">
+      <select id="search_condition_nearest_subway_stations" name="search_condition[nearest_subway_stations][]" size=10 multiple style="width:150px;" ondblclick="del_m();">
       </select>
       <input id="clear_button" type="button" value="  Очистить ст.метро!  " onclick="freset();">
     </div>

@@ -22,12 +22,16 @@ class SearchController < ApplicationController
   def office
     @search_condition = SearchCondition.new()
     @search_condition.city = "Москва"
+    @realty_types = RealtyType.get_office_types
+    @subway_stations = SubwayStation.find(:all)
   end
 
   #search for office in MO
   def office_mo
     @search_condition = SearchCondition.new()
     @search_condition.city = "МО"
+    @realty_types = RealtyType.get_office_types
+    @districts = MoDistrict.find(:all)
   end
 
   #search for suburban

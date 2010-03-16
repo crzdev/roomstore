@@ -57,4 +57,13 @@ class RealtyType
     @@SUBURBAN_REALTY_TYPES 
   end
 
+  def self.get_office_types
+    @@NONRESIDENTIAL_REALTY_TYPES 
+  end
+
+  def self.get_nonresidential_types
+    @@NONRESIDENTIAL_REALTY_TYPES 
+  end
+
+
 end		
