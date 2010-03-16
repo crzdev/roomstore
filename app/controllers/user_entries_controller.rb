@@ -94,6 +94,17 @@ class UserEntriesController < ApplicationController
     end
   end
 
+  def new_rent_office
+    @rent_entry = RentEntry.new
+    @rent_entry.user_id = session[:user_id]
+    @subway_stations = SubwayStation.find(:all)
+    @ess = EntriesSubwayStations.new
+    respond_to do |format|
+      format.html # new.html.erb
+      format.xml  { render :xml => @entry }
+    end
+  end
+
 
 
   # GET /entries/1/edit

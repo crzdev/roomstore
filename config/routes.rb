@@ -9,6 +9,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.connect "user_entries/new_rent_subway", :controller => "user_entries", :action => "new_rent_subway"
   map.connect "user_entries/new_rent_suburban", :controller => "user_entries", :action => "new_rent_suburban"
+  map.connect "user_entries/new_rent_office", :controller => "user_entries", :action => "new_rent_office"
   map.connect "user_entries/new_rent_flat", :controller => "user_entries", :action => "new_rent_flat"
   map.connect "user_entries/list_entries", :controller => "user_entries", :action => "list_entries"
   map.connect "user_entries/new_rent", :controller => "user_entries", :action => "new_rent"
