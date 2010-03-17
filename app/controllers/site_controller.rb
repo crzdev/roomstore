@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 class SiteController < ApplicationController
 	#start page
   #тупо редирект на логин. Без авторизации нельзя пользоваться системой.

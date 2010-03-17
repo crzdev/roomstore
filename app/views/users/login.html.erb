@@ -1,18 +1,33 @@
 <div id="login_div" class="">
-  <fieldset>
-    <legend>Please Log In</legend>
+	<fieldset id="login_field_set" class="big_field_set"> 
+    <legend class="big_field_set_legend">Вход в систему</legend>
     <% form_tag do %>
-       <p>
-         <label for="login">Login:</label>
+		<table>
+			<tr>
+				<td align=right>
+         <label for="login">Имя пользователя:</label>
+				</td>
+				<td >
          <%= text_field_tag :login, params[:login] %>
-       </p>
-       <p>
-         <label for="password">Password:</label>
+				</td>
+			</tr>
+			<tr>
+				<td align=right>
+         <label for="password">Пароль:</label>
+				</td>
+				<td>
          <%= password_field_tag :password, params[:password] %>
-       </p>
-       <p>
-         <%= submit_tag "Login" %>
-       </p>
+				</td>
+			</tr>
+			<tr>
+				<td>
+				</td>
+				<td>
+         <%= submit_tag "Вход" %>
+				</td>
+
+			</tr>
     <% end %>
+		</table>
   </fieldset>
 </div>

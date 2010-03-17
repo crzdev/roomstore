@@ -10,3 +10,12 @@
 		width:50%;
 		padding:10px
 }
+.big_field_set{
+		display:inline; 
+		padding: 15px;
+}
+
+.big_field_set_legend{
+		align: center;
+		color: grey;
+}
