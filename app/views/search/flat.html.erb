@@ -8,9 +8,20 @@
       <%= f.text_field :city, :size => 40 %>
     </p>
     <p>
-      <label for="Rooms count">Количество комнат:</label>
-      <%= f.text_field :rooms_count, :size => 3 %>
+      <label for="realty_type">Тип недвижимости:</label>
+			<% for  type in @realty_types -%>
+      <%= check_box_tag "search_condition[realty_types][]", "#{type[1]}" -%>
+      <%= "#{type[0]}" -%>
+      <% end -%>
     </p>
+		<p>
+      <label for="room_count">Количество комнат:</label>
+			<% 5.times do |i| -%>
+      <%= check_box_tag "search_condition[rooms_count][]", "#{i+1}" -%>
+      <%= "#{i+1}" -%>
+      <% end -%>
+      <%= check_box_tag "search_condition[rooms_count][]", "6+" -%> 6+
+		</p>
     <p>
       <label for="price">Цена</label>
       <label for="Min_Price">от:</label>
@@ -85,7 +96,7 @@
       <%= f.text_field :live_area, :size => 3 %>м2
     </p>
     <p>
-      <label for="Time_To_Nearest_Subway_Station">Время до ближайшей станции метро:</label>
+      <label for="Time_To_Nearest_Subway_Station">Время до ближайшей станции метро в пределах </label>
       <%= f.text_field :time_to_nearest_subway_station, :size => 10 %> мин.
     </p>
     <p>

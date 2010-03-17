@@ -8,6 +8,7 @@ class SearchController < ApplicationController
     @search_condition = SearchCondition.new()
     @search_condition.city = "Москва"
     @subway_stations = SubwayStation.find(:all)
+    @realty_types = RealtyType.get_urban_types
   end
 
   #search for flats in MO

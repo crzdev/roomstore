@@ -76,7 +76,7 @@ class SearchCondition
     #building base query string
     get_hash.each_pair {|key,value|
       #parametrs below processed in another way
-      if key !="min_price" && key != "max_price" && key != "has_photo" && key != "nearest_subway_stations" && key != "tv" && key != "furniture" && key != "washing_machine" && key != "phone"  && key != "refridgerator" && key != "total_area" && key != "kitchen_area" && key != "live_area" && key != "mo_districts" && key != "realty_types" && key != "min_distance_to_mkad" && key != "max_distance_to_mkad" && key != "min_area_house" && key != "max_area_house" && key != "min_area_plot" && key != "max_area_plot" && key != "highways"
+      if key !="min_price" && key != "max_price" && key != "has_photo" && key != "nearest_subway_stations" && key != "tv" && key != "furniture" && key != "washing_machine" && key != "phone"  && key != "refridgerator" && key != "total_area" && key != "kitchen_area" && key != "live_area" && key != "mo_districts" && key != "realty_types" && key != "min_distance_to_mkad" && key != "max_distance_to_mkad" && key != "min_area_house" && key != "max_area_house" && key != "min_area_plot" && key != "max_area_plot" && key != "highways" && key != "time_to_nearest_subway_station" && key != "rooms_count"
         qs += "#{key} = '#{value}' AND "
       end
     }
@@ -88,6 +88,11 @@ class SearchCondition
 
     if max_price != "" && max_price != nil
      qs += "rent_price < '#{max_price}' AND "
+    end
+
+    #adding time to nearest subway station
+    if time_to_nearest_subway_station != "" && time_to_nearest_subway_station != nil
+      qs += "(id in (SELECT entry_id FROM entries_subway_stations WHERE entries_subway_stations.time_to < '#{time_to_nearest_subway_station}')) AND "
     end
 
     #adding distance to mkad restrictions
@@ -184,6 +189,25 @@ class SearchCondition
       end
       qs +=") AND "
     end
+
+
+    #adding multiple rooms count
+    if rooms_count != nil
+      qs += "("
+      rooms_count.each do |count|
+        if count != "6+"
+          qs +="rooms_count ='#{count}' OR "
+        else
+          qs +="rooms_count >'5' OR "
+        end
+      end
+      #slice last " OR "
+      if qs != ""
+        qs.slice!(qs.length-4..qs.length)
+      end
+      qs +=") AND "
+    end
+
 
 
     #adding attributes that represented with radio group with vlues "yes" "no" "no_mater" in view
