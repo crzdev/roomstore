@@ -9,7 +9,13 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100315160236) do
+ActiveRecord::Schema.define(:version => 20100317100126) do
+
+  create_table "cities", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "entries", :force => true do |t|
     t.string   "type"
@@ -45,6 +51,7 @@ ActiveRecord::Schema.define(:version => 20100315160236) do
     t.integer  "distance_to_mkad"
     t.integer  "area_house"
     t.integer  "area_plot"
+    t.integer  "city_id"
   end
 
   create_table "entries_highways", :force => true do |t|

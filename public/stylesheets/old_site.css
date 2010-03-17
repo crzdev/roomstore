@@ -3,6 +3,15 @@ img{
     border: none;
 }
 
+.big_field_set{
+		display:inline; 
+		padding: 15px;
+}
+
+.big_field_set_legend{
+		align: center;
+		color: grey;
+}
 /* user panel */
 
 #top_user_panel{
@@ -109,3 +118,12 @@ img{
 }
 
 
+/*new entry start page*/
+#new_entry_start_page{
+		
+}
+
+/* home page */
+#home_page{
+		
+}

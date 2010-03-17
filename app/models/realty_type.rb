@@ -15,7 +15,7 @@ class RealtyType
                   [ "продажа бизнеса" , "selling_business" ],
                   [ "дом" , "house" ],
                   [ "часть дома" , "part_of_house" ],
-                  [ "участок" , "office" ],
+                  [ "участок" , "plot" ],
                   [ "таунхаус" , "townhouse" ]
                  ]
   @@NONRESIDENTIAL_REALTY_TYPES = [
@@ -40,7 +40,7 @@ class RealtyType
                            # Displayed stored in db
                            [ "дом" , "house" ],
                            [ "часть дома" , "part_of_house" ],
-                           [ "участок" , "office" ],
+                           [ "участок" , "plot" ],
                            [ "таунхаус" , "townhouse" ]
                           ]
 
@@ -65,5 +65,15 @@ class RealtyType
     @@NONRESIDENTIAL_REALTY_TYPES 
   end
 
+  #returns type name for value that stored in database
+  def self.get_name_for (value)
+    result = ""
+    get_all_types.collect { |el| 
+      if el[1] == value
+        result = el[0]
+      end
+    }
+    result
+  end
 
 end		

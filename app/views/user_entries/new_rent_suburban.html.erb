@@ -5,7 +5,7 @@
   <p>
 		<%= f.label "Ближайшее шоссе" %><br />
 		<%= select("highway", "id", @highways.collect {|h| [ h.name, h.id ] }, {:include_blank => 'Нету'}) %>
-		<%= f.text_field :distance_to_mkad %>
+		в <%= f.text_field :distance_to_mkad, :size => 3 %>км от МКАД
   </p>
   <p>
     <%= f.label "Город" %><br />
@@ -20,7 +20,7 @@
     <%= f.text_field :house_number %>
   </p>
   <p>
-    <%= f.label "realty_type" %><br />
+    <%= f.label "Тип недвижимости" %><br />
 		<%=	f.select( :realty_type, RealtyType.get_suburban_types ) %>
   </p>
   <p>
@@ -58,10 +58,6 @@
   <p>
     <%= f.label :comment %><br />
     <%= f.text_area :comment %>
-  </p>
-  <p>
-    <%= f.label :user_id %><br />
-    <%= f.text_field :user_id %>
   </p>
   <p>
     <%= f.submit 'Create' %>

@@ -4,14 +4,15 @@
 			<% office_rent_entry.subway_stations.each do |station| %>
 			<%= station.name %>
 			<% end %>
-
 			<%=h office_rent_entry.street %>
 			<%=h office_rent_entry.house_number %>
 			</div>
 		</td>
 		<td>
 			<div id= "office_rent_entry_type" class="rent_entry_table_field">
-				<%=h office_rent_entry.realty_type %>
+				<% if office_rent_entry.realty_type != nil && office_rent_entry.realty_type != "" %>
+				<%=h RealtyType.get_name_for  office_rent_entry.realty_type  %>
+				<% end %>
 			</div>
 		</td>
 		<td>
@@ -37,7 +38,7 @@
 		</td>
 		<td>
 			<div id= "office_rent_entry_rent_misc" class="rent_entry_table_field">
-				todo:добавить код
+				
 			</div>
 		</td>
 		<td>

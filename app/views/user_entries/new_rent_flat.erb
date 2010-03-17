@@ -3,7 +3,7 @@
   <%= f.error_messages %>
   <p>
 		<%= f.label "Ближайшая станция метро" %><br />
-		<%= select("subway_station", "id", SubwayStation.all.collect {|p| [ p.name, p.id ] }, {:include_blank => 'Нету'}) %>
+		<%= select("subway_station", "id", SubwayStation.all.collect {|p| [ p.name, p.id ] }, {:include_blank => 'Не выбрано'}) %>
 		<%= text_field "subway_station", "time_to", :size => 4 %> мин.
   </p>
   <p>
@@ -12,7 +12,7 @@
   </p>
   <p>
     <%= f.label "Район МО" %><br />
-		<%= select("mo_district", "id", MoDistrict.all.collect {|d| [ d.name, d.id ] }, {:include_blank => 'Другой'}) %>
+		<%= select("mo_district", "id", MoDistrict.all.collect {|d| [ d.name, d.id ] }, {:include_blank => 'Не выбрано'}) %>
   </p>
   <p>
     <%= f.label "Улица" %><br />
@@ -69,10 +69,6 @@
   <p>
     <%= f.label :comment %><br />
     <%= f.text_area :comment %>
-  </p>
-  <p>
-    <%= f.label :user_id %><br />
-    <%= f.text_field :user_id %>
   </p>
   <p>
     <%= f.submit 'Create' %>
