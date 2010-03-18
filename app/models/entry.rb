@@ -8,4 +8,9 @@ class Entry < ActiveRecord::Base
   has_many :highways, :through => :entries_highways, :class_name => "Highway", :dependent => :destroy
   has_many :entries_highways, :class_name => "EntriesHighways"
 
+  def self.find_with_search_condition (sc)
+    qs = sc.get_sql_condition
+    Entry.find(:all,:conditions => qs) #todo: SQLINJECTIONABLE
+  end
+
 end

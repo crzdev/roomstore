@@ -1,0 +1,55 @@
+<tr>
+  <td>
+		<div id= "office_rent_entry_address" class="rent_entry_table_field">
+			<% office_rent_entry.subway_stations.each do |station| %>
+			<%= station.name %>
+			<% end %>
+			<%=h office_rent_entry.street %>
+			<%=h office_rent_entry.house_number %>
+			</div>
+		</td>
+		<td>
+			<div id= "office_rent_entry_type" class="rent_entry_table_field">
+				<% if office_rent_entry.realty_type != nil && office_rent_entry.realty_type != "" %>
+				<%=h RealtyType.get_name_for  office_rent_entry.realty_type  %>
+				<% end %>
+			</div>
+		</td>
+		<td>
+			<div id= "office_rent_entry_area_total" class="rent_entry_table_field">
+				<%=h office_rent_entry.area_total %>
+			</div>
+		</td>
+		<td>
+			<div id= "office_rent_entry_rent_price" class="rent_entry_table_field">
+				<%=h office_rent_entry.rent_price %>
+			</div>
+		</td>
+
+		<td>
+			<div id= "office_rent_entry_rent_floor" class="rent_entry_table_field">
+				<%=h office_rent_entry.floor_number %>
+			</div>
+		</td>
+		<td>
+			<div id= "office_rent_entry_rent_phone" class="rent_entry_table_field">
+				<%=h office_rent_entry.phone %>
+			</div>
+		</td>
+		<td>
+			<div id= "office_rent_entry_rent_misc" class="rent_entry_table_field">
+				
+			</div>
+		</td>
+		<td>
+			<div id= "office_rent_entry_contacts" class="rent_entry_table_field">
+				<%=h office_rent_entry.contacts %>
+			</div>
+		</td>
+		<td>
+			<div id= "office_rent_entry_comment" class="rent_entry_table_field">
+				<%=h office_rent_entry.comment %>
+			</div>
+		</td>
+</tr>
+

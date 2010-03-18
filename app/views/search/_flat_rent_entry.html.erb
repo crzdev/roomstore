@@ -2,10 +2,10 @@
   <td>
 			<div id= "flat_rent_entry_address" class="rent_entry_table_field">
 				<% flat_rent_entry.subway_stations.each do |station| %>
-				<%= station.name %>
+				<subway_station_text><%= station.name %></subway_station_text>
         <% end %>
-				<%=h flat_rent_entry.street %>
-				<%=h flat_rent_entry.house_number %>
+				<street_name_text><%=h flat_rent_entry.street %></street_name_text>
+				<house_number_text><%=h flat_rent_entry.house_number %></homuse_number_text>
 			</div>
 		</td>
 		<td>

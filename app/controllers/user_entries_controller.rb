@@ -71,7 +71,7 @@ class UserEntriesController < ApplicationController
     end
   end
 
-  #view for adding new rent entry about flat or room in Moscow or MO
+  #view for adding new rent entry about suburban realty
   def new_rent_suburban
     @rent_entry = RentEntry.new
     @rent_entry.user_id = session[:user_id]
@@ -83,15 +83,43 @@ class UserEntriesController < ApplicationController
     end
   end
 
+  #view for adding new rent entry about nonresidential realty in Moscow or MO
   def new_rent_office
     @rent_entry = RentEntry.new
     @rent_entry.user_id = session[:user_id]
     @subway_stations = SubwayStation.find(:all)
     @ess = EntriesSubwayStations.new
     respond_to do |format|
-      format.html # new.html.erb
+      format.html
       format.xml  { render :xml => @entry }
     end
+  end
+
+  #view for viewing curent users rent entries about flat or room in Moscow or MO
+  def my_rents_flat_and_room
+    sc = SearchCondition.new(:user_id => session[:user_id],
+                             :realty_types => ["flat","room"]
+                             )
+    @entries = Entry.find_with_search_condition(sc)
+  end
+
+  #view for viewing curent users rent entries about suburban realty
+  def my_rents_suburban
+    sc = SearchCondition.new(:user_id => session[:user_id],
+                             :realty_types => ["house","part_of_house","plot","townhouse"]
+                             )
+    @entries = Entry.find_with_search_condition(sc)
+    @qs = sc.get_sql_condition
+  end
+
+  #view for viewing curent users rent entries about office in Moscow or MO
+  def my_rents_office
+    sc = SearchCondition.new(:user_id => session[:user_id],
+                             :city => "Москва", #todo: add code to process several cities in SearchCondition
+                             :realty_types => ["office","trading_floor","warehouse","catering","free_app","garage","manufacture","legal_address","autoservice","selling_business"]
+                             )
+    @entries = Entry.find_with_search_condition(sc)
+  
   end
 
 

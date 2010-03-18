@@ -1,0 +1,4 @@
+<div id="my_rents_flat_and_room" >
+	<h1>Ваши объявления об аренде квартир и комнат в Москве и МО:</h1>
+	<%= render(:partial => "entries/office_moscow_and_mo" , :locals => {:entries => @entries}) %>
+</div>

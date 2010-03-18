@@ -1,0 +1,14 @@
+<table id="office_moscow_and_mo_table" class="search_result_table">
+  <tr>
+    <th id="address_header">Адрес</th>
+    <th id="type_header">Тип помещения</th>
+    <th id="total_area_header"> Площадь суммарная</th>
+		<th id="price_header">Цена руб/мес</th>
+		<th id="floor_header">Этаж</th>
+		<th id="phone_header">Тел.</th>
+		<th id="misc_header">Дополнительно</th>
+    <th id="contacts_header">Контакты</th>
+    <th id="comment_header">Комментарий</th>
+  </tr>
+	<%= render(:partial => "entries/office_rent_entry" , :collection => entries) %>
+</table>

@@ -1,10 +1,45 @@
-<table>
-	<tr>
-		Персональная информация:
-	</tr>
-	<tr>
+<div id="personal_info">
+	<div id="personal_info_header" class="header">
+		<h1>Персональная информация:</h1>
+	</div>
+	<div class="row">
+		<div class="column">
+			<labe class="simple_label">Имя:</label>
+    </div>
+		<div class="column">
+			<span class="value_text"><%= @user.name %></span>
+		</div>
+  </div>
+  <div class="clear"></div>
+  <div class="row">
+		<div class="column">
+			<labe class="simple_label">Фамилия:</label>
+    </div>
+		<div class="column">
+			<span class="value_text"> <%= @user.surname%></span>
+		</div>
+   </div>
+   <div class="clear"></div>
+		<% if @group != nil %>
+	 <div class="row">
+		 <div class="column">
+			 <labe class="simple_label">Ваша учётная запись входит в группу:</label>
+      </div>
+      <div class="column">
+				<span class="value_text"><%= @group.name %></span>
+			</div>
+    </div>
+</div>
+<% end %>
+</div>
+
+<h1>Вы можете:</h1>
+<p>
 			<%= link_to "Добавить объявление",:controller => "oldsite",:action => "new_entry_start"%>
-			<%= link_to "Мои объявления",:controller => "user_entries", :action => "index"%>
+</p>
+<p>
+			<%= link_to "Посмотреть ваши объявления",:controller => "user_entries", :action => "index"%>
+</p>
+<p>
 			<%= link_to "Редактировать персональную информацию",:action => "personal_info"%>
-	</tr>
-</table>
+</p>
