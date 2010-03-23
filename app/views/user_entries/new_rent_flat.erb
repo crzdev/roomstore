@@ -1,5 +1,7 @@
-<h1>Новое объявление об аренде комнаты\квартиры в Москве или МО</h1>
-<% form_for(@rent_entry,@ess,@subway_stations,:url => {:action => "create_rent_flat"}) do |f| %>
+<div id="new_rent_flat_and_room" >
+	<h1>Новое объявление об аренде комнаты\квартиры в Москве или МО</h1>
+	<%= error_messages_for :renty_entry, :address %>
+	<% form_for(@rent_entry, @subway_stations,@address,@street_name,:url => {:action => "create_rent_flat_room"}) do |f| %>
   <%= f.error_messages %>
   <p>
 		<%= f.label "Ближайшая станция метро" %><br />
@@ -7,20 +9,16 @@
 		<%= text_field "subway_station", "time_to", :size => 4 %> мин.
   </p>
   <p>
-    <%= f.label "Город" %><br />
-    <%= f.text_field :city %>
+    <%= f.label "Район МО" %><br />
+		<%= select("address", "sub_administrative_area_id", @mo_saa.collect {|saa| [ saa.name, saa.id ] }, {:include_blank => 'Не выбрано'}) %>
   </p>
   <p>
-    <%= f.label "Район МО" %><br />
-		<%= select("mo_district", "id", MoDistrict.all.collect {|d| [ d.name, d.id ] }, {:include_blank => 'Не выбрано'}) %>
+    <%= f.label "Населенный пункт" %><br />
+    <%= text_field_tag "locality_name" %>
   </p>
   <p>
     <%= f.label "Улица" %><br />
-    <%= f.text_field :street %>
-  </p>
-  <p>
-    <%= f.label "Номер дома" %><br />
-    <%= f.text_field :house_number %>
+    <%= text_field_tag "street_name" %>
   </p>
   <p>
     <%= f.label "Количество комнат" %><br />
@@ -76,3 +74,4 @@
 <% end %>
 
 <%= link_to 'Back', entries_path %>
+</div>

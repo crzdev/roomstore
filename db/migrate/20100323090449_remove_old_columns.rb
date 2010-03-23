@@ -2,6 +2,7 @@ class RemoveOldColumns < ActiveRecord::Migration
   def self.up
     remove_column :entries, :city
     remove_column :entries, :city_id
+    remove_column :entries, :street
     remove_column :entries, :house_number
     remove_column :entries, :flat_number
     remove_column :entries, :disctrict #ololo
@@ -11,6 +12,7 @@ class RemoveOldColumns < ActiveRecord::Migration
   def self.down
     add_column :entries, :city, :string
     add_column :entries, :city_id, :integer
+    add_column :entries, :street, :string
     add_column :entries, :house_number, :integer
     add_column :entries, :flat_number, :integer
     add_column :entries, :disctrict, :string

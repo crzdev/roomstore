@@ -1,4 +1,3 @@
-
 class UserEntriesController < ApplicationController
   # GET /entries
   # GET /entries.xml
@@ -64,7 +63,12 @@ class UserEntriesController < ApplicationController
     @rent_entry = RentEntry.new
     @rent_entry.user_id = session[:user_id]
     @subway_stations = SubwayStation.find(:all)
-    @ess = EntriesSubwayStations.new
+
+    @mo_saa = SubAdministrativeArea.find(:all,:conditions => ["administrative_area_id = ?", 1])
+
+    @street_name = ""
+    @locality_name = ""
+
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @entry }
@@ -119,7 +123,7 @@ class UserEntriesController < ApplicationController
                              :realty_types => ["office","trading_floor","warehouse","catering","free_app","garage","manufacture","legal_address","autoservice","selling_business"]
                              )
     @entries = Entry.find_with_search_condition(sc)
-  
+    
   end
 
 
@@ -159,36 +163,141 @@ class UserEntriesController < ApplicationController
           @ess.save
         end
 
-          flash[:notice] = 'Entry was successfully created.'
-          format.html { redirect_to :action => :show, :id => @rent_entry.id}
-          format.xml  { render :xml => @rent_entry, :status => :created, :location => @entry }
-        else
-          format.html { render :action => "new_rent" }
-          format.xml  { render :xml => @rent_entry.errors, :status => :unprocessable_entity }
-        end
+        flash[:notice] = 'Entry was successfully created.'
+        format.html { redirect_to :action => :show, :id => @rent_entry.id}
+        format.xml  { render :xml => @rent_entry, :status => :created, :location => @entry }
+      else
+        format.html { render :action => "new_rent" }
+        format.xml  { render :xml => @rent_entry.errors, :status => :unprocessable_entity }
       end
+    end
+  end
+
+  #helper method
+  def helper
   end
 
   #create new rent entry for flat or room in Moscow or MO
-  def create_rent_flat
+  def create_rent_flat_room
+    @mo_saa = SubAdministrativeArea.find(:all,:conditions => ["administrative_area_id = ?", 1])
     @rent_entry = RentEntry.new(params[:rent_entry])
     #entry is created for curent user
     @rent_entry.user_id = session[:user_id]
     @subway_station = SubwayStation.find_by_id(params[:subway_station][:id])
-    respond_to do |format|
-      if @rent_entry.save
-        if @subway_station != nil
-          @ess = @rent_entry.entries_subway_stations.create(:subway_station_id => @subway_station.id,:time_to => params[:subway_station][:time_to])
-          @ess.save
-        end
+    @address = @rent_entry.build_address(params[:address]) 
+    @street_name = params[:street_name]
+    @locality_name = params[:locality_name]
+    locality = Locality.find(:first, :conditions => {:name => params[:locality_name]})
+
+    if locality
+      #locality found in our DB 
+      #Try to find street
+      street = Street.find(:first, :conditions => {:locality_id => locality.id})
+      #      street = locality.streets.find(:name => params[:street_name])
+      if street
+        #Street is founded on our DB
+        #try to save rent_entry if true save address
+        @address.locality = locality
+        @address.street = street
+        if @rent_entry.save
+          if @subway_station != nil
+            @ess = @rent_entry.entries_subway_stations.create(:subway_station_id => @subway_station.id,:time_to => params[:subway_station][:time_to])
+            @ess.save
+          end
           flash[:notice] = 'Entry was successfully created.'
-          format.html { redirect_to :action => :show, :id => @rent_entry.id}
-          format.xml  { render :xml => @rent_entry, :status => :created, :location => @entry }
+          redirect_to :action => :show, :id => @rent_entry.id
         else
-          format.html { render :action => "new_rent_flat" }
-          format.xml  { render :xml => @rent_entry.errors, :status => :unprocessable_entity }
+          flash[:notice] = 'Did not created'
+          render :action => "new_rent_flat" 
         end
+
+      else
+        #such street does not founded in our DB
+        #try to find it in Yandex.Maps
+        ym_street = YandexMaps.find_street(:locality_name => @locality_name)
+        if ym_street
+          #Street is found in YM.
+          if ym_street == @street_name
+            #Street name found by YM exactly same as entered by user
+            #Add street to our DB and save rent_entry and address
+
+            street = locality.streets.new(:name => ym_street)
+            street.save
+
+            @address.locality = locality
+            @address.street = street
+
+            @rent_entry.address = @address
+            
+            if @rent_entry.save
+              if @subway_station != nil
+                @ess = @rent_entry.entries_subway_stations.create(:subway_station_id => @subway_station.id,:time_to => params[:subway_station][:time_to])
+                @ess.save
+              end
+              flash[:notice] = 'Entry was successfully created.'
+              redirect_to :action => :show, :id => @rent_entry.id
+            else
+              render :action => "new_rent_flat" 
+            end
+            
+          else
+            #Render view for creating rent_entry with street name
+            #founded by YM. User must podtverdit' that info.
+            @street_name = ym_street
+
+
+            render :action => "new_rent_flat"
+          end
+        else
+          #street is NOT found in YM. render view for creating
+          #new entry promting user to enter new street address
+          render :action => "new_rent_flat" 
+        end
+
       end
+    else
+      #locality does not found in our base
+      #try to find it in Yandex.Maps
+      ym_locality = YandexMaps.find_locality(#todo :administrative_area_name => @address.administrative_area.name
+                                             :aprox_locality_name => @locality_name
+                                             )
+      if ym_locality
+        #Locality is found in YM.
+        if ym_locality == @locality_name
+          #Locality name found by YM exactly same as entered by user
+          #Add locality to our DB and try to save street
+
+          locality = Locality.new(:name => ym_locality)
+          locality.save
+        else
+          #Render view for creating rent_entry with locality name
+          #founded by YM. User must podtverdit' that info.
+          @locality_name = ym_locality
+          format.html { render :action => "new_rent_flat" }
+        end
+      else
+        #locality is NOT found in YM. render view for creating
+        #new entry promting user to enter new locality address
+        format.html { render :action => "new_rent_flat" }
+      end
+    end
+    
+=begin
+
+    if @rent_entry.save
+      if @subway_station != nil
+        @ess = @rent_entry.entries_subway_stations.create(:subway_station_id => @subway_station.id,:time_to => params[:subway_station][:time_to])
+        @ess.save
+      end
+      flash[:notice] = 'Entry was successfully created.'
+      redirect_to :action => :show, :id => @rent_entry.id
+    else
+      render :action => "new_rent_flat" 
+    end
+
+=end
+
+
   end
 
   #create new rent entry for suburban
@@ -203,14 +312,14 @@ class UserEntriesController < ApplicationController
           @eh = @rent_entry.entries_highways.create(:highway_id => @highway.id)
           @eh.save
         end
-          flash[:notice] = 'Entry was successfully created.'
-          format.html { redirect_to :action => :show, :id => @rent_entry.id}
-          format.xml  { render :xml => @rent_entry, :status => :created, :location => @entry }
-        else
-          format.html { render :action => "new_rent_suburban" }
-          format.xml  { render :xml => @rent_entry.errors, :status => :unprocessable_entity }
-        end
+        flash[:notice] = 'Entry was successfully created.'
+        format.html { redirect_to :action => :show, :id => @rent_entry.id}
+        format.xml  { render :xml => @rent_entry, :status => :created, :location => @entry }
+      else
+        format.html { render :action => "new_rent_suburban" }
+        format.xml  { render :xml => @rent_entry.errors, :status => :unprocessable_entity }
       end
+    end
   end
 
 
@@ -235,7 +344,7 @@ class UserEntriesController < ApplicationController
         format.xml  { render :xml => @rent_entry.errors, :status => :unprocessable_entity }
       end
 
-      end
+    end
   end
 
   # DELETE /entries/1
@@ -253,7 +362,7 @@ class UserEntriesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to(user_entries_url) }
       format.xml  { head :ok }
-      end
+    end
 
   end
 
