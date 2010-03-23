@@ -1,0 +1,24 @@
+<h1>Editing locality</h1>
+
+<% form_for(@locality) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :sub_administrative_area_id %><br />
+    <%= f.text_field :sub_administrative_area_id %>
+  </p>
+  <p>
+    <%= f.label :administrative_area_id %><br />
+    <%= f.text_field :administrative_area_id %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @locality %> |
+<%= link_to 'Back', localities_path %>

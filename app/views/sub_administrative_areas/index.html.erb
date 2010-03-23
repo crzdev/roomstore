@@ -1,0 +1,22 @@
+<h1>Listing sub_administrative_areas</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Administrative area</th>
+  </tr>
+
+<% @sub_administrative_areas.each do |sub_administrative_area| %>
+  <tr>
+    <td><%=h sub_administrative_area.name %></td>
+    <td><%=h sub_administrative_area.administrative_area_id %></td>
+    <td><%= link_to 'Show', sub_administrative_area %></td>
+    <td><%= link_to 'Edit', edit_sub_administrative_area_path(sub_administrative_area) %></td>
+    <td><%= link_to 'Destroy', sub_administrative_area, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New sub_administrative_area', new_sub_administrative_area_path %>

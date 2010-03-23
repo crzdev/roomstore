@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  administrative_area_id: 1
+  sub_administrative_area_id: 1
+  locality_id: 1
+  street_id: 1
+
+two:
+  administrative_area_id: 1
+  sub_administrative_area_id: 1
+  locality_id: 1
+  street_id: 1

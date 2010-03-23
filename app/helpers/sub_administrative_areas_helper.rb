@@ -1,0 +1,2 @@
+module SubAdministrativeAreasHelper
+end

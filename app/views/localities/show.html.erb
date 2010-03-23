@@ -1,0 +1,18 @@
+<p>
+  <b>Name:</b>
+  <%=h @locality.name %>
+</p>
+
+<p>
+  <b>Sub administrative area:</b>
+  <%=h @locality.sub_administrative_area_id %>
+</p>
+
+<p>
+  <b>Administrative area:</b>
+  <%=h @locality.administrative_area_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_locality_path(@locality) %> |
+<%= link_to 'Back', localities_path %>

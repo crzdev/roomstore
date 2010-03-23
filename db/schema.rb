@@ -9,9 +9,19 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100317100126) do
+ActiveRecord::Schema.define(:version => 20100323102855) do
 
-  create_table "cities", :force => true do |t|
+  create_table "addresses", :force => true do |t|
+    t.integer  "administrative_area_id"
+    t.integer  "sub_administrative_area_id"
+    t.integer  "locality_id"
+    t.integer  "street_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "premise"
+  end
+
+  create_table "administrative_areas", :force => true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -21,12 +31,8 @@ ActiveRecord::Schema.define(:version => 20100317100126) do
     t.string   "type"
     t.integer  "rooms_count"
     t.integer  "rent_price",        :limit => 10, :precision => 10, :scale => 0
-    t.string   "city"
     t.string   "street"
-    t.string   "house_number"
-    t.integer  "flat_number"
     t.integer  "floor_number"
-    t.string   "disctrict"
     t.integer  "area_total"
     t.integer  "area_kitchen"
     t.integer  "rent_time"
@@ -46,12 +52,11 @@ ActiveRecord::Schema.define(:version => 20100317100126) do
     t.boolean  "tv"
     t.boolean  "washing_machine"
     t.boolean  "furniture"
-    t.integer  "mo_district_id"
     t.string   "rent_time_type"
     t.integer  "distance_to_mkad"
     t.integer  "area_house"
     t.integer  "area_plot"
-    t.integer  "city_id"
+    t.integer  "address_id"
   end
 
   create_table "entries_highways", :force => true do |t|
@@ -85,8 +90,24 @@ ActiveRecord::Schema.define(:version => 20100317100126) do
     t.datetime "updated_at"
   end
 
-  create_table "mo_districts", :force => true do |t|
+  create_table "localities", :force => true do |t|
     t.string   "name"
+    t.integer  "sub_administrative_area_id"
+    t.integer  "administrative_area_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "streets", :force => true do |t|
+    t.string   "name"
+    t.integer  "locality_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "sub_administrative_areas", :force => true do |t|
+    t.string   "name"
+    t.integer  "administrative_area_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

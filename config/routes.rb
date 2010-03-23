@@ -1,4 +1,14 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :addresses
+
+  map.resources :streets
+
+  map.resources :localities
+
+  map.resources :sub_administrative_areas
+
+  map.resources :administrative_areas
+
   map.resources :cities
 
   map.resources :mo_districts
