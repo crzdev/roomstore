@@ -62,9 +62,6 @@ class UserEntriesController < ApplicationController
   def new_rent_flat
     @rent_entry = RentEntry.new
     @rent_entry.user_id = session[:user_id]
-    @subway_stations = SubwayStation.find(:all)
-
-    @mo_saa = SubAdministrativeArea.find(:all,:conditions => ["administrative_area_id = ?", 1])
 
     @street_name = ""
     @locality_name = ""
@@ -179,7 +176,9 @@ class UserEntriesController < ApplicationController
 
   #create new rent entry for flat or room in Moscow or MO
   def create_rent_flat_room
-    @mo_saa = SubAdministrativeArea.find(:all,:conditions => ["administrative_area_id = ?", 1])
+    Ml.w "create_rent_flat_room"
+    Ml.w "params:"
+    Ml.w params
     @rent_entry = RentEntry.new(params[:rent_entry])
     #entry is created for curent user
     @rent_entry.user_id = session[:user_id]
@@ -188,50 +187,55 @@ class UserEntriesController < ApplicationController
     @street_name = params[:street_name]
     @locality_name = params[:locality_name]
     locality = Locality.find(:first, :conditions => {:name => params[:locality_name]})
-
     if locality
+      Ml.w "locality #{locality} in our db"
       #locality found in our DB 
       #Try to find street
       street = Street.find(:first, :conditions => {:locality_id => locality.id})
       #      street = locality.streets.find(:name => params[:street_name])
       if street
+        Ml.w "street #{@street_name} in our db: #{street}"
         #Street is founded on our DB
         #try to save rent_entry if true save address
         @address.locality = locality
         @address.street = street
+        @rent_entry.entries_subway_stations.build(:subway_station_id => params[:subway_station][:id],:time_to => params[:subway_station_time_to])
         if @rent_entry.save
-          if @subway_station != nil
-            @ess = @rent_entry.entries_subway_stations.create(:subway_station_id => @subway_station.id,:time_to => params[:subway_station][:time_to])
-            @ess.save
-          end
+          Ml.w "rent successfully saved"
           flash[:notice] = 'Entry was successfully created.'
           redirect_to :action => :show, :id => @rent_entry.id
         else
+          Ml.w "rent not saved"
           flash[:notice] = 'Did not created'
           render :action => "new_rent_flat" 
         end
 
       else
+        Ml.w "street #{@street_name} NOT in our DB "
         #such street does not founded in our DB
         #try to find it in Yandex.Maps
-        ym_street = YandexMaps.find_street(:locality_name => @locality_name)
+        ym_street = YandexMaps.find_street(@street_name)
         if ym_street
+          Ml.w "street #{@street_name} founded in Yandex Maps: #{ym_street} "
           #Street is found in YM.
           if ym_street == @street_name
+            Ml.w "street #{@street_name} name same ad in Yandex Maps "
             #Street name found by YM exactly same as entered by user
             #Add street to our DB and save rent_entry and address
 
-            street = locality.streets.new(:name => ym_street)
-            street.save
-
+            Ml.w "adding street to our DB"
+            new_street = locality.streets.new(:name => ym_street)
+            new_street.save
+            Ml.w "db entry: #{new_street}"
             @address.locality = locality
-            @address.street = street
+            @address.street = new_street
 
             @rent_entry.address = @address
             
             if @rent_entry.save
+              Ml.w "rent successfully saved"
               if @subway_station != nil
-                @ess = @rent_entry.entries_subway_stations.create(:subway_station_id => @subway_station.id,:time_to => params[:subway_station][:time_to])
+                @ess = @rent_entry.entries_subway_stations.create(:subway_station_id => @subway_station.id,:time_to => params[:subway_station_time_to])
                 @ess.save
               end
               flash[:notice] = 'Entry was successfully created.'
@@ -241,14 +245,15 @@ class UserEntriesController < ApplicationController
             end
             
           else
+            Ml.w "street founded in Yandex Maps but it is not same ad entered by user"
             #Render view for creating rent_entry with street name
             #founded by YM. User must podtverdit' that info.
             @street_name = ym_street
 
-
             render :action => "new_rent_flat"
           end
         else
+          Ml.w "street not founded in YM"
           #street is NOT found in YM. render view for creating
           #new entry promting user to enter new street address
           render :action => "new_rent_flat" 
@@ -256,26 +261,34 @@ class UserEntriesController < ApplicationController
 
       end
     else
+      Ml.w "Locality #{@locality_name} NOT on our DB"
       #locality does not found in our base
       #try to find it in Yandex.Maps
-      ym_locality = YandexMaps.find_locality(#todo :administrative_area_name => @address.administrative_area.name
-                                             :aprox_locality_name => @locality_name
+      ym_locality = YandexMaps.find_locality(
+                                              @locality_name
                                              )
       if ym_locality
+        Ml.w "locality #{@locality_name} founded in Yandex Mampa: #{ym_locality}"
         #Locality is found in YM.
         if ym_locality == @locality_name
+          Ml.w "Locality name is same as founded in YM"
           #Locality name found by YM exactly same as entered by user
           #Add locality to our DB and try to save street
+          #todo: add code that saves locality_id in uper lvl geo object
+          Ml.w "creating new locality in our DB"
+          new_locality = Locality.new(:name => ym_locality)
+          new_locality.save
+          Ml.w "locality #{@locality_name} created in our DB: #{new_locality}"
 
-          locality = Locality.new(:name => ym_locality)
-          locality.save
         else
+          Ml.w "locality name is NOT same. User must choose one that right"
           #Render view for creating rent_entry with locality name
           #founded by YM. User must podtverdit' that info.
           @locality_name = ym_locality
           format.html { render :action => "new_rent_flat" }
         end
       else
+        Ml.w "locaity is not founded in YM"
         #locality is NOT found in YM. render view for creating
         #new entry promting user to enter new locality address
         format.html { render :action => "new_rent_flat" }

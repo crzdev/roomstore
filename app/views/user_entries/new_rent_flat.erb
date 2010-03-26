@@ -1,16 +1,16 @@
 <div id="new_rent_flat_and_room" >
 	<h1>Новое объявление об аренде комнаты\квартиры в Москве или МО</h1>
 	<%= error_messages_for :renty_entry, :address %>
-	<% form_for(@rent_entry, @subway_stations,@address,@street_name,:url => {:action => "create_rent_flat_room"}) do |f| %>
+	<% form_for(@rent_entry,@address, @street_name, :url => {:action => "create_rent_flat_room"}) do |f| %>
   <%= f.error_messages %>
   <p>
 		<%= f.label "Ближайшая станция метро" %><br />
 		<%= select("subway_station", "id", SubwayStation.all.collect {|p| [ p.name, p.id ] }, {:include_blank => 'Не выбрано'}) %>
-		<%= text_field "subway_station", "time_to", :size => 4 %> мин.
+		<%= text_field_tag "subway_station_time_to","", {:size => 4} %> мин.
   </p>
   <p>
     <%= f.label "Район МО" %><br />
-		<%= select("address", "sub_administrative_area_id", @mo_saa.collect {|saa| [ saa.name, saa.id ] }, {:include_blank => 'Не выбрано'}) %>
+		<%= select("address", "sub_administrative_area_id",SubAdministrativeArea.find(:all,:conditions => ["administrative_area_id = ?", 1]).collect {|saa| [ saa.name, saa.id ] }, {:include_blank => 'Не выбрано'}) %>
   </p>
   <p>
     <%= f.label "Населенный пункт" %><br />

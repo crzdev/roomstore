@@ -3,18 +3,18 @@ class YandexMaps
   @@api_key = ""
   @@service_url = ""
 
-  def self.find_street (args = {})
+  def self.find_street street
     #todo: add code here
 
     #stub
-    args[:aprox_street_name]
+    street
   end
 
-  def self.find_locality (args = {})
+  def self.find_locality locality
     #todo: add code here
 
     #stub
-    args[:aprox_locality_name]
+    locality
 
   end
 
