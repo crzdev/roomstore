@@ -11,13 +11,13 @@ class YandexMapsService
   def self.geocode address_string
     url = "#{@@service_url}geocode=#{address_string}&key=#{@@api_key}"
     enc_url = URI.escape url
-
     # get the XML data as a string
     Net::HTTP.get_response(URI.parse(enc_url)).body
   end
 
   #parses YandexMaps XML respons and returns array of AddressText objects
   #todo: make a class for parsing xmls
+  #todo: exclude subways stations ( use <kind> tag to determine )
   def self.get_address_texts ymml
     result = []
     doc = REXML::Document.new(ymml)
@@ -43,8 +43,8 @@ class YandexMapsService
       if doc2.elements["//LocalityName"] != nil
         new_address_text.locality = doc2.elements["//LocalityName"].text 
       end
-      if doc2.elements["//PremiseName"]      != nil
-        new_address_text.premise = doc2.elements["//PremiseName"].text 
+      if doc2.elements["//PremiseNumber"] != nil
+        new_address_text.premise = doc2.elements["//PremiseNumber"].text 
       end
       if doc2.elements["//ThoroughfareName"] != nil
         new_address_text.street = doc2.elements["//ThoroughfareName"].text 
@@ -52,6 +52,13 @@ class YandexMapsService
       result << new_address_text
     end
     result
+  end
+
+  #returns first variant of address in string format ( "Russia, Moscow, street Blah, 4" )
+  def self.get_address_string ymml
+    doc = REXML::Document.new(ymml)
+    #each address variant
+    doc.elements["ymaps/GeoObjectCollection/featureMember/GeoObject/metaDataProperty/GeocoderMetaData/text"].text
   end
 
 

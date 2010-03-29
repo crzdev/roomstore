@@ -1,0 +1,2 @@
+class Yms < YandexMapsService
+end
