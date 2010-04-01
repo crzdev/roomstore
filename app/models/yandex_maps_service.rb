@@ -57,7 +57,6 @@ class YandexMapsService
   #returns first variant of address in string format ( "Russia, Moscow, street Blah, 4" )
   def self.get_address_string ymml
     doc = REXML::Document.new(ymml)
-    #each address variant
     doc.elements["ymaps/GeoObjectCollection/featureMember/GeoObject/metaDataProperty/GeocoderMetaData/text"].text
   end
 

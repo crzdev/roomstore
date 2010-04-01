@@ -1,0 +1,89 @@
+<tr>
+  <td>
+			<div id= "flat_room_rent_entry_address" class="rent_entry_table_field">
+				<% rent_entry.subway_stations.each do |station| %>
+				<subway_station_text><%= station.name %></subway_station_text>
+        <% end %>
+				<street_name_text><%=h rent_entry.address.street.name %></street_name_text>
+				<premise_text><%=h rent_entry.address.premise %></premise_text>
+			</div>
+		</td>
+		<td>
+			<div id= "rent_entry_rooms_count" class="rent_entry_table_field">
+				<% if rent_entry.realty_type == "room" then %>
+				<p>
+					комната
+				</p>
+				<% end %>
+				<% if rent_entry.realty_type == "flat" then %>
+				<p>
+					<%= "Квартира. #{rent_entry.rooms_count} комн."%>
+				</p>
+				<% end %>
+			</div>
+		</td>
+    <td>
+			<div id= "rent_entry_rent_price" class="rent_entry_table_field">
+				<%=h rent_entry.rent_price %>
+			</div>
+		</td>
+		<td>
+			<div id= "rent_entry_commission" class="rent_entry_table_field">
+				<%=h rent_entry.commission_agent %>%
+			</div>
+		</td>
+		<td>
+			<div id= "rent_entry_area_total" class="rent_entry_table_field">
+				<%=h rent_entry.area_total %>
+			</div>
+		</td>
+		<td>
+			<div id= "rent_entry_area_kitchen" class="rent_entry_table_field">
+				<%=h rent_entry.area_kitchen %>
+			</div>
+		</td>
+	<td>
+		<div id= "rent_entry_misc" class="rent_entry_table_field">
+			<% if rent_entry.furniture == true then %>
+			<p>
+				Мебель
+			</p>
+			<% end %>
+			<% if rent_entry.phone == true then %>
+			<p>
+				Телефон
+			</p>
+			<% end %>
+
+			<% if rent_entry.tv == true then %>
+			<p>
+				Телевизор
+			</p>
+			<% end %>
+
+			<% if rent_entry.washing_machine  == true then %>
+			<p>
+				Стиральная машина
+			</p>
+			<% end %>
+
+			<% if rent_entry.refridgerator == true then %>
+			<p>
+				Холодильник
+			</p>
+			<% end%>
+
+		</div>
+	</td>
+		<td>
+			<div id= "rent_entry_contacts" class="rent_entry_table_field">
+				<%=h rent_entry.contacts %>
+			</div>
+		</td>
+		<td>
+			<div id= "rent_entry_comment" class="rent_entry_table_field">
+				<%=h rent_entry.comment %>
+			</div>
+		</td>
+</tr>
+

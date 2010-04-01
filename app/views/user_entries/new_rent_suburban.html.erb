@@ -4,7 +4,7 @@
   <%= f.error_messages %>
   <p>
 		<%= f.label "Ближайшее шоссе" %><br />
-		<%= select("highway", "id", @highways.collect {|h| [ h.name, h.id ] }, {:include_blank => 'Нету'}) %>
+		<%= select("highway", "id", Highway.all.collect {|h| [ h.name, h.id ] }, {:include_blank => 'Нету'}) %>
 		в <%= f.text_field :distance_to_mkad, :size => 3 %>км от МКАД
   </p>
   <p>

@@ -19,7 +19,7 @@ ActionController::Routing::Routes.draw do |map|
   map.connect "group_administrating/:id/destroy_user", :controller => "group_administrating", :action => "destroy_user"
   map.resources :entries
 
-
+  map.connect "user_entries/my_rents", :controller => "user_entries", :action => "my_rents"
   map.connect "user_entries/my_rents_suburban", :controller => "user_entries", :action => "my_rents_suburban"
   map.connect "user_entries/my_rents_office", :controller => "user_entries", :action => "my_rents_office"
   map.connect "user_entries/my_rents_flat_and_room", :controller => "user_entries", :action => "my_rents_flat_and_room"

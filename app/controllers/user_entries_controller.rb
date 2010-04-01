@@ -51,7 +51,7 @@ class UserEntriesController < ApplicationController
 
   def new_rent
     @rent_entry = RentEntry.new
-    @rent_entry.user_id = session[:user_id]
+    @address_text = AddressText.new
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @entry }
@@ -94,6 +94,12 @@ class UserEntriesController < ApplicationController
       format.html
       format.xml  { render :xml => @entry }
     end
+  end
+
+  #view for viewing curent users all rent entries
+  def my_rents
+    sc = SearchCondition.new(:user_id => session[:user_id])
+    @entries = Entry.find_with_search_condition(sc)
   end
 
   #view for viewing curent users rent entries about flat or room in Moscow or MO
@@ -149,29 +155,33 @@ class UserEntriesController < ApplicationController
   # POST /entries.xml
   def create_rent
     @rent_entry = RentEntry.new(params[:rent_entry])
-    #entry is created for curent user
     @rent_entry.user_id = session[:user_id]
-    @subway_station = SubwayStation.find_by_id(params[:subway_station][:id])
-    @highways = Highway.find_by_id(params[:highway][:id])
-    respond_to do |format|
+    @address_text = AddressText.new(params[:address_text])
+    #todo: is it necesary? look below
+    @address_text.country = "Россия"
+    #entry is created for curent user
+    if AddressHelper.is_resolved_by_ym? @address_text
+      #todo: remove loging
+      Ml.w "#{@address_text} is resolved by YM"
+      Ml.w "#{@address_text.get_address_string}"
+      @address = @rent_entry.build_address (AddressHelper.build_model_for @address_text)
+      @subway_station = SubwayStation.find_by_id(params[:subway_station][:id])
+      @highways = Highway.find_by_id(params[:highway][:id])
       if @rent_entry.save
         if @subway_station != nil
           @ess = @rent_entry.entries_subway_stations.create(:subway_station_id => @subway_station.id,:time_to => params[:subway_station][:time_to])
           @ess.save
         end
-
-        flash[:notice] = 'Entry was successfully created.'
-        format.html { redirect_to :action => :show, :id => @rent_entry.id}
-        format.xml  { render :xml => @rent_entry, :status => :created, :location => @entry }
+        flash[:notice] = "Новая запись успешно добавлена"
+        redirect_to :action => "new_rent"
       else
-        format.html { render :action => "new_rent" }
-        format.xml  { render :xml => @rent_entry.errors, :status => :unprocessable_entity }
+        render :action => "new_rent" 
       end
+    else
+      Ml.w "#{@address_text} CAN NOT BE resolved by YM"
+      flash[:notice] = "Убедитесь в правильности Адресса"
+      render :action => "new_rent" 
     end
-  end
-
-  #helper method
-  def helper
   end
 
   #create new rent entry for flat or room in Moscow or MO
@@ -378,6 +388,5 @@ class UserEntriesController < ApplicationController
     end
 
   end
-
 end
 

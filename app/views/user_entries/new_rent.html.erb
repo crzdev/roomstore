@@ -1,56 +1,74 @@
-<h1>Новое объявление аренды:</h1>
-
-<% form_for(@rent_entry, :url => {:action => "create_rent"}) do |f| %>
+<div id="new_rent_flat_and_room" >
+	<h1>Новое объявление об аренде комнаты\квартиры</h1>
+	<%= error_messages_for :renty_entry, :address %>
+	<% form_for(@rent_entry,@address, :url => {:action => "create_rent"}) do |f| %>
   <%= f.error_messages %>
   <p>
-    <%= f.label :rooms_count %><br />
+		<%= f.label "Ближайшее шоссе" %><br />
+		<%= select("highway", "id", Highway.all.collect {|h| [ h.name, h.id ] }, {:include_blank => 'Не выбрано'}) %>
+		в <%= f.text_field :distance_to_mkad, :size => 3 %>км от МКАД
+  </p>
+  <p>
+		<%= f.label "Ближайшая станция метро" %><br />
+		<%= select("subway_station", "id", SubwayStation.all.collect {|p| [ p.name, p.id ] }, {:include_blank => 'Не выбрано'}) %>
+		<%= text_field_tag "subway_station_time_to","", {:size => 4} %> мин.
+  </p>
+  <p>
+    <%= f.label "Район МО" %><br />
+		<%= select("address_text", "sub_administrative_area",SubAdministrativeArea.find(:all,:conditions => ["administrative_area_id = ?", 1]).collect {|saa| [ saa.name, saa.name ] }, {:include_blank => 'Не выбрано'}) %>
+  </p>
+  <p>
+    <%= f.label "Населенный пункт" %><br />
+    <%= text_field "address_text", "locality" %>
+  </p>
+  <p>
+    <%= f.label "Улица" %><br />
+    <%= text_field "address_text", "street" %>
+  </p>
+  <p>
+    <%= f.label "Дом" %><br />
+    <%= text_field "address_text", "premise" %>
+  </p>
+  <p>
+    <%= f.label "Количество комнат" %><br />
     <%= f.text_field :rooms_count %>
   </p>
   <p>
-    <%= f.label :rent_price %><br />
-    <%= f.text_field :rent_price %> руб.
-  </p>
-  <p>
-    <%= f.label :city %><br />
-    <%= f.text_field :city %>
-  </p>
-  <p>
-    <%= f.label :street %><br />
-    <%= f.text_field :street %>
-  </p>
-  <p>
-    <%= f.label :house_number %><br />
-    <%= f.text_field :house_number %>
-  </p>
-  <p>
-    <%= f.label :flat_number %><br />
-    <%= f.text_field :flat_number %>
-  </p>
-  <p>
-    <%= f.label :floor_number %><br />
-    <%= f.text_field :floor_number %>
-  </p>
-  <p>
-    <%= f.label :disctrict %><br />
-    <%= f.text_field :disctrict %>
-  </p>
-  <p>
-    <%= f.label :area_total %><br />
+    <%= f.label "Площадь суммарная" %><br />
     <%= f.text_field :area_total %>
   </p>
   <p>
-    <%= f.label :area_kitchen %><br />
+    <%= f.label "Площадь кухни" %><br />
     <%= f.text_field :area_kitchen %>
   </p>
   <p>
-    <%= f.label :rent_time %><br />
-    <%= f.text_field :rent_time %>
+    <%= f.label "Цена" %><br />
+    <%= f.text_field :rent_price %> руб/мес
   </p>
   <p>
-  <%= f.label :subway_station ,"Ближайшая станция метро" %> 
-  <%= select("subway_station", "id", SubwayStation.all.collect {|p| [ p.name, p.id ] }, {:include_blank => 'Нету'}) %>
-  в <%= text_field "subway_station", "time_to", :size => 4 %> мин.
+    <%= f.label "Срок аренды" %><br />
+		<%=	f.select( :rent_time_type, RentTimeTypes.get_rent_time_types ) %>
   </p>
+  <p>
+		<%= f.label "Этаж:" %><br />
+    <%= f.text_field :floor_number %>
+  </p>
+    <p>
+			<%= f.label "Телефон:" %><br />
+      <%= f.check_box :phone %>
+    </p>
+    <p>
+			<%= f.label "Телевизор:" %><br />
+      <%= f.check_box :tv -%>
+    </p>
+    <p>
+			<%= f.label "Холодильник:" %><br />
+      <%= f.check_box :refridgerator -%>
+    </p>
+    <p>
+			<%= f.label "Стиральная машина:" %><br />
+      <%= f.check_box :washing_machine -%>
+    </p>
   <p>
     <%= f.label :contacts %><br />
     <%= f.text_area :contacts %>
@@ -60,8 +78,9 @@
     <%= f.text_area :comment %>
   </p>
   <p>
-    <%= f.submit 'Create' ,:class => "Submit"%>
+    <%= f.submit 'Create' %>
   </p>
 <% end %>
 
-<%= link_to 'Back to Entries List', :action => :index %>
+<%= link_to 'Back', entries_path %>
+</div>

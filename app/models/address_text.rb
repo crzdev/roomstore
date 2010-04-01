@@ -7,9 +7,17 @@ class AddressText
   attr_accessor :locality
   attr_accessor :street
   attr_accessor :premise
+
+  def initialize (args = {})
+    @country = args[:country]
+    @administrative_area = args[:administrative_area]
+    @sub_administrative_area = args[:sub_administrative_area]
+    @locality = args[:locality]
+    @street = args[:street]
+    @premise = args[:premise]
+  end
   
 #returns address in string format  ( "Russia, Moscow, street Blah, 4" )
-
   def get_address_string
     address_string = ""
 
