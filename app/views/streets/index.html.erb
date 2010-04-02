@@ -2,14 +2,14 @@
 
 <table>
   <tr>
-    <th>Name</th>
     <th>Locality</th>
+    <th>Name</th>
   </tr>
 
 <% @streets.each do |street| %>
   <tr>
-    <td><%=h street.name %></td>
     <td><%=h street.locality_id %></td>
+    <td><%=h street.name %></td>
     <td><%= link_to 'Show', street %></td>
     <td><%= link_to 'Edit', edit_street_path(street) %></td>
     <td><%= link_to 'Destroy', street, :confirm => 'Are you sure?', :method => :delete %></td>

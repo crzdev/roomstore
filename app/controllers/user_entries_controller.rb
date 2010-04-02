@@ -155,14 +155,14 @@ class UserEntriesController < ApplicationController
   # POST /entries.xml
   def create_rent
     @rent_entry = RentEntry.new(params[:rent_entry])
+    #entry is created for curent user
     @rent_entry.user_id = session[:user_id]
     @address_text = AddressText.new(params[:address_text])
     #todo: is it necesary? look below
     @address_text.country = "Россия"
-    #entry is created for curent user
-    if AddressHelper.is_resolved_by_ym? @address_text
+    if AddressHelper.is_resolved_by_db? @address_text
       #todo: remove loging
-      Ml.w "#{@address_text} is resolved by YM"
+      Ml.w "#{@address_text} is resolved by DB"
       Ml.w "#{@address_text.get_address_string}"
       @address = @rent_entry.build_address (AddressHelper.build_model_for @address_text)
       @subway_station = SubwayStation.find_by_id(params[:subway_station][:id])
@@ -178,9 +178,28 @@ class UserEntriesController < ApplicationController
         render :action => "new_rent" 
       end
     else
-      Ml.w "#{@address_text} CAN NOT BE resolved by YM"
-      flash[:notice] = "Убедитесь в правильности Адресса"
-      render :action => "new_rent" 
+      if AddressHelper.is_resolved_by_ym? @address_text
+        #todo: remove loging
+        Ml.w "#{@address_text} is resolved by YM"
+        Ml.w "#{@address_text.get_address_string}"
+        @address = @rent_entry.build_address (AddressHelper.build_model_for @address_text)
+        @subway_station = SubwayStation.find_by_id(params[:subway_station][:id])
+        @highways = Highway.find_by_id(params[:highway][:id])
+        if @rent_entry.save
+          if @subway_station != nil
+            @ess = @rent_entry.entries_subway_stations.create(:subway_station_id => @subway_station.id,:time_to => params[:subway_station][:time_to])
+            @ess.save
+          end
+          flash[:notice] = "Новая запись успешно добавлена"
+          redirect_to :action => "new_rent"
+        else
+          render :action => "new_rent" 
+        end
+      else
+        Ml.w "#{@address_text} CAN NOT BE resolved by YM"
+        flash[:notice] = "Убедитесь в правильности Адресса"
+        render :action => "new_rent" 
+      end
     end
   end
 

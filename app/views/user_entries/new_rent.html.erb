@@ -6,7 +6,7 @@
   <p>
 		<%= f.label "Ближайшее шоссе" %><br />
 		<%= select("highway", "id", Highway.all.collect {|h| [ h.name, h.id ] }, {:include_blank => 'Не выбрано'}) %>
-		в <%= f.text_field :distance_to_mkad, :size => 3 %>км от МКАД
+		в <%= text_field_tag "distance_to_mkad","", :size => 3 %>км от МКАД
   </p>
   <p>
 		<%= f.label "Ближайшая станция метро" %><br />
@@ -35,19 +35,19 @@
   </p>
   <p>
     <%= f.label "Площадь суммарная" %><br />
-    <%= f.text_field :area_total %>
+    <%= f.text_field :total_area %>
   </p>
   <p>
     <%= f.label "Площадь кухни" %><br />
-    <%= f.text_field :area_kitchen %>
+    <%= f.text_field :kitchen_area %>
   </p>
   <p>
     <%= f.label "Цена" %><br />
-    <%= f.text_field :rent_price %> руб/мес
+    <%= f.text_field :price %> руб/мес
   </p>
   <p>
     <%= f.label "Срок аренды" %><br />
-		<%=	f.select( :rent_time_type, RentTimeTypes.get_rent_time_types ) %>
+		<%=	f.select( :rent_time_type, RentTimeType.get_rent_time_types ) %>
   </p>
   <p>
 		<%= f.label "Этаж:" %><br />

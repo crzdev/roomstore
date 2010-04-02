@@ -1,0 +1,18 @@
+<p>
+  <b>Address:</b>
+  <%=h @address_highway.address_id %>
+</p>
+
+<p>
+  <b>Highway:</b>
+  <%=h @address_highway.highway_id %>
+</p>
+
+<p>
+  <b>Distance to mkad:</b>
+  <%=h @address_highway.distance_to_mkad %>
+</p>
+
+
+<%= link_to 'Edit', edit_address_highway_path(@address_highway) %> |
+<%= link_to 'Back', address_highways_path %>

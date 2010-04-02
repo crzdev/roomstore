@@ -1,11 +1,11 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
-  name: MyString
-  sub_administrative_area_id: 1
   administrative_area_id: 1
+  sub_administrative_area_id: 1
+  name: MyString
 
 two:
-  name: MyString
-  sub_administrative_area_id: 1
   administrative_area_id: 1
+  sub_administrative_area_id: 1
+  name: MyString

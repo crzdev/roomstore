@@ -1,4 +1,16 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :localities
+
+  map.resources :sub_administrative_areas
+
+  map.resources :administrative_areas
+
+  map.resources :address_highways
+
+  map.resources :address_subway_stations
+
+  map.resources :streets
+
   map.connect "group_administrating/:id/show_user", :controller => "group_administrating", :action => "show_user"
   map.connect "group_administrating/:id/edit_user", :controller => "group_administrating", :action => "edit_user"
   map.connect "group_administrating/:id/update_user", :controller => "group_administrating", :action => "update_user"

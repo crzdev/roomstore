@@ -8,8 +8,8 @@ class CreateEntries < ActiveRecord::Migration
       t.decimal :price_type
       t.integer :floors_total
       t.integer :floor_number
-      t.integer :area_total
-      t.integer :area_kitche
+      t.integer :total_area
+      t.integer :kitchen_area
       t.integer :house_area
       t.integer :plot_area
       t.integer :rent_time_type

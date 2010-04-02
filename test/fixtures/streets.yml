@@ -1,9 +1,9 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
-  name: MyString
   locality_id: 1
+  name: MyString
 
 two:
-  name: MyString
   locality_id: 1
+  name: MyString

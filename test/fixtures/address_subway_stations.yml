@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  address_id: 1
+  subway_station_id: 1
+  time_to: 1
+
+two:
+  address_id: 1
+  subway_station_id: 1
+  time_to: 1

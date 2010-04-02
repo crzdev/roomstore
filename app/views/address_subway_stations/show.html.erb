@@ -1,0 +1,18 @@
+<p>
+  <b>Address:</b>
+  <%=h @address_subway_station.address_id %>
+</p>
+
+<p>
+  <b>Subway station:</b>
+  <%=h @address_subway_station.subway_station_id %>
+</p>
+
+<p>
+  <b>Time to:</b>
+  <%=h @address_subway_station.time_to %>
+</p>
+
+
+<%= link_to 'Edit', edit_address_subway_station_path(@address_subway_station) %> |
+<%= link_to 'Back', address_subway_stations_path %>

@@ -1,0 +1,24 @@
+<h1>Listing address_highways</h1>
+
+<table>
+  <tr>
+    <th>Address</th>
+    <th>Highway</th>
+    <th>Distance to mkad</th>
+  </tr>
+
+<% @address_highways.each do |address_highway| %>
+  <tr>
+    <td><%=h address_highway.address_id %></td>
+    <td><%=h address_highway.highway_id %></td>
+    <td><%=h address_highway.distance_to_mkad %></td>
+    <td><%= link_to 'Show', address_highway %></td>
+    <td><%= link_to 'Edit', edit_address_highway_path(address_highway) %></td>
+    <td><%= link_to 'Destroy', address_highway, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New address_highway', new_address_highway_path %>

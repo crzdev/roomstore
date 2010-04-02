@@ -101,7 +101,7 @@
     </p>
     <p>
       <label for="Rent_Time">Срок аренды:</label>
-			<%=	f.select( :rent_time_type, RentTimeTypes.get_rent_time_types ) %>
+			<%=	f.select( :rent_time_type, RentTimeType.get_rent_time_types ) %>
     </p>
     <p>
       <%= f.submit "Найти!" , :class => "submit" %>

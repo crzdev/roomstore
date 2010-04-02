@@ -1,0 +1,24 @@
+<h1>Listing address_subway_stations</h1>
+
+<table>
+  <tr>
+    <th>Address</th>
+    <th>Subway station</th>
+    <th>Time to</th>
+  </tr>
+
+<% @address_subway_stations.each do |address_subway_station| %>
+  <tr>
+    <td><%=h address_subway_station.address_id %></td>
+    <td><%=h address_subway_station.subway_station_id %></td>
+    <td><%=h address_subway_station.time_to %></td>
+    <td><%= link_to 'Show', address_subway_station %></td>
+    <td><%= link_to 'Edit', edit_address_subway_station_path(address_subway_station) %></td>
+    <td><%= link_to 'Destroy', address_subway_station, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New address_subway_station', new_address_subway_station_path %>

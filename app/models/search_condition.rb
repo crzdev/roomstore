@@ -1,6 +1,6 @@
 #attrs names must be same as colomun names in entries table
 class SearchCondition
-  attr_accessor :city
+  attr_accessor :locality
   attr_accessor :mo_districts
   attr_accessor :highways
   attr_accessor :street
@@ -30,7 +30,7 @@ class SearchCondition
 
 
   def initialize (args = {})
-    @city = args[:city]
+    @locality = args[:locality]
     @mo_districts = args[:mo_districts]
     @highways = args[:highways]
     @street = args[:street]

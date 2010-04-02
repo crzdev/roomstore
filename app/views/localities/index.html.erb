@@ -2,16 +2,16 @@
 
 <table>
   <tr>
-    <th>Name</th>
-    <th>Sub administrative area</th>
     <th>Administrative area</th>
+    <th>Sub administrative area</th>
+    <th>Name</th>
   </tr>
 
 <% @localities.each do |locality| %>
   <tr>
-    <td><%=h locality.name %></td>
-    <td><%=h locality.sub_administrative_area_id %></td>
     <td><%=h locality.administrative_area_id %></td>
+    <td><%=h locality.sub_administrative_area_id %></td>
+    <td><%=h locality.name %></td>
     <td><%= link_to 'Show', locality %></td>
     <td><%= link_to 'Edit', edit_locality_path(locality) %></td>
     <td><%= link_to 'Destroy', locality, :confirm => 'Are you sure?', :method => :delete %></td>

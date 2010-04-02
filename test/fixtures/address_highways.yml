@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  address_id: 1
+  highway_id: 1
+  distance_to_mkad: 9.99
+
+two:
+  address_id: 1
+  highway_id: 1
+  distance_to_mkad: 9.99
