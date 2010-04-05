@@ -1,4 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :addresses
+
   map.resources :localities
 
   map.resources :sub_administrative_areas

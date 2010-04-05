@@ -75,6 +75,59 @@ class AddressHelper
   #builds Address model object for passed address_text object 
   #all geo objects builded too if needed
   def self.build_model_for address_text
+    #if address_text.street or address_text.premise or address_text.locality  == "" or nil return with error
+    #if address_text.sub_administrative_area and address_text.administrative_area == nil return with error
+    if (address_text.street == "" or address_text.street == nil or address_text.premise == "" or address_text.premise == nil or address_text.locality == "" or address_text.locality == nil)
+      Ml.w "cant create Model for AddressText becouse street premise and locailty must be not empty"
+      return nil
+    end
+
+    if address_text.sub_administrative_area and ( address_text.administrative_area == nil or address_text.administrative_area == "" )
+      Ml.w "cant create Model for AddressText becouse sub administrative area can not be without administrative area "
+      return nil
+    end
+    
+=begin
+    aa = AdministrativeArea.find_by_name(address_text.administrative_area) || "NULL"
+    saa = SubAdministrativeArea.find_by_name(address_text.sub_administrative_area) || "NULL"
+    locality = Locality.find_by_name(address_text.locality) || "NULL"
+=end
+    #todo: those if-elses are so UGLY :(
+    if aa = AdministrativeArea.find_by_name(address_text.administrative_area)
+      Ml.w "aa #{aa.name} founded in our DB"
+      if saa = SubAdministrativeArea.find(:first, :conditions => { :name => address_text.sub_administrative_area, :administrative_area_id => aa.id})
+        Ml.w "saa #{saa.name} founded in our DB"
+        if locality = Locality.find(:first, :conditions => { :name => address_text.locality, :sub_administrative_area_id => saa.id})
+          Ml.w "locality #{locality.name} founded in our DB"
+          if street = Street.find(:first,:conditions => { :name => address_text.street, :locality_id => locality.id})
+            Ml.w "street #{sreet.name} founded in our DB"
+            new_address = Address.new(:street_id => street.id, :premise => address_text.premise)
+          else
+            Ml.w "street #{addres_text.street} IS NOT in our DB"
+            new_street = locality.streets.build (:name => address_text.street)
+            new_address = Address.new(:street_id => new_street.id, :premise => address_text.premise)
+          end
+        else
+          Ml.w "locality #{address_text.locality} IS NOT in our DB"
+          new_locality = saa.localities.build (:name => address_text.locality)
+          new_street = new_locality.streets.build (:name => address_text.street)
+          new_address = Address.new(:street_id => new_street.id, :premise => address_text.premise)
+        end
+      else
+        Ml.w "saa #{address_text.sub_administrative_area} IS NOT in our DB"
+        new_saa = aa.sub_administrative_areas.build (:name => address_text.sub_administrative_area)
+        new_locality = new_saa.localities.build (:name => address_text.locality)
+        new_street = new_locality.streets.build (:name => address_text.street)
+        new_address = Address.new(:street_id => new_street.id, :premise => address_text.premise)
+      end
+    else
+      Ml.w "aa #{address_text.administrative_area} IS NOT in our DB"
+      new_aa = AdministrativeArea.new (:name => address_text.administrative_area)
+      new_saa = new_aa.sub_administrative_areas.build (:name => address_text.sub_administrative_area)
+      new_locality = new_saa.localities.build (:name => address_text.locality)
+      new_street = new_locality.streets.build (:name => address_text.street)
+      new_address = Address.new(:street_id => new_street.id, :premise => address_text.premise)
+    end
   end
 
   #parses YandexMaps XML respons and returns array of AddressText objects
