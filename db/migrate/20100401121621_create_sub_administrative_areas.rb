@@ -1,7 +1,7 @@
 class CreateSubAdministrativeAreas < ActiveRecord::Migration
   def self.up
     create_table :sub_administrative_areas do |t|
-      t.integer :name
+      t.string :name
       t.integer :administrative_area_id
 
       t.timestamps
