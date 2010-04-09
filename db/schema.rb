@@ -35,7 +35,7 @@ ActiveRecord::Schema.define(:version => 20100402104118) do
   end
 
   create_table "administrative_areas", :force => true do |t|
-    t.integer  "name"
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -99,7 +99,7 @@ ActiveRecord::Schema.define(:version => 20100402104118) do
   end
 
   create_table "sub_administrative_areas", :force => true do |t|
-    t.integer  "name"
+    t.string   "name"
     t.integer  "administrative_area_id"
     t.datetime "created_at"
     t.datetime "updated_at"

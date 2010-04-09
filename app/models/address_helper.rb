@@ -57,6 +57,7 @@ class AddressHelper
       end
     end
 =end
+    result
   end
   
   #checks if AddressText object can be resolved by Yandex Maps server
@@ -105,27 +106,40 @@ class AddressHelper
           else
             Ml.w "street #{addres_text.street} IS NOT in our DB"
             new_street = locality.streets.build (:name => address_text.street)
+            new_street.save
             new_address = Address.new(:street_id => new_street.id, :premise => address_text.premise)
           end
         else
           Ml.w "locality #{address_text.locality} IS NOT in our DB"
           new_locality = saa.localities.build (:name => address_text.locality)
+          new_locality.save
           new_street = new_locality.streets.build (:name => address_text.street)
+          new_street.save
           new_address = Address.new(:street_id => new_street.id, :premise => address_text.premise)
+          new_address.save
         end
       else
         Ml.w "saa #{address_text.sub_administrative_area} IS NOT in our DB"
         new_saa = aa.sub_administrative_areas.build (:name => address_text.sub_administrative_area)
+        new_saa.save
         new_locality = new_saa.localities.build (:name => address_text.locality)
+        new_locality.save
         new_street = new_locality.streets.build (:name => address_text.street)
+        new_street.save
         new_address = Address.new(:street_id => new_street.id, :premise => address_text.premise)
       end
     else
       Ml.w "aa #{address_text.administrative_area} IS NOT in our DB"
+      if address_text.administrative_area != "" && address_text.administrative_area != nil
       new_aa = AdministrativeArea.new (:name => address_text.administrative_area)
+      #todo: add save check
+      new_aa.save
       new_saa = new_aa.sub_administrative_areas.build (:name => address_text.sub_administrative_area)
+      new_saa.save
       new_locality = new_saa.localities.build (:name => address_text.locality)
+      new_locality.save
       new_street = new_locality.streets.build (:name => address_text.street)
+      new_street.save
       new_address = Address.new(:street_id => new_street.id, :premise => address_text.premise)
     end
   end
