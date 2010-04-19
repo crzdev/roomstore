@@ -1,9 +1,31 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
+  id: 1
   name: 1
   administrative_area_id: 1
 
 two:
+  id: 2
   name: 1
   administrative_area_id: 1
+
+three:
+  id: 3
+  name: Раменский район
+  administrative_area_id: 3
+
+four:
+  id: 4
+  name: SA4
+  administrative_area_id: 4
+
+five:
+  id: 5
+  name: SA5
+  administrative_area_id: 4
+
+six:
+  id: 6
+  name: SA6
+  administrative_area_id: 5

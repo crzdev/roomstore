@@ -1,11 +1,48 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
+  id: 1
   administrative_area_id: 1
   sub_administrative_area_id: 1
   name: MyString
 
 two:
+  id: 2
   administrative_area_id: 1
   sub_administrative_area_id: 1
   name: MyString
+
+three:
+  id: 3
+  sub_administrative_area_id: 3
+  name: поселок Ильинский
+
+four:
+  id: 4
+  sub_administrative_area_id: 4
+  name: L4
+
+five:
+  id: 5
+  sub_administrative_area_id: 4
+  name: L5
+
+six:
+  id: 6
+  sub_administrative_area_id: 5
+  name: L6
+
+seven:
+  id: 7
+  sub_administrative_area_id: 6
+  name: L7
+
+eight:
+  id: 8
+  administrative_area_id: 5
+  name: L8
+
+nine:
+  id: 9
+  administrative_area_id: 4
+  name: L9

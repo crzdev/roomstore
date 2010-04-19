@@ -1,9 +1,52 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
+  id: 1
   street_id: 1
   premise: MyString
 
 two:
+  id: 2
   street_id: 1
   premise: MyString
+
+three:
+  id: 3
+  street_id: 3
+  premise: 5/57
+
+four:
+  id: 4
+  street_id: 4
+  premise: 111
+
+five:
+  id: 5
+  street_id: 5
+  premise: 222
+
+six:
+  id: 6
+  street_id: 6
+  premise: 333
+
+seven:
+  id: 7
+  street_id: 7
+  premise: 444
+								
+eight:
+  id: 8
+  street_id: 8
+  premise: 555
+
+nine:
+  id: 9
+  street_id: 9
+  premise: 999
+
+ten:
+  id: 10
+  street_id: 10
+  premise: 10
+

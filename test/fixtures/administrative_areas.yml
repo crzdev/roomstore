@@ -1,7 +1,10 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
-one:
-  name: 1
+four:
+  id: 4
+  name: AA4
 
-two:
-  name: 1
+five:
+  id: 5
+  name: AA5
+

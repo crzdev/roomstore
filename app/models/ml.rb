@@ -9,6 +9,7 @@ class Ml
       f =  File.open(@@path+@@file_name, 'a')
     end
     f.puts text
+    f.close
   end  
 end
 

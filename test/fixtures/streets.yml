@@ -1,9 +1,52 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
+  id: 1
   locality_id: 1
   name: MyString
 
 two:
+  id: 2
   locality_id: 1
   name: MyString
+
+three:
+  id: 3
+  locality_id: 3
+  name: Пионерский переулок
+
+four:
+  id: 4
+  locality_id: 4
+  name: S4
+
+five:
+  id: 5
+  locality_id: 4
+  name: S5
+
+six:
+  id: 6
+  locality_id: 5
+  name: S6
+
+seven:
+  id: 7
+  locality_id: 6
+  name: S7
+
+eight:
+  id: 8
+  locality_id: 7
+  name: S8			
+
+nine:
+  id: 9
+  locality_id: 8
+  name: S9			
+
+ten:
+  id: 10
+  locality_id: 9
+  name: S10			
+

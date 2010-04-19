@@ -1,22 +1,18 @@
 <div id="new_rent_room_flat" >
-	<h1>Новое объявление об аренде загородных помещений</h1>
+	<h1>Новое объявление об аренде комнаты\квартиры в Москве</h1>
 	<%= error_messages_for :renty_entry %>
-	<% form_for(@rent_entry,@address_text, :url => {:action => "create_rent"}) do |f| %>
+	<% form_for(@rent_entry,@address_text, :url => {:action => "create_rent_room_flat_moscow"}) do |f| %>
   <%= f.error_messages %>
+
+<% if @address_variants != nil && @address_variants.length > 0 %>
   <p>
-		<%= f.label "Ближайшее шоссе" %><br />
-		<%= select("highway", "id", Highway.all.collect {|h| [ h.name, h.id ] }, {:include_blank => 'Не выбрано'}) %>
-		в <%= text_field_tag "distance_to_mkad","", :size => 3 %>км от МКАД
+  Выбирите один из вариантов:
   </p>
-  <p>
-		<%= f.label "Ближайшая станция метро" %><br />
-		<%= select("subway_station", "id", SubwayStation.all.collect {|p| [ p.name, p.id ] }, {:include_blank => 'Не выбрано'}) %>
-		<%= text_field_tag "subway_station_time_to","", {:size => 4} %> мин.
-  </p>
-  <p>
-    <%= f.label "Район МО" %><br />
-		<%= select("address_text", "sub_administrative_area",SubAdministrativeArea.find(:all,:conditions => ["administrative_area_id = ?", 1]).collect {|saa| [ saa.name, saa.name ] }, {:include_blank => 'Не выбрано'}) %>
-  </p>
+  <div id="address_variants">
+  <%= select "address_variant", "variant", @address_variants.collect {|av| [av.get_address_string, av.get_address_string] } %>
+  </div>
+<% else %>
+<div id="address">
   <p>
     <%= f.label "Населенный пункт" %><br />
     <%= text_field "address_text", "locality" %>
@@ -28,6 +24,13 @@
   <p>
     <%= f.label "Дом" %><br />
     <%= text_field "address_text", "premise" %>
+  </p>
+</div>
+<% end %>
+  <p>
+		<%= f.label "Ближайшая станция метро" %><br />
+		<%= select("subway_station", "id", SubwayStation.all.collect {|p| [ p.name, p.id ] }, {:include_blank => 'Не выбрано'}) %>
+		<%= text_field_tag "subway_station_time_to","", {:size => 4} %> мин.
   </p>
   <p>
     <%= f.label "Количество комнат" %><br />

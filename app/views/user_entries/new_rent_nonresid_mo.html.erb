@@ -1,5 +1,5 @@
-<div id="new_rent_room_flat" >
-	<h1>Новое объявление об аренде загородных помещений</h1>
+<div id="new_rent_nonresid_mo" >
+	<h1>Новое объявление об аренде нежелых помещений в Московской Области</h1>
 	<%= error_messages_for :renty_entry %>
 	<% form_for(@rent_entry,@address_text, :url => {:action => "create_rent"}) do |f| %>
   <%= f.error_messages %>
