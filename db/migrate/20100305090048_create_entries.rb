@@ -18,6 +18,7 @@ class CreateEntries < ActiveRecord::Migration
       t.string :realty_type
       t.decimal :commission_client
       t.decimal :commission_agent
+      t.boolean :furniture
       t.boolean :phone
       t.boolean :refridgerator
       t.boolean :tv

@@ -3,19 +3,18 @@
 	<%= error_messages_for :renty_entry %>
 	<% form_for(@rent_entry,@address_text, :url => {:action => "create_rent"}) do |f| %>
   <%= f.error_messages %>
-  <p>
-		<%= f.label "Ближайшее шоссе" %><br />
-		<%= select("highway", "id", Highway.all.collect {|h| [ h.name, h.id ] }, {:include_blank => 'Не выбрано'}) %>
-		в <%= text_field_tag "distance_to_mkad","", :size => 3 %>км от МКАД
-  </p>
-  <p>
-		<%= f.label "Ближайшая станция метро" %><br />
-		<%= select("subway_station", "id", SubwayStation.all.collect {|p| [ p.name, p.id ] }, {:include_blank => 'Не выбрано'}) %>
-		<%= text_field_tag "subway_station_time_to","", {:size => 4} %> мин.
-  </p>
+  <% if @address_variants != nil && @address_variants.length > 0 %>
+   <p>
+      Выбирите один из вариантов:
+   </p>
+   <div id="address_variants">
+     <%= select "address_variant", "variant", @address_variants.collect {|av| [av.get_address_string, av.get_address_string] } %>
+   </div>
+  <% else %>
+   <div id="address">
   <p>
     <%= f.label "Район МО" %><br />
-		<%= select("address_text", "sub_administrative_area",SubAdministrativeArea.find(:all,:conditions => ["administrative_area_id = ?", 1]).collect {|saa| [ saa.name, saa.name ] }, {:include_blank => 'Не выбрано'}) %>
+    <%= text_field "address_text", "sub_administrative_area" %>
   </p>
   <p>
     <%= f.label "Населенный пункт" %><br />
@@ -28,6 +27,17 @@
   <p>
     <%= f.label "Дом" %><br />
     <%= text_field "address_text", "premise" %>
+  </p>
+   </div>
+  <% end %>
+  <p>
+		<%= f.label "Ближайшая станция метро" %><br />
+		<%= select("subway_station", "id", SubwayStation.all.collect {|p| [ p.name, p.id ] }, {:include_blank => 'Не выбрано'}) %>
+		<%= text_field_tag "subway_station_time_to","", {:size => 4} %> мин.
+  </p>
+  <p>
+    <%= f.label "Тип недвижимости" %><br />
+    <%= f.select :realty_type, RealtyType.get_nonresid_types.collect {|t| [t[0],t[1]]} %>
   </p>
   <p>
     <%= f.label "Количество комнат" %><br />

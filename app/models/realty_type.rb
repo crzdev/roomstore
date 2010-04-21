@@ -61,7 +61,7 @@ class RealtyType
     @@NONRESIDENTIAL_REALTY_TYPES 
   end
 
-  def self.get_nonresidential_types
+  def self.get_nonresid_types
     @@NONRESIDENTIAL_REALTY_TYPES 
   end
 

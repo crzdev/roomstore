@@ -1,11 +1,11 @@
 <tr>
   <td>
 			<div id= "flat_rent_entry_address" class="rent_entry_table_field">
-				<% flat_rent_entry.subway_stations.each do |station| %>
+				<% flat_rent_entry.address.subway_stations.each do |station| %>
 				<subway_station_text><%= station.name %></subway_station_text>
         <% end %>
-				<street_name_text><%=h flat_rent_entry.street %></street_name_text>
-				<house_number_text><%=h flat_rent_entry.house_number %></homuse_number_text>
+				<street_name_text><%=h flat_rent_entry.address.street.name %></street_name_text>,
+				<premise_text><%=h flat_rent_entry.address.premise %></homuse_number_text>
 			</div>
 		</td>
 		<td>
@@ -24,7 +24,7 @@
 		</td>
 		<td>
 			<div id= "flat_rent_entry_rent_price" class="rent_entry_table_field">
-				<%=h flat_rent_entry.rent_price %>
+				<%=h flat_rent_entry.price %>
 			</div>
 		</td>
 		<td>
@@ -34,12 +34,12 @@
 		</td>
 		<td>
 			<div id= "flat_rent_entry_area_total" class="rent_entry_table_field">
-				<%=h flat_rent_entry.area_total %>
+				<%=h flat_rent_entry.total_area %>
 			</div>
 		</td>
 		<td>
 			<div id= "flat_rent_entry_area_kitchen" class="rent_entry_table_field">
-				<%=h flat_rent_entry.area_kitchen %>
+				<%=h flat_rent_entry.kitchen_area %>
 			</div>
 		</td>
 	<td>

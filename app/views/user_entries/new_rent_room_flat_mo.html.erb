@@ -1,21 +1,20 @@
 <div id="new_rent_room_flat" >
 	<h1>Новое объявление об аренде комнаты\квартиры в Московской Области</h1>
 	<%= error_messages_for :renty_entry %>
-	<% form_for(@rent_entry,@address_text, :url => {:action => "create_rent"}) do |f| %>
+	<% form_for(@rent_entry,@address_text, :url => {:action => "create_rent_room_flat_mo"}) do |f| %>
   <%= f.error_messages %>
+<% if @address_variants != nil && @address_variants.length > 0 %>
   <p>
-		<%= f.label "Ближайшее шоссе" %><br />
-		<%= select("highway", "id", Highway.all.collect {|h| [ h.name, h.id ] }, {:include_blank => 'Не выбрано'}) %>
-		в <%= text_field_tag "distance_to_mkad","", :size => 3 %>км от МКАД
+  Выбирите один из вариантов:
   </p>
-  <p>
-		<%= f.label "Ближайшая станция метро" %><br />
-		<%= select("subway_station", "id", SubwayStation.all.collect {|p| [ p.name, p.id ] }, {:include_blank => 'Не выбрано'}) %>
-		<%= text_field_tag "subway_station_time_to","", {:size => 4} %> мин.
-  </p>
+  <div id="address_variants">
+  <%= select "address_variant", "variant", @address_variants.collect {|av| [av.get_address_string, av.get_address_string] } %>
+  </div>
+<% else %>
+<div id="address">
   <p>
     <%= f.label "Район МО" %><br />
-		<%= select("address_text", "sub_administrative_area",SubAdministrativeArea.find(:all,:conditions => ["administrative_area_id = ?", 1]).collect {|saa| [ saa.name, saa.name ] }, {:include_blank => 'Не выбрано'}) %>
+    <%= text_field "address_text", "sub_administrative_area" %>
   </p>
   <p>
     <%= f.label "Населенный пункт" %><br />
@@ -28,6 +27,22 @@
   <p>
     <%= f.label "Дом" %><br />
     <%= text_field "address_text", "premise" %>
+  </p>
+</div>
+<% end %>
+  <p>
+		<%= f.label "Ближайшее шоссе" %><br />
+		<%= select("highway", "id", Highway.all.collect {|h| [ h.name, h.id ] }, {:include_blank => 'Не выбрано'}) %>
+		<%= text_field_tag "distance_to_mkad","", :size => 3 %>км от МКАД
+  </p>
+  <p>
+		<%= f.label "Ближайшая станция метро" %><br />
+		<%= select("subway_station", "id", SubwayStation.all.collect {|p| [ p.name, p.id ] }, {:include_blank => 'Не выбрано'}) %>
+		<%= text_field_tag "subway_station_time_to","", {:size => 4} %> мин.
+  </p>
+  <p>
+    <%= f.label "Тип недвижимости" %><br />
+    <%= f.select :realty_type, RealtyType.get_urban_types.collect {|t| [t[0],t[1]]} %>
   </p>
   <p>
     <%= f.label "Количество комнат" %><br />
@@ -70,11 +85,11 @@
       <%= f.check_box :washing_machine -%>
     </p>
   <p>
-    <%= f.label :contacts %><br />
+    <%= f.label "Контакты:" %><br />
     <%= f.text_area :contacts %>
   </p>
   <p>
-    <%= f.label :comment %><br />
+    <%= f.label "Комментарий" %><br />
     <%= f.text_area :comment %>
   </p>
   <p>

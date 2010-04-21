@@ -58,6 +58,7 @@ ActiveRecord::Schema.define(:version => 20100411081758) do
     t.string   "realty_type"
     t.integer  "commission_client", :limit => 10, :precision => 10, :scale => 0
     t.integer  "commission_agent",  :limit => 10, :precision => 10, :scale => 0
+    t.boolean  "furniture"
     t.boolean  "phone"
     t.boolean  "refridgerator"
     t.boolean  "tv"

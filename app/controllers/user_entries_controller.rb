@@ -216,6 +216,7 @@ class UserEntriesController < ApplicationController
           flash[:notice] = "Новая запись успешно добавлена"
           redirect_to :action => "new_rent_room_flat_moscow"
         else
+          @address.destroy
           render :action => "new_rent_room_flat_moscow" 
         end
       else
@@ -243,9 +244,10 @@ class UserEntriesController < ApplicationController
             @ah.save
           end
           flash[:notice] = "Новая запись успешно добавлена"
-          redirect_to :action => "new_rent"
+          redirect_to :action => "new_rent_room_flat_moscow"
         else
-          render :action => "new_rent" 
+          @address.destroy
+          render :action => "new_rent_rent_room_flat_moscow" 
         end
       else
         if AddressHelper.is_resolved_by_ym? @address_text
@@ -264,6 +266,7 @@ class UserEntriesController < ApplicationController
             flash[:notice] = "Новая запись успешно добавлена"
             redirect_to :action => "new_rent_room_flat_moscow"
           else
+            @address.destroy
             render :action => "new_rent_room_flat_moscow" 
           end
         else
@@ -276,7 +279,328 @@ class UserEntriesController < ApplicationController
     end
   end
 
+  #working method
+  #creates rent entry with address from coresponding form
+  def create_rent_room_flat_mo
+    @rent_entry = RentEntry.new(params[:rent_entry])
+    #entry is created for curent user
+    @rent_entry.user_id = session[:user_id]
+    @address_text = nil
+    if params[:address_text] != nil
+      @address_text = AddressText.new(params[:address_text])
+      @address_text.administrative_area = "Москвоская область"
+      #todo: is it necesary? look below
+      @address_text.country = "Россия"
+    end
+    @address_variant_string = nil
+    if params[:address_variant] != nil
+      @address_variant_string = params[:address_variant][:variant]
+    end
+    #todo: look at code. mb bring this if upper in this method 
+    #to avoid izbitochnie asign and var. initialization?
+    if @address_variant_string != nil && @address_variant_string != ""
+      #We got address_variant from form
+      Ml.w "Got address variant from form: #{@address_variant_string}"
+      Ml.w "Going to check it"
+      #user selected address variant string
+      #check below is needed to prevent HTML form hacking
+      if AddressHelper.is_address_string_resolved_by_ym? @address_variant_string
+        Ml.w "This address variant resolved by Yms"
+        #all ok! do all things for saving entry
+        xml = Yms.geocode @address_variant_string
+        ats = AddressHelper.get_address_texts xml
+        Ml.w "Going to build model for: #{ats[0].get_address_string}"
+        #        @address = @rent_entry.build_address (AddressHelper.build_model_for ats[0])
+        @address = AddressHelper.build_model_for ats[0]
+        @address.save
+        @rent_entry.address = @address
+        @subway_station = SubwayStation.find_by_id(params[:subway_station][:id])
+        if @rent_entry.save
+          Ml.w "New rent entry saved!!"
+          if @subway_station != nil
+            @ass = @address.address_subway_stations.create(:subway_station_id => @subway_station.id,:time_to => params[:subway_station_time_to])
+            @ass.save
+          end
+          flash[:notice] = "Новая запись успешно добавлена"
+          redirect_to :action => "new_rent_room_flat_mo"
+        else
+          @address.destroy
+          render :action => "new_rent_room_flat_mo" 
+        end
+      else
+        Ml.w "This address variant does not resolved by Yms"
+        #some one tryed to hack HTML or it is bug ;|
+        #todo: add watcher for this event. bloack ips who tried to hack
+      end
+    else
+      #There is no address variants! Working with AddressText object!
+      Ml.w "Working with address_text: #{@address_text.get_address_string}"
+      if AddressHelper.is_resolved_by_db? @address_text
+        #todo: remove loging
+        Ml.w "#{@address_text} is resolved by DB"
+        Ml.w "#{@address_text.get_address_string}"
+        @address = @rent_entry.build_address (AddressHelper.build_model_for @address_text)
+        @subway_station = SubwayStation.find_by_id(params[:subway_station][:id])
+        @highway = Highway.find_by_id(params[:highway][:id])
+        if @rent_entry.save
+          if @subway_station != nil
+            @ass = @address.address_subway_stations.create(:subway_station_id => @subway_station.id,:time_to => params[:subway_station_time_to])
+            @ass.save
+          end
+          if @highway != nil
+            @ah = @address.address_highways.create(:highway_id => @highway.id,:distance_to_mkad => params[:highway_distance_to_mkad])
+            @ah.save
+          end
+          flash[:notice] = "Новая запись успешно добавлена"
+          redirect_to :action => "new_rent_room_flat_mo"
+        else
+          @address.destroy
+          render :action => "new_rent_room_flat_mo" 
+        end
+      else
+        if AddressHelper.is_resolved_by_ym? @address_text
+          #todo: remove loging
+          Ml.w "#{@address_text} is resolved by YM"
+          Ml.w "#{@address_text.get_address_string}"
+          @address = AddressHelper.build_model_for @address_text
+          @address.save
+          @rent_entry.address = @address
+          @subway_station = SubwayStation.find_by_id(params[:subway_station][:id])
+          if @rent_entry.save
+            if @subway_station != nil
+              @ass = @address.address_subway_stations.create(:subway_station_id => @subway_station.id,:time_to => params[:subway_station_time_to])
+              @ass.save
+            end
+            flash[:notice] = "Новая запись успешно добавлена"
+            redirect_to :action => "new_rent_room_flat_mo"
+          else
+            @address.destroy
+            render :action => "new_rent_room_flat_mo" 
+          end
+        else
+          Ml.w "#{@address_text.get_address_string} CAN NOT BE resolved by YM"
+          @address_variants = AddressHelper.get_variants_for @address_text
+          flash[:notice] = "Убедитесь в правильности Адресса"
+          render :action => "new_rent_room_flat_mo" 
+        end
+      end
+    end
+  end
 
+  #working method
+  #creates rent entry with address from coresponding form
+  def create_rent_nonresid_moscow
+    @rent_entry = RentEntry.new(params[:rent_entry])
+    #entry is created for curent user
+    @rent_entry.user_id = session[:user_id]
+    @address_text = nil
+    if params[:address_text] != nil
+      @address_text = AddressText.new(params[:address_text])
+      #todo: is it necesary? look below
+      @address_text.country = "Россия"
+    end
+    @address_variant_string = nil
+    if params[:address_variant] != nil
+      @address_variant_string = params[:address_variant][:variant]
+    end
+    #todo: look at code. mb bring this if upper in this method 
+    #to avoid izbitochnie asign and var. initialization?
+    if @address_variant_string != nil && @address_variant_string != ""
+      #We got address_variant from form
+      Ml.w "Got address variant from form: #{@address_variant_string}"
+      Ml.w "Going to check it"
+      #user selected address variant string
+      #check below is needed to prevent HTML form hacking
+      if AddressHelper.is_address_string_resolved_by_ym? @address_variant_string
+        Ml.w "This address variant resolved by Yms"
+        #all ok! do all things for saving entry
+        xml = Yms.geocode @address_variant_string
+        ats = AddressHelper.get_address_texts xml
+        Ml.w "Going to build model for: #{ats[0].get_address_string}"
+        #        @address = @rent_entry.build_address (AddressHelper.build_model_for ats[0])
+        @address = AddressHelper.build_model_for ats[0]
+        @address.save
+        @rent_entry.address = @address
+        @subway_station = SubwayStation.find_by_id(params[:subway_station][:id])
+        if @rent_entry.save
+          Ml.w "New rent entry saved!!"
+          if @subway_station != nil
+            @ass = @address.address_subway_stations.create(:subway_station_id => @subway_station.id,:time_to => params[:subway_station_time_to])
+            @ass.save
+          end
+          flash[:notice] = "Новая запись успешно добавлена"
+          redirect_to :action => "new_rent_nonresid_moscow"
+        else
+          @address.destroy
+          render :action => "new_rent_nonresid_moscow" 
+        end
+      else
+        Ml.w "This address variant does not resolved by Yms"
+        #some one tryed to hack HTML or it is bug ;|
+        #todo: add watcher for this event. bloack ips who tried to hack
+      end
+    else
+      #There is no address variants! Working with AddressText object!
+      Ml.w "Working with address_text: #{@address_text.get_address_string}"
+      if AddressHelper.is_resolved_by_db? @address_text
+        #todo: remove loging
+        Ml.w "#{@address_text} is resolved by DB"
+        Ml.w "#{@address_text.get_address_string}"
+        @address = @rent_entry.build_address (AddressHelper.build_model_for @address_text)
+        @subway_station = SubwayStation.find_by_id(params[:subway_station][:id])
+        @highway = Highway.find_by_id(params[:highway][:id])
+        if @rent_entry.save
+          if @subway_station != nil
+            @ass = @address.address_subway_stations.create(:subway_station_id => @subway_station.id,:time_to => params[:subway_station_time_to])
+            @ass.save
+          end
+          if @highway != nil
+            @ah = @address.address_highways.create(:highway_id => @highway.id,:distance_to_mkad => params[:highway_distance_to_mkad])
+            @ah.save
+          end
+          flash[:notice] = "Новая запись успешно добавлена"
+          redirect_to :action => "new_rent_nonresid_moscow"
+        else
+          @address.destroy
+          render :action => "new_rent_nonresid_moscow" 
+        end
+      else
+        if AddressHelper.is_resolved_by_ym? @address_text
+          #todo: remove loging
+          Ml.w "#{@address_text} is resolved by YM"
+          Ml.w "#{@address_text.get_address_string}"
+          @address = AddressHelper.build_model_for @address_text
+          @address.save
+          @rent_entry.address = @address
+          @subway_station = SubwayStation.find_by_id(params[:subway_station][:id])
+          if @rent_entry.save
+            if @subway_station != nil
+              @ass = @address.address_subway_stations.create(:subway_station_id => @subway_station.id,:time_to => params[:subway_station_time_to])
+              @ass.save
+            end
+            flash[:notice] = "Новая запись успешно добавлена"
+            redirect_to :action => "new_rent_nonresid_moscow"
+          else
+            @address.save
+            render :action => "new_rent_nonresid_moscow" 
+          end
+        else
+          Ml.w "#{@address_text.get_address_string} CAN NOT BE resolved by YM"
+          @address_variants = AddressHelper.get_variants_for @address_text
+          flash[:notice] = "Убедитесь в правильности Адресса"
+          render :action => "new_rent_nonresid_moscow" 
+        end
+      end
+    end
+  end
+
+  #working method
+  #creates rent entry with address from coresponding form
+  def create_rent_nonresid_mo
+    @rent_entry = RentEntry.new(params[:rent_entry])
+    #entry is created for curent user
+    @rent_entry.user_id = session[:user_id]
+    @address_text = nil
+    if params[:address_text] != nil
+      @address_text = AddressText.new(params[:address_text])
+      @address_text = "Московская область"
+      #todo: is it necesary? look below
+      @address_text.country = "Россия"
+    end
+    @address_variant_string = nil
+    if params[:address_variant] != nil
+      @address_variant_string = params[:address_variant][:variant]
+    end
+    #todo: look at code. mb bring this if upper in this method 
+    #to avoid izbitochnie asign and var. initialization?
+    if @address_variant_string != nil && @address_variant_string != ""
+      #We got address_variant from form
+      Ml.w "Got address variant from form: #{@address_variant_string}"
+      Ml.w "Going to check it"
+      #user selected address variant string
+      #check below is needed to prevent HTML form hacking
+      if AddressHelper.is_address_string_resolved_by_ym? @address_variant_string
+        Ml.w "This address variant resolved by Yms"
+        #all ok! do all things for saving entry
+        xml = Yms.geocode @address_variant_string
+        ats = AddressHelper.get_address_texts xml
+        Ml.w "Going to build model for: #{ats[0].get_address_string}"
+        #        @address = @rent_entry.build_address (AddressHelper.build_model_for ats[0])
+        @address = AddressHelper.build_model_for ats[0]
+        @address.save
+        @rent_entry.address = @address
+        @subway_station = SubwayStation.find_by_id(params[:subway_station][:id])
+        if @rent_entry.save
+          Ml.w "New rent entry saved!!"
+          if @subway_station != nil
+            @ass = @address.address_subway_stations.create(:subway_station_id => @subway_station.id,:time_to => params[:subway_station_time_to])
+            @ass.save
+          end
+          flash[:notice] = "Новая запись успешно добавлена"
+          redirect_to :action => "new_rent_nonresid_mo"
+        else
+          @address.destroy
+          render :action => "new_rent_nonresid_mo" 
+        end
+      else
+        Ml.w "This address variant does not resolved by Yms"
+        #some one tryed to hack HTML or it is bug ;|
+        #todo: add watcher for this event. bloack ips who tried to hack
+      end
+    else
+      #There is no address variants! Working with AddressText object!
+      Ml.w "Working with address_text: #{@address_text.get_address_string}"
+      if AddressHelper.is_resolved_by_db? @address_text
+        #todo: remove loging
+        Ml.w "#{@address_text} is resolved by DB"
+        Ml.w "#{@address_text.get_address_string}"
+        @address = @rent_entry.build_address (AddressHelper.build_model_for @address_text)
+        @subway_station = SubwayStation.find_by_id(params[:subway_station][:id])
+        @highway = Highway.find_by_id(params[:highway][:id])
+        if @rent_entry.save
+          if @subway_station != nil
+            @ass = @address.address_subway_stations.create(:subway_station_id => @subway_station.id,:time_to => params[:subway_station_time_to])
+            @ass.save
+          end
+          if @highway != nil
+            @ah = @address.address_highways.create(:highway_id => @highway.id,:distance_to_mkad => params[:highway_distance_to_mkad])
+            @ah.save
+          end
+          flash[:notice] = "Новая запись успешно добавлена"
+          redirect_to :action => "new_rent_nonresid_mo"
+        else
+          @address.destroy
+          render :action => "new_rent_nonresid_mo" 
+        end
+      else
+        if AddressHelper.is_resolved_by_ym? @address_text
+          #todo: remove loging
+          Ml.w "#{@address_text} is resolved by YM"
+          Ml.w "#{@address_text.get_address_string}"
+          @address = AddressHelper.build_model_for @address_text
+          @address.save
+          @rent_entry.address = @address
+          @subway_station = SubwayStation.find_by_id(params[:subway_station][:id])
+          if @rent_entry.save
+            if @subway_station != nil
+              @ass = @address.address_subway_stations.create(:subway_station_id => @subway_station.id,:time_to => params[:subway_station_time_to])
+              @ass.save
+            end
+            flash[:notice] = "Новая запись успешно добавлена"
+            redirect_to :action => "new_rent_nonresid_mo"
+          else
+            @address.destroy
+            render :action => "new_rent_nonresid_mo" 
+          end
+        else
+          Ml.w "#{@address_text.get_address_string} CAN NOT BE resolved by YM"
+          @address_variants = AddressHelper.get_variants_for @address_text
+          flash[:notice] = "Убедитесь в правильности Адресса"
+          render :action => "new_rent_nonresid_mo" 
+        end
+      end
+    end
+  end
 
 
   #create new rent entry for suburban
