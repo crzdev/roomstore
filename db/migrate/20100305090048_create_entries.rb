@@ -5,14 +5,14 @@ class CreateEntries < ActiveRecord::Migration
       t.integer :rooms_count
       t.decimal :price
       t.string :currency
-      t.decimal :price_type
+      t.string :price_type
       t.integer :floors_total
       t.integer :floor_number
       t.integer :total_area
       t.integer :kitchen_area
       t.integer :house_area
       t.integer :plot_area
-      t.integer :rent_time_type
+      t.string :rent_time_type
       t.integer :user_id
       t.integer :address_id
       t.string :realty_type
