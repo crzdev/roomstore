@@ -123,7 +123,9 @@ class UserEntriesController < ApplicationController
       Ml.w "#{@address_text} is resolved by DB"
       Ml.w "#{@address_text.get_address_string}"
       @address = @rent_entry.build_address (AddressHelper.build_model_for @address_text)
-      @subway_station = SubwayStation.find_by_id(params[:subway_station][:id])
+      if params[:subway_station][:id] != ""
+        @subway_station = SubwayStation.find_by_id(params[:subway_station][:id])
+      end
       @highway = Highway.find_by_id(params[:highway][:id])
       if @rent_entry.save
         if @subway_station != nil
@@ -145,9 +147,11 @@ class UserEntriesController < ApplicationController
         Ml.w "#{@address_text} is resolved by YM"
         Ml.w "#{@address_text.get_address_string}"
         @address = @rent_entry.build_address (AddressHelper.build_model_for @address_text)
-        @subway_station = SubwayStation.find_by_id(params[:subway_station][:id])
+        if params[:subway_station][:id] != ""
+          @subway_station = SubwayStation.find_by_id(params[:subway_station][:id])
+        end
         #todo: remove comment below
-#        @highways = Highway.find_by_id(params[:highway][:id])
+        #        @highways = Highway.find_by_id(params[:highway][:id])
         if @rent_entry.save
           if @subway_station != nil
             @ass = @address.address_subway_stations.create(:subway_station_id => @subway_station.id,:time_to => params[:subway_station_time_to])
@@ -206,7 +210,9 @@ class UserEntriesController < ApplicationController
         @address = AddressHelper.build_model_for ats[0]
         @address.save
         @rent_entry.address = @address
-        @subway_station = SubwayStation.find_by_id(params[:subway_station][:id])
+        if params[:subway_station][:id] != ""
+          @subway_station = SubwayStation.find_by_id(params[:subway_station][:id])
+        end
         if @rent_entry.save
           Ml.w "New rent entry saved!!"
           if @subway_station != nil
@@ -232,7 +238,9 @@ class UserEntriesController < ApplicationController
         Ml.w "#{@address_text} is resolved by DB"
         Ml.w "#{@address_text.get_address_string}"
         @address = @rent_entry.build_address (AddressHelper.build_model_for @address_text)
-        @subway_station = SubwayStation.find_by_id(params[:subway_station][:id])
+        if params[:subway_station][:id] != ""
+          @subway_station = SubwayStation.find_by_id(params[:subway_station][:id])
+        end
         @highway = Highway.find_by_id(params[:highway][:id])
         if @rent_entry.save
           if @subway_station != nil
@@ -257,7 +265,9 @@ class UserEntriesController < ApplicationController
           @address = AddressHelper.build_model_for @address_text
           @address.save
           @rent_entry.address = @address
-          @subway_station = SubwayStation.find_by_id(params[:subway_station][:id])
+          if params[:subway_station][:id] != ""
+            @subway_station = SubwayStation.find_by_id(params[:subway_station][:id])
+          end
           if @rent_entry.save
             if @subway_station != nil
               @ass = @address.address_subway_stations.create(:subway_station_id => @subway_station.id,:time_to => params[:subway_station_time_to])
@@ -314,7 +324,9 @@ class UserEntriesController < ApplicationController
         @address = AddressHelper.build_model_for ats[0]
         @address.save
         @rent_entry.address = @address
-        @subway_station = SubwayStation.find_by_id(params[:subway_station][:id])
+        if params[:subway_station][:id] != ""
+          @subway_station = SubwayStation.find_by_id(params[:subway_station][:id])
+        end
         if @rent_entry.save
           Ml.w "New rent entry saved!!"
           if @subway_station != nil
@@ -340,7 +352,9 @@ class UserEntriesController < ApplicationController
         Ml.w "#{@address_text} is resolved by DB"
         Ml.w "#{@address_text.get_address_string}"
         @address = @rent_entry.build_address (AddressHelper.build_model_for @address_text)
-        @subway_station = SubwayStation.find_by_id(params[:subway_station][:id])
+        if params[:subway_station][:id] != ""
+          @subway_station = SubwayStation.find_by_id(params[:subway_station][:id])
+        end
         @highway = Highway.find_by_id(params[:highway][:id])
         if @rent_entry.save
           if @subway_station != nil
@@ -365,7 +379,9 @@ class UserEntriesController < ApplicationController
           @address = AddressHelper.build_model_for @address_text
           @address.save
           @rent_entry.address = @address
-          @subway_station = SubwayStation.find_by_id(params[:subway_station][:id])
+          if params[:subway_station][:id] != ""
+            @subway_station = SubwayStation.find_by_id(params[:subway_station][:id])
+          end
           if @rent_entry.save
             if @subway_station != nil
               @ass = @address.address_subway_stations.create(:subway_station_id => @subway_station.id,:time_to => params[:subway_station_time_to])
@@ -421,7 +437,9 @@ class UserEntriesController < ApplicationController
         @address = AddressHelper.build_model_for ats[0]
         @address.save
         @rent_entry.address = @address
-        @subway_station = SubwayStation.find_by_id(params[:subway_station][:id])
+        if params[:subway_station][:id] != ""
+          @subway_station = SubwayStation.find_by_id(params[:subway_station][:id])
+        end
         if @rent_entry.save
           Ml.w "New rent entry saved!!"
           if @subway_station != nil
@@ -447,7 +465,9 @@ class UserEntriesController < ApplicationController
         Ml.w "#{@address_text} is resolved by DB"
         Ml.w "#{@address_text.get_address_string}"
         @address = @rent_entry.build_address (AddressHelper.build_model_for @address_text)
-        @subway_station = SubwayStation.find_by_id(params[:subway_station][:id])
+        if params[:subway_station][:id] != ""
+          @subway_station = SubwayStation.find_by_id(params[:subway_station][:id])
+        end
         @highway = Highway.find_by_id(params[:highway][:id])
         if @rent_entry.save
           if @subway_station != nil
@@ -472,7 +492,9 @@ class UserEntriesController < ApplicationController
           @address = AddressHelper.build_model_for @address_text
           @address.save
           @rent_entry.address = @address
-          @subway_station = SubwayStation.find_by_id(params[:subway_station][:id])
+          if params[:subway_station][:id] != ""
+            @subway_station = SubwayStation.find_by_id(params[:subway_station][:id])
+          end
           if @rent_entry.save
             if @subway_station != nil
               @ass = @address.address_subway_stations.create(:subway_station_id => @subway_station.id,:time_to => params[:subway_station_time_to])
@@ -529,7 +551,9 @@ class UserEntriesController < ApplicationController
         @address = AddressHelper.build_model_for ats[0]
         @address.save
         @rent_entry.address = @address
-        @subway_station = SubwayStation.find_by_id(params[:subway_station][:id])
+        if params[:subway_station][:id] != ""
+          @subway_station = SubwayStation.find_by_id(params[:subway_station][:id])
+        end
         if @rent_entry.save
           Ml.w "New rent entry saved!!"
           if @subway_station != nil
@@ -555,7 +579,9 @@ class UserEntriesController < ApplicationController
         Ml.w "#{@address_text} is resolved by DB"
         Ml.w "#{@address_text.get_address_string}"
         @address = @rent_entry.build_address (AddressHelper.build_model_for @address_text)
-        @subway_station = SubwayStation.find_by_id(params[:subway_station][:id])
+        if params[:subway_station][:id] != ""
+          @subway_station = SubwayStation.find_by_id(params[:subway_station][:id])
+        end
         @highway = Highway.find_by_id(params[:highway][:id])
         if @rent_entry.save
           if @subway_station != nil
@@ -580,7 +606,9 @@ class UserEntriesController < ApplicationController
           @address = AddressHelper.build_model_for @address_text
           @address.save
           @rent_entry.address = @address
-          @subway_station = SubwayStation.find_by_id(params[:subway_station][:id])
+          if params[:subway_station][:id] != ""
+            @subway_station = SubwayStation.find_by_id(params[:subway_station][:id])
+          end
           if @rent_entry.save
             if @subway_station != nil
               @ass = @address.address_subway_stations.create(:subway_station_id => @subway_station.id,:time_to => params[:subway_station_time_to])

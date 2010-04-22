@@ -9,7 +9,7 @@ development:
 test:
  adapter: mysql
  encoding: utf8
- database: roomstore_development
+ database: roomstore_test
  username: root
  password: PAC7#m_at
  host: localhost
