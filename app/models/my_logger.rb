@@ -1,5 +1,5 @@
 class MyLogger
-  @@path = "log\/"
+  @@path = "c:\/projects\/rails\/roomstore\/log\/"
   @@file_name = "log.log"
   def self.write text
     f = nil

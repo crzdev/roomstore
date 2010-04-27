@@ -46,6 +46,7 @@ class SearchController < ApplicationController
   def result_flat
     @qs = "" #query_string todo: remove in production
     @search_condition = SearchCondition.new(params[:search_condition])
+    @search_condition.locality = "Москва"
     @qs = @search_condition.get_sql_condition
     @entries = Entry.find(:all,:conditions => @qs) #todo: SQLINJECTIONABLE
   end
@@ -61,6 +62,7 @@ class SearchController < ApplicationController
   def result_flat_mo
     @qs = "" #query_string todo: remove in production
     @search_condition = SearchCondition.new(params[:search_condition])
+    @search_condition.administrative_area = "Московская область"
     @qs = @search_condition.get_sql_condition
     @entries = Entry.find(:all,:conditions => @qs) #todo: SQLINJECTIONABLE
   end
@@ -75,6 +77,7 @@ class SearchController < ApplicationController
   def result_office_mo
     @qs = "" #query_string todo: remove in production
     @search_condition = SearchCondition.new(params[:search_condition])
+    @search_condition.administrative_area = "Московская область"
     @qs = @search_condition.get_sql_condition
     @entries = Entry.find(:all,:conditions => @qs) #todo: SQLINJECTIONABLE
   end

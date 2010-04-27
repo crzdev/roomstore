@@ -4,12 +4,12 @@
   <div id="search_conditions" class="column">
     <h1>Поиск по нежелым помещениям в Москве</h1>
     <p>
-      <label for="City">Город:</label>
-      <%= f.text_field :city, :size => 40 %>
+      <label for="Locality">Город:</label>
+      <%= f.text_field :locality, :size => 40 %>
     </p>
     <p>
       <label for="realty_type">Тип недвижимости:</label>
-			<% for  type in @realty_types -%>
+			<% for  type in RealtyType.get_nonresid_types -%>
       <%= check_box_tag "search_condition[realty_types][]", "#{type[1]}" -%>
       <%= "#{type[0]}" -%>
       <% end -%>
@@ -51,7 +51,7 @@
       <img usemap="#map" src="/images/metromap_2009b.gif" >
     </div>
     <div id="options_map_selection">
-			<%= select "subway","station", @subway_stations.collect { |el| [el.name, el.id]},{},{:size =>10,:ondblclick=>"add_m();"}  %>
+			<%= select "subway","station", SubwayStation.find(:all).collect { |el| [el.name, el.id]},{},{:size =>10,:ondblclick=>"add_m();"}  %>
 			<input id="add_button" type=button name=add value="->" onclick="add_m();">
       <input id="remove_button" type=button name=del value="<-" onclick="del_m();">
       <select id="search_condition_nearest_subway_stations" name="search_condition[nearest_subway_stations][]" size=10 multiple style="width:150px;" ondblclick="del_m();">

@@ -14,7 +14,11 @@
   <% else %>
 <div id="address">
   <p>
-    <%= f.label "Район МО" %><br />
+    <%= f.label "Область, Округ, Край, Республика" %><br />
+    <%= text_field "address_text", "administrative_area" %>
+  </p>
+  <p>
+    <%= f.label "Областной район" %><br />
     <%= text_field "address_text", "sub_administrative_area" %>
   </p>
   <p>

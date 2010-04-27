@@ -2,13 +2,52 @@ require File.dirname(__FILE__) + '/../test_helper'
 require 'search_condition'
 require 'entry'
 class SearchConditionTest < ActiveSupport::TestCase
-  fixtures :administrative_areas, :sub_administrative_areas, :localities, :streets, :entries
+  fixtures :administrative_areas, :sub_administrative_areas, :localities, :streets, :entries, :highways, :address_highways, :subway_stations, :address_subway_stations
 
-  def test_finding_address_with_search_condition
+  def test_searching_entries_with_subway_stations
+    puts "test_searching_entries_with_subway_stations"
+    puts "1st SC"
+    sc1 = SearchCondition.new(:time_to_nearest_subway_station => 20)
+    entries = Entry.find(:all,:conditions => sc1.get_sql_condition)
+    puts sc1.get_sql_condition
+    assert_equal 2, entries.length
+    assert_equal 1, entries[0].id
 
+    puts "2nd SC"
+    sc2 = SearchCondition.new(:time_to_nearest_subway_station => 11, :nearest_subway_stations => [2,3])
+    entries = Entry.find(:all,:conditions => sc2.get_sql_condition)
+    puts sc2.get_sql_condition
+    assert_equal 1, entries.length
+    assert_equal 2, entries[0].id
+  end
 
+  def test_searching_entries_with_highways
+    puts "test_searching_entries_with_highways"
+    puts "1st SC"
+    sc1 = SearchCondition.new(:max_distance_to_mkad => 999)
+    entries = Entry.find(:all, :conditions => sc1.get_sql_condition)
+    puts sc1.get_sql_condition
+    assert_equal 2, entries.length
 
+    puts "2nd SC"
+    sc2 = SearchCondition.new(:max_distance_to_mkad => 150)
+    entries = Entry.find(:all, :conditions => sc2.get_sql_condition)
+    assert_equal 1, entries.length
+    assert_equal entries[0].id, 1
 
+    puts "3d SC"
+    sc3 = SearchCondition.new(:highways =>[1,3])
+    entries = Entry.find(:all, :conditions => sc3.get_sql_condition)
+    assert_equal 1, entries.length
+    assert_equal entries[0].id, 1
+
+    puts "4th SC"
+    sc4 = SearchCondition.new(:max_distance_to_mkad => 150, :highways =>[2,3])
+    entries = Entry.find(:all, :conditions => sc4.get_sql_condition)
+    assert_equal 0, entries.length
+  end
+
+  def test_searching_address_with_search_condition
     #1 
     #0|0|0|0
     Ml.w "Testing #0|0|0|0"

@@ -107,7 +107,6 @@ class UserEntriesController < ApplicationController
       flash[:notice] = "You can't edit this entry"
       redirect_to :action => "index"
     end
-
   end
 
   #method for testing

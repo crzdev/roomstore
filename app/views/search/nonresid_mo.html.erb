@@ -4,12 +4,12 @@
   <div id="search_conditions" class="column">
     <h1>Поиск по нежелым помещениям в Московской Областе</h1>
     <p>
-      <label for="City">Город:</label>
-      <%= f.text_field :city, :size => 40 %>
+      <label for="locality">Город:</label>
+      <%= f.text_field :locality, :size => 40 %>
     </p>
     <p>
       <label for="realty_type">Тип недвижимости:</label>
-			<% for  type in @realty_types -%>
+			<% for  type in RealtyType.get_nonresid_types -%>
       <%= check_box_tag "search_condition[realty_types][]", "#{type[1]}" -%>
       <%= "#{type[0]}" -%>
       <% end -%>
@@ -53,7 +53,7 @@
 			</p>
     </div>
     <div id="options_map_selection">
-			<%= select "mo_districts","district", @districts.collect { |el| [el.name, el.id]},{},{:size =>10,:ondblclick=>"add_d();"}  %>
+			<%= select "mo_districts","district", AdministrativeArea.get_mo_sub_administrative_areas.collect { |el| [el.name, el.id]},{},{:size =>10,:ondblclick=>"add_d();"}  %>
 			<input id="add_button" type=button name=add value="->" onclick="add_d();">
       <input id="remove_button" type=button name=del value="<-" onclick="del_d();">
       <select id="search_condition_mo_districts" name="search_condition[mo_districts][]" size=10 multiple style="width:150px;" ondblclick="del_d();">

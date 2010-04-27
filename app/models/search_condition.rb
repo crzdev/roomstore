@@ -210,16 +210,16 @@ class SearchCondition
 
     #adding time to nearest subway station
     if time_to_nearest_subway_station != "" && time_to_nearest_subway_station != nil
-      qs += "(id in (SELECT entry_id FROM entries_subway_stations WHERE entries_subway_stations.time_to < '#{time_to_nearest_subway_station}')) AND "
+      qs += "address_id IN (SELECT address_subway_stations.address_id FROM address_subway_stations WHERE (address_subway_stations.time_to < '#{time_to_nearest_subway_station}')) AND "
     end
 
     #adding distance to mkad restrictions
+    #addres_id IN (SELECT address_highways.address_id FROM address_higways WHERE (address_higways.distance_to_mkad ))
     if min_distance_to_mkad != "" && min_distance_to_mkad != nil
-      qs += "distance_to_mkad > '#{min_distance_to_mkad}' AND "
+      qs += "address_id IN (SELECT address_highways.address_id FROM address_highways WHERE (address_highways.distance_to_mkad > '#{min_distance_to_mkad}')) AND "
     end
-
     if max_distance_to_mkad != "" && max_distance_to_mkad != nil
-      qs += "distance_to_mkad < '#{max_distance_to_mkad}' AND "
+      qs += "address_id IN (SELECT address_highways.address_id FROM address_highways WHERE (address_highways.distance_to_mkad < '#{max_distance_to_mkad}')) AND "
     end
 
     #adding house area restrictions
@@ -256,18 +256,20 @@ class SearchCondition
     #adding photo restriction
     #todo: add code here
 
-    #adding multiple subway stations
+    #adding multiple subway_stations
+    #address_id in (SELECT address_subway_stations.address_id FROM address_subway_stations WHERE address_subway_stations.subway_stations_id IN (SELECT subway_stations.id FROM subway_stations WHERE subway_stations.highway_id = 'x' OR ... ) AND addres_subway_stations.distance_to_mkad < 'y') 
     if nearest_subway_stations != nil
-      qs += "("
+      qs += "address_id in (SELECT address_subway_stations.address_id FROM address_subway_stations WHERE address_subway_stations.subway_station_id IN (SELECT subway_stations.id FROM subway_stations WHERE "
       nearest_subway_stations.each do |id|
-        qs +="nearest_subway_station ='#{Metro.get_stations[id]}' OR "
+        qs +="subway_stations.id = '#{id}' OR "
       end
       #slice last " OR "
       if qs != ""
         qs.slice!(qs.length-4..qs.length)
       end
-      qs +=") AND "
+      qs +=")) AND "
     end
+
 
     #adding multiple mo_districts
     if mo_districts != nil
@@ -282,17 +284,19 @@ class SearchCondition
       qs +=") AND "
     end
 
+
     #adding multiple highways
+    #address_id in (SELECT address_highways.address_id FROM address_highways WHERE address_highways.highways_id IN (SELECT highways.id FROM highways WHERE highways.highway_id = 'x' OR ... ) AND addres_highways.distance_to_mkad < 'y') 
     if highways != nil
-      qs += "("
+      qs += "address_id in (SELECT address_highways.address_id FROM address_highways WHERE address_highways.highway_id IN (SELECT highways.id FROM highways WHERE "
       highways.each do |id|
-        qs +="highway_id =#{id} OR "
+        qs +="highways.id = '#{id}' OR "
       end
       #slice last " OR "
       if qs != ""
         qs.slice!(qs.length-4..qs.length)
       end
-      qs +=") AND "
+      qs +=")) AND "
     end
 
     #adding multiple realty_type

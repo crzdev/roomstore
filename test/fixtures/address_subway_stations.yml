@@ -3,9 +3,9 @@
 one:
   address_id: 1
   subway_station_id: 1
-  time_to: 1
+  time_to: 15
 
 two:
-  address_id: 1
-  subway_station_id: 1
-  time_to: 1
+  address_id: 2
+  subway_station_id: 2
+  time_to: 10

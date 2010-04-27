@@ -1,5 +1,6 @@
 class Ml
-  @@path = "log\/"
+  #  @@path = "log\/"
+  @@path = "c:\/projects\/rails\/roomstore\/log\/"
   @@file_name = "log.log"
   def self.w text
     f = nil

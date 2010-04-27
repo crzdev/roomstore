@@ -3,9 +3,9 @@
 one:
   address_id: 1
   highway_id: 1
-  distance_to_mkad: 9.99
+  distance_to_mkad: 100
 
 two:
-  address_id: 1
-  highway_id: 1
-  distance_to_mkad: 9.99
+  address_id: 2
+  highway_id: 2
+  distance_to_mkad: 200
